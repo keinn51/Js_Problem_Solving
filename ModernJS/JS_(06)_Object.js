@@ -48,7 +48,6 @@ let salaries = {
 // 함수 호출 전
 */
 
-
 let menu = {
   width: 200,
   height: 300,
@@ -80,7 +79,7 @@ user.name = 'Pete';
 delete user.name;
 
 
-//❌ 2.
+//❌❌❌ 2.
 isEmpty = ((schedule) => {
   for (let key in schedule) {
     return false;
