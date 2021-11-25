@@ -31,28 +31,3 @@
 
 도움이 되셨으면 좋겠어요😄
 
-<br>
-
-#### ✅ 문제의 순서
-ProblemList 폴더로 들어가서 풀어보세요! 테마 별로 풀어볼 수도 있습니다.
-
-<br>
-
-
-Basic ➡️ If & switch ➡️ Continue And Break ➡️ For and While ➡️ Function ➡️ String ➡️ Object ➡️ array ➡️ This ➡️ Promise
-
-
-<br>
-
-#### ✅ 난이도의 의미
-🌶 : 
-
-🌶🌶 : 
-
-🌶🌶🌶 : 
-
-<br>
-
----
-
-
