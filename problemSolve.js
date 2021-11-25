@@ -1,34 +1,4 @@
 
-// function Accumulator (startingValue) {
-//     this.value = startingValue;
-//     this.read = function () {
-//         this.value += +prompt('Enter the number');
-//         console.log(this);
-//         return this.value;
-//     }    
-// };
-
-
-// let Accumulator = (startingValue) => {
-//     this.value = startingValue;
-//     this.read = function () {
-//         this.value += +prompt('Enter the number');
-//         console.log(this);
-//         return this.value;
-//     }    
-// };
-
-
-
-// let accumulator = new Accumulator(1);
-
-// // accumulator.read(); // 사용자가 입력한 값을 더해줌
-// accumulator.read(); // 사용자가 입력한 값을 더해줌
-
-// console.log(accumulator.value); // 최초값과 사용자가 입력한 모든 값을 더해 출력함
-
-
-
 
 // function User () {
 //     this.name = "KS";
@@ -133,25 +103,31 @@
 //   const fun2 = new arrFun();
 //   fun2.speak(); // 하이
 
-// let name = 'error';
+// ** 전역변수 name 선언
+let name2 = 'error';
+
+// ** 객체 내부 변수 name 선언
+const person = {
+  name2: 'Lee',
+};
+  
+// ** 함수 선언식으로 method 설정
+person.sayHi = () => {
+  console.log(this);
+  console.log(`Hi ${this.name2}`);
+};
+
+// ** 결과
+person.sayHi();
 
 // const person = {
 //     name: 'Lee',
 //   };
   
-//   Object.prototype.sayHi = () => console.log(`Hi ${this.name}`);
-  
-//   person.sayHi(); // Hi undefined
-
-// const person = {
-//     name: 'Lee',
-//   };
-  
-//   Object.prototype.sayHi = function() {
+//   person.sayHi = function() {
 //     console.log(this);
 //     console.log(`Hi ${this.name}`);
 //   };
   
 //   person.sayHi(); // Hi Lee
 
-console.dir(Array.prototype);
