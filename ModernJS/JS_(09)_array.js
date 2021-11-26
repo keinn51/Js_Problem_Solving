@@ -22,7 +22,8 @@ alert(fruits.length); // ?
 
 요소 “Jazz”, "Blues"가 있는 styles 배열을 생성합니다.
 "Rock-n-Roll"을 배열 끝에 추가합니다.
-배열 정 중앙에 있는 요소를 "Classics"로 바꿉니다. 가운데 요소를 찾는 코드는 요소가 홀수 개인 배열에서도 잘 작동해야 합니다.
+배열 정 중앙에 있는 요소를 "Classics"로 바꿉니다. 
+가운데 요소를 찾는 코드는 요소가 홀수 개인 배열에서도 잘 작동해야 합니다.
 배열의 첫 번째 요소를 꺼내서 출력합니다.
 "Rap"과 "Reggae"를 배열의 앞에 추가합니다.
 단계를 하나씩 거칠 때마다 배열 모습은 아래와 같이 변해야 합니다.
@@ -98,7 +99,7 @@ arr.push(function () {
   alert(this);
 })
 
-arr[2](); // 함수가 뜨겠지..?
+arr[2](); // array!
 
 
 
@@ -132,3 +133,17 @@ console.log(getMaxSubSum([-1, 2, 3, -9, 11]) == 11);
 console.log(getMaxSubSum([-2, -1, 1, 2]) == 3);
 console.log(getMaxSubSum([100, -9, 2, -3, 5]) == 100);
 console.log(getMaxSubSum([1, 2, 3]) == 6);
+
+
+// const getMaxSubSum = function (arr) {
+//   return arr.reduce((prev, _, i, arr) => {
+//       let sum = 0;
+//       let big_res = 0;
+//       while (i < arr.length)
+//       {
+//           sum += arr[i++];
+//           big_res = (big_res > sum) ? big_res : sum;
+//       }
+//       return ((prev < big_res) ? big_res : prev);
+//   }, 0);
+// }

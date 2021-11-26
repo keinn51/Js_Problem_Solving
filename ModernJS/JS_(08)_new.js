@@ -125,3 +125,6 @@ accumulator.read(); // 사용자가 입력한 값을 더해줌
 accumulator.read(); // 사용자가 입력한 값을 더해줌
 
 alert(accumulator.value);
+
+
+// ✅ Think!!!: why we can't make the Accumulator with arrow func!??

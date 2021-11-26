@@ -1,133 +1,24 @@
+/*
+[문제35 : Factory 함수 사용하기](https://www.notion.so/35-Factory-6a3a32fd25344c7e9e7ae5eaa7a37dc2)
+2제곱, 3제곱, 4제곱을 할 수 있는 Factory 함수를 만들려고 합니다.
+
+<pass>에 코드를 작성하여 two함수를 완성하세요.
 
 
-// function User () {
-//     this.name = "KS";
-//     this.isAdmin = false;
-// }
+function one(n){
+    function two(){
+        //pass
+    }
+    return two;
+}
 
+const a = one(2);
+*const b = one(3);
+const c = one(4);*
 
-// let User = (name) => {
-//     this.name = name;
-//     this.isAdmin = false;
-// }
+console.log(a(10));
+console.log(b(10));
+console.log(c(10));
 
-
-// let user = new User();
-
-// console.dir(user);
-//  console.dir(User.prototype)
-//  console.dir(User.prototype.constructor)
-
-
-//-----------------------------------------------------------------
-
-
-//  function myFunction (){
-//      this.a = this.foo;
-//  }
-
-//  function Foo (){
-//      this.greet = "hello world";    // Foo 생성자 함수에서 greet이라는 속성을 추가합니다.
-//  }
-
-//  myFunction.prototype.foo =  function Foo (){
-//     this.greet = "hello world";    // Foo 생성자 함수에서 greet이라는 속성을 추가합니다.
-// }
-
-// console.log(myFunction.foo());
- 
-
-
-
-
-//  myFunction.prototype.constructor.construct_val = "생성자 값";
-
-
-//  var myFunction_instance = new myFunction(); //으로 myFunction의 인스턴스를 만들고,
-
-//  console.log(myFunction_instance.proto_val); //로 콘솔을 찍어보면 원하는 값인 '원형 값'이 나옵니다.
-
-//  Object.prototype.say = function(){
-//      console.log(`say : '원형', ${this.greet}`); //Object의 프로토타입에 say라는 메서드를 추가합니다.
-//  }
- 
-//  function Foo (){
-//      this.greet = "hello world";    // Foo 생성자 함수에서 greet이라는 속성을 추가합니다.
-//  }
- 
-//  var foo_instance = new Foo();     //인스턴스를 생성합니다.
- 
-//  console.log(`foo_instance.greet : ${foo_instance.greet}`) // hello world
-//  console.log(Foo.prototype);
-//  console.log(foo_instance);
-//  console.log(Foo);
-//  console.log(`Object.prototype : ${Object.prototype}`);
-
-//  console.log(Foo.prototype)
-
-//  console.log(`foo_instance.say() : ${foo_instance.say()}`) // 원형 hello world
- 
-// let animal = {
-//     eats: true
-//   };
-  
-//   // 프로토타입이 animal인 새로운 객체를 생성합니다.
-//   let rabbit = Object.create(animal);
-  
-//  console.log(Object.getPrototypeOf(rabbit));
-
-
-// function fun() {
-//     this.name = "하이";
-//     return {
-//       name: "바이",
-//       speak: function () {
-//         console.log(this.name);
-//       },
-//     };
-//   }
-  
-//   function arrFun() {
-//     this.name = "하이";
-//     return {
-//       name: "바이",
-//       speak: () => {
-//         console.log(this.name);
-//       },
-//     };
-//   }
-  
-//   const fun1 = new fun();
-//   fun1.speak(); // 바이
-  
-//   const fun2 = new arrFun();
-//   fun2.speak(); // 하이
-
-// ** 전역변수 name 선언
-let name2 = 'error';
-
-// ** 객체 내부 변수 name 선언
-const person = {
-  name2: 'Lee',
-};
-  
-// ** 함수 선언식으로 method 설정
-person.sayHi = () => {
-  console.log(this);
-  console.log(`Hi ${this.name2}`);
-};
-
-// ** 결과
-person.sayHi();
-
-// const person = {
-//     name: 'Lee',
-//   };
-  
-//   person.sayHi = function() {
-//     console.log(this);
-//     console.log(`Hi ${this.name}`);
-//   };
-  
-//   person.sayHi(); // Hi Lee
+*/
 

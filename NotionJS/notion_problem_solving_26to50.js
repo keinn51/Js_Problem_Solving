@@ -1,7 +1,7 @@
 // This is the Problem Solving JS file!
 // You can get the problem easily at https://www.notion.so/JS-100-94d97d294dd14c9b911a02c840fa9f2d
 
-/*
+/* 🛑
 [문제26 : 행성 문제2](https://www.notion.so/26-2-a9ae3f90c41c4aef96af9c10f13a1d5d)
 우리 태양계를 이루는 행성은 수성, 금성, 지구, 화성, 목성, 토성, 천왕성, 해왕성이 있습니다.
 이 행성들의 영어 이름은 Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune입니다.
@@ -14,15 +14,12 @@ function GetPlanetEng(planet) {
   let planetK = ["수성", "금성", "지구", "화성", "목성", "토성", "천왕성", "해왕성"]
   let planetE = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
 
-  let result = {};
-  planetK.forEach((a, i) => result[a] = planetE[i])
-
-  return console.log(result[planet])
+  return planetE[planetK.indexOf(planet)];
 }
 
-GetPlanetEng("수성")
+// console.log(GetPlanetEng("금성"));
 
-/*
+/* 🛑🛑
 [문제27 : 객체 만들기](https://www.notion.so/27-1bdb95a6719049ceb820538eda42c3a8)
 첫번째 입력에서는 학생의 이름이 공백으로 구분되어 입력되고, 두번째에는 그 학생의 수학 점수가 공백으로 구분되어 주어집니다.
 
@@ -40,19 +37,17 @@ Yujin Hyewon
 
 // A.27
 
-function Getobject() {
-  let name = prompt("Enter name: ").split(' ');
-  let score = prompt("Enter score: ").split(' ');
+const getObject = function () {
+    let name = prompt("Enter the names: ").split(' ');
+    let scores = prompt('Enter the scores: ').split(' ');
 
-  let result = {}
-  name.forEach((a, i) => result[a] = score[i]);
-  return console.log(result)
+    return Object.fromEntries(name.map((elem, i) => [elem, Number(scores[i])]));
 }
 
-Getobject()
+console.log(getObject());
 
 
-/*
+/* 🛑🛑
 [문제28 : 2-gram](https://www.notion.so/28-2-gram-fb3e43a5c88f4745932844d1ebac7725)
 **2-gram**이란 문자열에서 2개의 연속된 요소를 출력하는 방법입니다.
 
@@ -77,16 +72,14 @@ p t
 
 // A.28
 
-function TwoGram(str) {
-  for (i = 0; i < str.length - 1; i++) {
-    console.log(str.charAt(i) + ' ' + str.charAt(i + 1))
-  }
+const	twoGram = function (str) {
+	str.split('').forEach((a, i, arr) => (i + 1 < arr.length) ? console.log(arr[i], arr[i + 1]) : 0);
 }
 
-TwoGram('Javascript')
+twoGram('Javascript');
 
 
-/*
+/* 🛑
 [문제29 : 대문자만 지나가세요](https://www.notion.so/29-ef7e9672d0db44efa3e69c4799aea12e)
 진구는 영어 학원 아르바이트를 하고 있습니다. 반 아이들은 알파벳을 공부하는 학생들인데 오늘은 대문자 쓰기 시험을 봤습니다.
 
@@ -100,7 +93,7 @@ let IsUpperStirng = () => console.log((input == input.toUpperCase()) ? "Yes" : "
 
 IsUpperStirng()
 
-/*
+/* 🛑
 [문제30 : 문자열 속 문자 찾기](https://www.notion.so/30-c0ce1df21dbb431c8eb356d0c47491ed)
 문자 pineapple에는 apple이라는 문자가 숨어 있습니다. 원범이는 이렇듯 문자열 속에 숨어있는 문자를 찾아보려고 합니다.
 
@@ -123,7 +116,7 @@ findstring()
 
 
 
-/*
+/* 🛑
 [문제31 : 자바스크립트 자료형의 복잡도](https://www.notion.so/31-6772762cc7c7486a9643452a1baf5e1d)
 다음 배열 내장함수의 시간 복잡도가 O(1)이 아닌 것을 모두 고르시오.
 
@@ -145,7 +138,7 @@ slice랑 includes는 컴퓨터가 배열에 들어가서 값들을 하나하나 
 
 
 
-/*
+/* 🛑
 [문제32 : 문자열 만들기](https://www.notion.so/32-bc824f2a919e4f948441286bb253cef0)
 취업 준비생인 혜림이는 자기소개서를 쓰고 있습니다. 열심히 자기소개서를 작성하던 도중 혜림이는 자기가 지금까지 단어를 얼마나 적었는지 궁금하게 됩니다. 
 
@@ -165,7 +158,7 @@ let checkWord = () => console.log(prompt("Enter").split(' ').length)
 
 
 
-/*
+/* 🛑
 [문제33 : 거꾸로 출력하기](https://www.notion.so/33-e31451740a314d09ba074aac0a1002ed)
 한 줄에 여러개의 숫자가 입력되면, 역순으로 그 숫자들을 하나씩 출력하는 프로그램을 작성하시오.
 
@@ -186,7 +179,8 @@ let reverseWords = () => console.log(prompt("Enter").split(' ').reverse().join('
 
 /*
 [문제34 : sort 구현하기](https://www.notion.so/34-sort-35f9e8bed7f34f5a8722588b400d0d8c)
-민주는 체육부장으로 체육시간이 되면 반 친구들이 제대로 키 순서대로 모였는지를 확인해야 한다. 그런데 요즘 민주는 그것이 너무 번거롭게 느껴져 한 번에 확인하고 싶어한다.
+민주는 체육부장으로 체육시간이 되면 반 친구들이 제대로 키 순서대로 모였는지를 확인해야 한다. 
+그런데 요즘 민주는 그것이 너무 번거롭게 느껴져 한 번에 확인하고 싶어한다.
 
 민주를 위해 **키가 주어지면 순서대로 제대로 섰는지 확인하는 프로그램**을 작성해보자.
 (키는 공백으로 구분하여 입력됩니다.)
@@ -201,13 +195,13 @@ let reverseWords = () => console.log(prompt("Enter").split(' ').reverse().join('
 */
 
 // A.34
-let checkRideOver = () => {
-  let a = prompt("Enter");
-  let b = a.split(' ').sort((a, b) => a - b).join(' ');
-  return console.log((a == b) ? "Yes" : "No")
-}
+const checkSort = function (str) {
+	let pastedArr = Array.from(str.split(' ')).sort((a, b) => a - b);
+	return console.log((str.split(' ').some((_, i, arr) => (arr[i] != pastedArr[i]))) ? "NO!" : "YES!");
+};
 
-CheckSort()
+checkSort('176 156 155 165 166 169');
+checkSort('155 156 165 166 169 176');
 
 
 /*

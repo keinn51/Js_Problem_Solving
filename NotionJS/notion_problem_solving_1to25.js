@@ -1,7 +1,8 @@
 // This is the Problem Solving JS file!
 // You can get the problem easily at https://www.notion.so/JS-100-94d97d294dd14c9b911a02c840fa9f2d
 
-
+// all the problems easy! don't recommend unless u first time whith JS
+// 🔥 Just get the concept about Math.floor, pow, toUpperCase, parseInt! that's all~
 
 
 /* 🛑
@@ -474,7 +475,7 @@ Nanugi(3, 2)
 // set은 object형태로 저장되어 있다!
 
 
-/*
+/* 🛑
 [문제22 : 배수인지 확인하기](https://www.notion.so/22-1b2b76da2aba48508e89b38d50b1af6c)
 다음 중 변수 i가 6의 배수인지 확인하는 방법으로 올바른 것은?
 
@@ -488,7 +489,7 @@ Nanugi(3, 2)
 // A22. 2
 
 
-/*
+/* 🛑
 [문제23 : OX문제](https://www.notion.so/23-OX-f0a0a6971b1b4a76a7430e0ff128e515)
 `console.log(10/3)`의 출력 결과는 **3**이다.
 */
@@ -496,7 +497,7 @@ Nanugi(3, 2)
 // A23. X (3.33333333이다)
 
 
-/*
+/* 🛑
 [문제24 : 대문자로 바꿔주세요!](https://www.notion.so/24-bd6c963c0b294c8fa0b1c98f932dcc28)
 민지는 국제 포럼에서 아르바이트를 하게 되었습니다. 민지는 각 국에서 온 참가자들의 명단을 엑셀로 정리하고 있는데 참가자들 이름이 어떤 이는 전부 소문자, 
 어떤 이는 전부 대문자로 써져 있는 등 형식이 제각각이었습니다.
@@ -515,7 +516,7 @@ Nanugi(3, 2)
 let toupper = console.log(prompt("Enter: ").toUpperCase())
 
 
-/*
+/* 🛑
 [문제25 : 원의 넓이를 구하세요](https://www.notion.so/25-a4d299898a4c4b2fb6615aa57b4c6f6f)
 원의 넓이는 반지름의 길이 x 반지름의 길이 x 3.14로 구할 수 있습니다.
 함수를 사용하여 원의 넓이를 구하는 코드를 작성해봅시다.
