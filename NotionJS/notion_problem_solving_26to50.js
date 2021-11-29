@@ -177,7 +177,7 @@ let checkWord = () => console.log(prompt("Enter").split(' ').length)
 let reverseWords = () => console.log(prompt("Enter").split(' ').reverse().join(' '))
 
 
-/*
+/* 🛑🛑
 [문제34 : sort 구현하기](https://www.notion.so/34-sort-35f9e8bed7f34f5a8722588b400d0d8c)
 민주는 체육부장으로 체육시간이 되면 반 친구들이 제대로 키 순서대로 모였는지를 확인해야 한다. 
 그런데 요즘 민주는 그것이 너무 번거롭게 느껴져 한 번에 확인하고 싶어한다.
@@ -204,7 +204,7 @@ checkSort('176 156 155 165 166 169');
 checkSort('155 156 165 166 169 176');
 
 
-/*
+/* 🛑🛑
 [문제35 : Factory 함수 사용하기](https://www.notion.so/35-Factory-6a3a32fd25344c7e9e7ae5eaa7a37dc2)
 2제곱, 3제곱, 4제곱을 할 수 있는 Factory 함수를 만들려고 합니다.
 
@@ -245,7 +245,7 @@ console.log(a(10));
 console.log(b(10));
 console.log(c(10));
 
-/*
+/* 🛑
 [문제36 : 구구단 출력하기](https://www.notion.so/36-3a4189e2c35142f780f0b02b4c7b4bd8)
 1~9까지의 숫자 중 하나를 입력하면 그 단의 구구단 결과를 한 줄에 출력하는 프로그램을 작성하세요.
 
@@ -258,9 +258,13 @@ console.log(c(10));
 // A.36
 let GUGUDAN = new Array(9).fill(+prompt("Enter")).map((a, i) => a * (i + 1))
 
-/*
+
+
+/* 🛑🛑
 [문제37 : 반장 선거 ](https://www.notion.so/37-f56ab84018d44e7184c2307632a8c921)
-새 학기를 맞아 호준이네 반은 반장 선거를 하기로 했습니다.  그런데 표를 하나씩 개표하는 과정이 너무 번거롭게 느껴진 당신은 **학생들이 뽑은 후보들을 입력받으면 뽑힌 학생의 이름과 받은 표 수를 출력하는 프로그램**을 작성하기로 하였습니다.
+새 학기를 맞아 호준이네 반은 반장 선거를 하기로 했습니다.  
+그런데 표를 하나씩 개표하는 과정이 너무 번거롭게 느껴진 당신은 
+**학생들이 뽑은 후보들을 입력받으면 뽑힌 학생의 이름과 받은 표 수를 출력하는 프로그램**을 작성하기로 하였습니다.
 
 **입력**
 원범 원범 혜원 혜원 혜원 혜원 유진 유진
@@ -280,7 +284,7 @@ function getBanjang() {
 getBanjang()
 
 
-//----------
+//--------------------------------------------------------------------
 
 /* Object.keys와 Array.reduce를 알아야 한다!
 Array.reduce는 배열 요소 각각의 전과 후를 비교해 비교-연산할 수 있다*/
@@ -301,9 +305,29 @@ winner = Object.keys(result).reduce(function (a, b) {
 console.log(`${winner}(이)가 총 ${result[winner]}표로 반장이 되었습니다.`);
 
 
-/*
+//--------------------------------------------------------------------
+
+// include the re-vote! (but not nice code for big-O => iter for 4 times...)
+
+const votePresident = function (str) 
+{
+    const temp_obj = {};
+    str.split(' ').forEach((man) => temp_obj[man] ? temp_obj[man] += 1 : temp_obj[man] = 1);
+    const result = Object.entries(temp_obj).filter((e,i,arr) => (e[1] == Math.max(...arr.map(e=>e[1]))));
+    return (result.length == 1) ? console.log(`${result[0][0]}(이)가 총 ${result[0][1]}표로 반장이 되었습니다.`) 
+    : console.log(`${result.map(e=>e[0])}(이)가 총 ${result[0][1]}표로, 재투표가 필요합니다.`)
+}
+
+votePresident("원범 원범 혜원 혜원 혜원 혜원 유진 유진");
+votePresident("원범 원범 혜원 혜원 혜원 혜원 유진 유진 유진 유진");
+
+
+
+/* 🛑🛑
 [문제38 : 호준이의 아르바이트](https://www.notion.so/38-371eb506b05f4b8db674569a08304799)
-호준이는 아르바이트로 영어 학원에서 단어 시험지를 채점하는 일을 하고 있다. 호준이가 일하는 학원은 매번 1위부터 3위까지의 학생에게 상으로 사탕을 준다. 그런데 오늘은 마침 사탕이 다 떨어져서 호준이가 채점을 하고 점수를 보내면, 당신이 아이들의 숫자만큼 사탕을 사러 가기로 했다.
+호준이는 아르바이트로 영어 학원에서 단어 시험지를 채점하는 일을 하고 있다. 
+호준이가 일하는 학원은 매번 1위부터 3위까지의 학생에게 상으로 사탕을 준다. 
+그런데 오늘은 마침 사탕이 다 떨어져서 호준이가 채점을 하고 점수를 보내면, 당신이 아이들의 숫자만큼 사탕을 사러 가기로 했다.
 
 1위 ~ 3위 학생은 여러명일 수 있고 1~3위 학생 중 중복되는 학생까지 포함하여 사탕을 사기로 한다.
 **학생들의 점수를 공백으로 구분하여 입력을 받고 사탕을 받을 학생의 수를 출력하세요.**
@@ -329,7 +353,7 @@ giveCandy()
 // calculatingTime: 7.290771484375 ms (100try)
 
 
-// While과 Pop을 이용한 풀이 (이게 더 나은듯..)
+// While과 Pop을 이용한 풀이
 const scores = prompt('점수입력').split(' ').map(function (n) {
   return parseInt(n, 10);
 });
@@ -355,9 +379,10 @@ console.log(count);
 
 
 
-/*
+/* 🛑🛑 (regular expression!)
 [문제39 : 오타 수정하기](https://www.notion.so/39-e31823d5c6184efc95fdf78a86843414)
-혜원이는 평소 영타가 빠르고 정확한 것을 친구들에게 자랑하고 다녔습니다. 반 친구들이 혜원이의 타자 속도가 빠르다는 것을 모두 알게 되자 혜원이는 모두의 앞에서 타자 실력을 보여주게 됩니다.
+혜원이는 평소 영타가 빠르고 정확한 것을 친구들에게 자랑하고 다녔습니다. 
+반 친구들이 혜원이의 타자 속도가 빠르다는 것을 모두 알게 되자 혜원이는 모두의 앞에서 타자 실력을 보여주게 됩니다.
 
 그런데 막상 보여주려니 긴장이 되서 문장의 모든 e를 q로 잘못 친 것을 발견했습니다.
 혜원이는 프로그램을 돌려 재빠르게 모든 q를 e로 바꾸는 프로그램을 작성하려고 합니다.
@@ -385,9 +410,10 @@ console.log(word.replace(/q/gi, 'e'));
 // calculatingTime: 5.274169921875 ms (100)
 
 
-/*
+/* 🛑
 [문제40 : 놀이동산에 가자](https://www.notion.so/40-592ce594719b4054a5bc4a38c5475ba5)
-테마파크에 온 원범이와 친구들은 놀이기구를 타려고 합니다. 모든 놀이기구는 한번에 타는 인원수에는 제한이 없지만 제한 무게를 넘으면 무조건 다음 기구를 타야 합니다.
+테마파크에 온 원범이와 친구들은 놀이기구를 타려고 합니다. 
+모든 놀이기구는 한번에 타는 인원수에는 제한이 없지만 제한 무게를 넘으면 무조건 다음 기구를 타야 합니다.
 
 원범이와 친구들이 총 몇 명 탈 수 있는지 알 수 있는 프로그램을 작성해 주세요.
 
@@ -422,7 +448,9 @@ while (NotOver > SumWeight) {
 }
 console.log(count)
 
-/*
+
+
+/* 🛑
 [문제41 : 소수판별](https://www.notion.so/41-994743b827054aadadbe471001b6531c)
 숫자가 주어지면 **소수인지 아닌지 판별하는 프로그램**을 작성해주세요.
 소수이면 YES로, 소수가 아니면 NO로 출력해주세요.
@@ -441,7 +469,8 @@ for (let i = 2; i < num; i++) {
 console.log(Answer)
 
 
-/*
+
+/* 🛑🛑 (about date object!!)
 [문제42 : 2020년](https://www.notion.so/42-2020-ae1dd4dc05cd43dbb7475afb52bc00c4)
 2020년 1월 1일은 수요일입니다. 2020년 a월 b일은 무슨 요일일까요?
 두 수 a, b를 입력받아 2020년 a월 b일이 무슨 요일인지 리턴하는 함수 solution을 완성하세요.
@@ -460,7 +489,8 @@ let time = new Date(`${+prompt("Enter")} ${+prompt("Enter")},2020`)
 console.log(time.toString().slice(0, 3))
 
 
-/*
+
+/* 🛑🛑🛑 (what is toString??)
 [문제43 : 10진수를 2진수로](https://www.notion.so/43-10-2-ea6da83e61ba4b038841ec035a621fea)
 우리가 흔히 사용하는 숫자 1, 8, 19, 28893 등등...은 10진수 체계입니다.
 이를 컴퓨터가 알아 들을 수 있는 2진수로 바꾸려고 합니다. 어떻게 해야할까요?
@@ -470,37 +500,34 @@ console.log(time.toString().slice(0, 3))
 */
 
 // A.43
-function twostring() {
-  let num = +prompt('Enter the number: ');
-  return console.log(num.toString(2))
+const dec_to_bin = function (num) 
+{
+    let n = 0;
+    let result = [];
+    while (Math.pow(2, n) <= num)
+        n++;
+    if (n != 0)
+        n--;
+    while (n >= 0)
+    {
+        result.push(parseInt(num / Math.pow(2, n), 10));
+        num = num % Math.pow(2, n--);
+    }
+    return console.log(result.join(''));
 }
 
-twostring();
+dec_to_bin(10023);
 
-// toString이 뭔데...
-let num = +prompt("Enter"), n = 0;
 
-while (true) {
-  if (parseInt(num / Math.pow(2, n)) == 0) {
-    break;
-  }
-  n += 1;
-}
+// using toSring (ho....)
 
-let arr = new Array(n).fill(0);
+const dec_to_bin = function (num) {console.log(num.toString(2))};
 
-let minus = num;
+dec_to_bin(23);
 
-for (let i = (n - 1); i >= 0; i--) {
-  if ((minus - Math.pow(2, i)) >= 0) {
-    arr[i] = 1;
-    minus -= Math.pow(2, i);
-  }
-}
 
-console.log(arr)
 
-/*
+/*  🛑🛑
 [문제44 : 각 자리수의 합](https://www.notion.so/44-a15b4323690f449ebb91275d7d38662f)
 사용자가 입력한 양의 정수의 각 자리수의 합을 구하는 프로그램을 만들어주세요
 
@@ -523,7 +550,9 @@ let SumLetters = () => console.log(+prompt("Enter").split('').reduce((pre, curr)
 
 SumLetters()
 
-/*
+
+
+/*  🛑
 [문제45 : getTime()함수 사용하기](https://www.notion.so/45-getTime-88b0941980cc47859649df7576966391)
 Date객체의 메소드 중 하나인 getTime()은 1970년 1월 1일 0시 0분 0초 이후로부터 지금까지 흐른 시간을 천분의 1초 단위(ms)로 반환합니다.
 
@@ -539,7 +568,9 @@ let year = Math.floor(date.getTime() / (1000 * 3600 * 24 * 365) + 1970);
 
 console.log(year);
 
-/*
+
+
+/*  🛑
 [문제46 : 각 자리수의 합 2](https://www.notion.so/46-2-1349c673327740de973e50d1297354f5)
 1부터 20까지의(20을 포함) 모든 숫자를 일렬로 놓고 모든 자릿수의 총 합을 구하세요. 
 
@@ -555,9 +586,12 @@ for (let i = 1; i <= 20; i++) {
 
 console.log(num.split('').reduce((prev, curr) => prev + parseInt(curr, 10), 0));
 
-/*
+
+
+/* 🛑 (about set!)
 [문제47 : set 자료형의 응용](https://www.notion.so/47-set-8b73fa6b52114d128bba7bc6c6da83c6)
-바울랩에서는 3월 29일 제주대학교에서 '제주 빅데이터 사회혁신 해커톤' 행사를 주최하게 되었습니다. 이에 구글 설문지를 배포하였으나 제주대학생들이 중복해서 n개씩 설문지를 제출하였습니다.
+바울랩에서는 3월 29일 제주대학교에서 '제주 빅데이터 사회혁신 해커톤' 행사를 주최하게 되었습니다. 
+이에 구글 설문지를 배포하였으나 제주대학생들이 중복해서 n개씩 설문지를 제출하였습니다.
 **중복된 데이터들을 삭제하여 실제 접수 명단이 몇 명인지 알고 싶습니다.**
 
 아래 주어진 데이터들로부터 중복을 제거하여 **실제 접수 인원을 출력**해 주세요.
@@ -571,11 +605,11 @@ const people = {
   이호: "01050443904",
   이호준: "01050442903"
 };
-
 */
 
 // A.47
 
+// Object.entries also delete the same elem!!
 const people = {
   이호준: "01050442903",
   이호상: "01051442904",
@@ -591,7 +625,25 @@ let DeleteSame = () => console.log(Object.entries(people).length);
 DeleteSame(people);
 
 
-/*
+// Just use Set! (size is same with length)
+const people = {
+  이호준: "01050442903",
+  이호상: "01051442904",
+  이준호: "01050342904",
+  이호준: "01050442903",
+  이준: "01050412904",
+  이호: "01050443904",
+  이호준: "01050442903"
+};
+
+let result = new Set();
+for (let key in people) {
+  result.add(people[key]);
+}
+console.log(result.size); //size 는 set 객체 내 값의 개수를 반환합니다.
+
+
+/* 🛑
 [문제48 : 대소문자 바꿔서 출력하기](https://www.notion.so/48-ab0fe531a1ca4042b9436c1e3dc5a75d)
 문자열이 주어지면 대문자와 소문자를 바꿔서 출력하는 프로그램을 작성하세요.
 
@@ -606,7 +658,7 @@ let ChangeCase = prompt("Enter").split('').map((curr, i) => (curr == curr.toUppe
 
 console.log(ChangeCase)
 
-/*
+/* 🛑
 [문제49 : 최댓값 구하기](https://www.notion.so/49-2052f88fe90f4bde93cea5fb63627483)
 순서가 없는 10개의 숫자가 공백으로 구분되어 주어진다. 주어진 숫자들 중 최댓값을 반환하라.
 
@@ -620,7 +672,8 @@ console.log(ChangeCase)
 let CheckMax = prompt("Enter").split(' ').sort((a, b) => b - a)[0];
 console.log(CheckMax)
 
-/*
+
+/* 🛑🛑🛑
 [문제50 : 버블정렬 구현하기](https://www.notion.so/50-bb22106895db4766b2517b0f61a8cc2d)
 버블정렬은 두 인접한 원소를 검사하여 정렬하는 방법을 말합니다. 시간 복잡도는 느리지만 코드가 단순하기 때문에 자주 사용됩니다.
 https://img.scoop.it/omRChIeVtQY1Nodjul8eODl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9
