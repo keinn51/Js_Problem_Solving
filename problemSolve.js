@@ -1,11 +1,15 @@
-var arr = []
-for(var i = 0; i < 5; i++){
-    arr[i] = function(id) {
-        return function(){
-            return id;
-        }
-    }(i);
+var x = 1;
+
+function foo()
+{
+	var x = 10;
+	bar();
 }
-for(var index in arr) {
-    console.log(arr[index]());
+
+function bar()
+{
+	console.log(x);
 }
+
+foo();	//1
+bar();	//1
