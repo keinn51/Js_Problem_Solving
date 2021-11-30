@@ -1,4 +1,4 @@
-/*
+/* 🔥🔥🔥
 [문제51 : merge sort를 만들어보자](https://www.notion.so/51-merge-sort-217249ae47f2424baeab023685c90830)
 병합정렬(merge sort)은 대표적인 정렬 알고리즘 중 하나로 다음과 같이 동작합니다.
 
@@ -88,7 +88,7 @@ const array = prompt('배열을 입력하세요').split(' ').map(n => parseInt(n
 
 console.log(mergeSort(array));
 
-/*
+/* 🔥🔥
 [문제52 : quick sort](https://www.notion.so/52-quick-sort-46b7823bdea64ddfb6a6c7083be7cba9)
 다음 빈 칸을 채워 퀵 정렬을 완성해주세요.
 
@@ -145,7 +145,7 @@ const array = prompt('배열을 입력하세요').split(' ').map(n => parseInt(n
 console.log(quickSort(array));
 
 
-/*
+/* 🔥🔥
 [문제53 : 괄호 문자열](https://www.notion.so/53-8776d8e89b91496cb7a3bfa09a84fe49)
 괄호 문자열이란 괄호 기호인 '{', '}', '[', ']', '(', ')' 와 같은 것을 말한다. 그중 괄호의 모양이 바르게 구성된 문자열을 **바른 문자열**, 그렇지 않은 문자열을 **바르지 않은 문자열**이라 부르도록 하자.
 
@@ -184,6 +184,27 @@ function CheckRightParen() {
 
 CheckRightParen();
 
+// ([{}]) added version!
+const checkBracket = function (str)
+{
+	const temp_bracket = {'(': 0, ')': 0, '[': 0, ']': 0, '{': 0, '}': 0};
+	let i = 0;
+	let result_arr;
+
+	while (i < str.length)
+	{
+		(str[i] == '(' || str[i] == '[' || str[i] == '{') ? temp_bracket[str[i]] += 1 :
+		(str[i] == ')' || str[i] == ']' || str[i] == '}') ? temp_bracket[str[i]] -= 1 : 0;
+		result_arr = [temp_bracket['('] + temp_bracket[')'], temp_bracket['['] + temp_bracket[']'], temp_bracket['{'] + temp_bracket['}']];
+		if (result_arr.some((e) => e < 0)){return ("NO")};
+		i++;
+	}
+	return(result_arr.every((e) => !e) ? "YES" : "NO");
+}
+
+console.log(checkBracket("({[]})(}"));
+
+
 /*
 [문제54 : 연속되는 수](https://www.notion.so/54-169748106ffe46b6bed0e62ced61d4d5)
 은주는 놀이공원 아르바이트를 하고 있다. 은주가 일하는 놀이공원에서는 현재 놀이공원 곳곳에 숨겨진 숫자 스탬프를 모아 오면 선물을 주는 이벤트를 하고 있다. 숫자 스탬프는 매일 그 수와 스탬프에 적힌 숫자가 바뀌지만 그 숫자는 항상 연속된다. 
@@ -205,8 +226,22 @@ NO
 */
 
 // A.54
-let CheckStamp = (str) => (str.split(' ').sort((a, b) => a - b).join(' ') == str) ? console.log("YES") : console.log("No");
+const checkStamp = function(str)
+{
+	let i = 0;
+	const new_str = str.replaceAll(' ', '');
 
+	while (i + 1 < new_str.length)
+	{
+		if (!((Number(new_str[i]) + 1) == Number(new_str[i + 1])))
+			return ("NO");
+		i++;
+	}
+	return ("YES");
+}
+
+console.log(checkStamp("1 2 3 4 5"));	//YES
+console.log(checkStamp("1 4 2 6 3"));	//No
 
 /*
 [문제55 : 하노이의 탑](https://www.notion.so/55-105b77098f7e4b99a156280ee0550866)
