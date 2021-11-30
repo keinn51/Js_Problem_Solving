@@ -1,26 +1,20 @@
-const quickSort = function (arr)
+
+function Circle(radius)
 {
-	if (arr.length <= 1)
-		return (arr);
-	const pivot = arr.shift();
-	const left = [];
-	const right = [];
-
-	while(arr.length)
+	console.log(this);
+	this.radius = radius;
+	this.getDiameter = function() 
 	{
-		if (pivot <= arr[0])
-		{
-			right.push(arr.shift());
-		}
-		else
-		{
-			left.push(arr.shift());
-		}
-	}
+		return (2 * this.radius);
+	};
 
-	return (quickSort(left).concat([pivot], quickSort(right)));
+	return (100);
 }
+// normal function's this indicates 'Window'
+Circle(10);	// Window
 
-console.log(quickSort([5,3,2,4,1]));
+// declare 'radius' like global variable
+console.log(radius); //10
 
-console.log(([1].concat([2])))
+// make a new instance 'circle'. 'this' will bind with circle.
+const circle = new Circle(10);	// Circle {}
