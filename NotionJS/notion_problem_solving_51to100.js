@@ -205,7 +205,7 @@ const checkBracket = function (str)
 console.log(checkBracket("({[]})(}"));
 
 
-/*
+/* 💥💥
 [문제54 : 연속되는 수](https://www.notion.so/54-169748106ffe46b6bed0e62ced61d4d5)
 은주는 놀이공원 아르바이트를 하고 있다. 은주가 일하는 놀이공원에서는 현재 놀이공원 곳곳에 숨겨진 숫자 스탬프를 모아 오면 선물을 주는 이벤트를 하고 있다. 숫자 스탬프는 매일 그 수와 스탬프에 적힌 숫자가 바뀌지만 그 숫자는 항상 연속된다. 
 그런데 요즘 다른 날에 찍은 스탬프를 가지고 와 선물을 달라고 하는 손님이 늘었다.
@@ -243,7 +243,7 @@ const checkStamp = function(str)
 console.log(checkStamp("1 2 3 4 5"));	//YES
 console.log(checkStamp("1 4 2 6 3"));	//No
 
-/*
+/* 💥💥💥💥💥
 [문제55 : 하노이의 탑](https://www.notion.so/55-105b77098f7e4b99a156280ee0550866)
 하노이의 탑은 프랑스 수학자 에두아르드가 처음으로 발표한 게임입니다. 하노이의 탑은 A, B, C 3개의 기둥과 기둥에 꽂을 수 있는 N 개의 원판으로 이루어져 있습니다. 
 이 게임에서는 다음의 규칙을 만족해야 합니다.
@@ -304,7 +304,7 @@ hanoi(3, 'A', 'B', 'C');
 console.log(route);
 console.log(route.length);
 
-/*
+/* 💥💥
 [문제56 : 객체의 함수 응용](https://www.notion.so/56-abc381f5916d4775804fbae9365ad0e6)
 다음의 객체가 주어졌을 때 한국의 면적과 가장 비슷한 국가와 그 차이를 출력하세요.
 
@@ -346,7 +346,7 @@ let diffCountry = diffObjArr[diffArr.indexOf(diff)][0];
 
 console.log(diffCountry, diff)
 
-/*
+/* 💥💥💥
 [문제57 : 1의 개수](https://www.notion.so/57-1-35ac8107242f4e1da2f8fd57ad2a8d1d)
 **0부터 1000까지 1의 개수를 세는 프로그램**을 만들려고 합니다. 예를 들어 0부터 20까지 1의 개수를 세어본다면 
 1, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19에 각각 1이 들어가므로 12개의 1이 있게 됩니다. 11은 1이 2번 들어간 셈이죠.
@@ -365,7 +365,7 @@ let result = sumOfString1000.split('').filter(a => a == '1').length;
 
 console.log(result)
 
-/*
+/* 💥💥💥💥
 [문제58 : 콤마 찍기](https://www.notion.so/58-4152dead59ad4ab7801752d6604e037d)
 원범이는 편의점 아르바이트가 끝난 후 정산을 하고자 합니다.
 정산을 빨리하고 집에 가고 싶은 원범이는 프로그램을 만들려고 합니다.
@@ -393,7 +393,7 @@ console.log(getNumber.reverse().join(''))
 // 5.27 ms (100 try)
 
 
-// 재귀함수 사용
+// 재귀함수 사용 🔥🔥🔥🔥🔥
 function comma(s) {
   if (s.length <= 3) {
     return s;

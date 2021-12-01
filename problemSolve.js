@@ -1,48 +1,23 @@
-
 /*
-[문제56 : 객체의 함수 응용](https://www.notion.so/56-abc381f5916d4775804fbae9365ad0e6)
-다음의 객체가 주어졌을 때 한국의 면적과 가장 비슷한 국가와 그 차이를 출력하세요.
+[문제58 : 콤마 찍기](https://www.notion.so/58-4152dead59ad4ab7801752d6604e037d)
+원범이는 편의점 아르바이트가 끝난 후 정산을 하고자 합니다.
+정산을 빨리하고 집에 가고 싶은 원범이는 프로그램을 만들려고 합니다.
 
-```jsx
-**데이터**
-nationWidth = {
-     'korea': 220877,
-     'Rusia': 17098242,
-     'China': 9596961,
-     'France': 543965,
-     'Japan': 377915,
-     'England' : 242900,
-}
+숫자를 입력받고 천 단위로 콤마(,)를 찍어주세요.
 
-**출력**
-England 22023
-```
+예를 들어, 123456789를 입력받았으면 123,456,789를 출력해야 합니다.
+
 */
 
-nationWidth = {
-  'korea': 220877,
-  'Rusia': 17098242,
-  'China': 9596961,
-  'France': 543965,
-  'Japan': 377915,
-  'England' : 242900,
-}
+let getNumber = prompt("Enter").split('').reverse();
 
-const getSimilarCountry = function (obj)
-{
-  const kor_Area = obj.korea;
-  const country_Arr = Object.entries(obj);
-  let min;
-  let min_country;
+for (let i = 0; i <= getNumber.length; i++) {
+  if (i % 4 == 3) {
+    if (i != getNumber.length) {
+      getNumber.splice(i, 0, ',');
+      console.log(getNumber)
+    }
+  };
+};
 
-  min = Math.abs(country_Arr[0][1] - kor_Area);
-  country_Arr.forEach((e) => {
-    if (Math.abs(e[1] - kor_Area) < min)
-      min = Math.abs(e[1] - kor_Area);
-      min_country = e[0];
-      console.log((kor_Area))
-  });
-  return ([min_country, min]);
-}
-
-console.log(getSimilarCountry(nationWidth))
+console.log(getNumber.reverse().join(''))
