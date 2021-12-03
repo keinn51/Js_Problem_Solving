@@ -378,23 +378,27 @@ console.log(result)
 
 // A.58
 
-let getNumber = prompt("Enter").split('').reverse();
+const getNumber = function (str)
+{
+  let result = str.split('').reverse();
 
-for (let i = 0; i <= getNumber.length; i++) {
-  if (i % 4 == 3) {
-    if (i != getNumber.length) {
-      getNumber.splice(i, 0, ',');
-    }
+  for (let i = 0; i <= result.length; i++) {
+    if (i % 4 == 3) {
+      if (i != result.length) {
+        result.splice(i, 0, ',');
+      }
+    };
   };
-};
+  return (result.reverse().join(''));
+}
 
+console.log(getNumber('123456'))
 
-console.log(getNumber.reverse().join(''))
 // 5.27 ms (100 try)
 
 
 // 재귀함수 사용 🔥🔥🔥🔥🔥
-function comma(s) {
+const comma = function (s) {
   if (s.length <= 3) {
     return s;
   } else {
@@ -402,8 +406,7 @@ function comma(s) {
   }
 }
 
-const n = prompt('숫자를 입력해주세요.');
-console.log(comma(n));
+console.log(comma('123456'));
 // 4.67 ms (100try)
 
 /*

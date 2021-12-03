@@ -9,15 +9,12 @@
 
 */
 
-let getNumber = prompt("Enter").split('').reverse();
+const comma = function (s) {
+  if (s.length <= 3) {
+    return s;
+  } else {
+    return comma(s.slice(0, s.length - 3)) + ',' + s.slice(s.length - 3);
+  }
+}
 
-for (let i = 0; i <= getNumber.length; i++) {
-  if (i % 4 == 3) {
-    if (i != getNumber.length) {
-      getNumber.splice(i, 0, ',');
-      console.log(getNumber)
-    }
-  };
-};
-
-console.log(getNumber.reverse().join(''))
+console.log(comma('123456'));
