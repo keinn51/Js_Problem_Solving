@@ -3,6 +3,7 @@
 
 🛑
 [문제1 : 배열의 삭제](https://www.notion.so/1-94677631c7b642a7bf3a60d93137f7b5)
+
 다음 배열에서 400, 500를 삭제하는 code를 입력하세요.
 
 ```jsx
@@ -84,6 +85,7 @@ console.log(typeof(arr));
 
 🛑
 [문제4 : 변수의 타입2](https://www.notion.so/4-2-7c2a26a48d214a7d9e1c6d7164f76909)
+    
 다음 변수 a를 `typeof(a)`로 넣었을 때 출력될 값과의 연결이 알맞지 않은 것은?
 
 1)  입력 : a =1,   출력 : number
@@ -101,6 +103,7 @@ console.log(typeof(arr));
 
 🛑
 [문제5 : for문 계산](https://www.notion.so/5-for-638d3381b00f4e1d89d4350b089d491a)
+    
 다음 코드의 출력 값으로 알맞은 것은?
 
 ```jsx
@@ -129,6 +132,7 @@ i는 1이랑 3밖에 돌지 않습니다.
 
 🛑
 [문제6 : False](https://www.notion.so/6-False-75e3067aaa0c48c98ba1e19ef086fb71)
+
 다음은 자바스크립트 문법 중에서 False로 취급하는 것들 입니다.
 앗, False로 취급하지 않는 것이 하나 있네요! **True를 찾아주세요.**
 
@@ -152,6 +156,7 @@ i는 1이랑 3밖에 돌지 않습니다.
 
 🛑🛑
 [문제7 : 변수명](https://www.notion.so/7-ade1039d89a547ec861ecbae6575a0af)
+
 다음 중 변수명으로 사용할 수 없는 것 2개를 고르시오.
 
 1)  age
@@ -183,6 +188,7 @@ let 은 이미 JavaScript 문법에 존재하는 예약어라 사용이 불가�
 
 🛑
 [문제8 : 객체의 키 이름 중복](https://www.notion.so/8-c59d74ba23ed46b68d304fb03ac1b341)
+
 자바스크립트 객체를 다음과 같이 만들었다. 
 출력값을 입력하시오. (출력값은 공백을 넣지 않습니다. )
 
@@ -211,6 +217,7 @@ console.log(d['weight']);
 
  🛑
 [문제9 : concat을 활용한 출력 방법](https://www.notion.so/9-concat-1f73859ed0714620b8fb88fd0800edaf)
+
 다음 소스 코드를 완성하여 날짜와 시간을 출력하시오.
 
 ```jsx
@@ -255,6 +262,7 @@ console.log(result);
 
 🛑🛑
 [문제10 : 별 찍기](https://www.notion.so/10-26e59abc17d6492eb8fe8f8c20c632ca)
+
 크리스마스 날, 은비는 친구들과 함께 파티를 하기로 했습니다. 그런데, 크리스마스 트리를 사는 것을 깜빡하고 말았습니다. 
 온 가게를 돌아다녀 봤지만 크리스마스 트리는 모두 품절이었습니다. 하는 수 없이 은비는 프로그래밍으로 트리를 만들기로 합니다. 
 
