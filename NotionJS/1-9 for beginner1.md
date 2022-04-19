@@ -165,19 +165,13 @@ i는 1이랑 3밖에 돌지 않습니다.
 4)  _age
 5)  1age
 
-
-// A7. 
-/*
-3)  let
-5)  1age
-
 <details>
 
 <summary>code & explain</summary>
 
 정답은 '3번', '5번' 입니다.
-JavaScript 식별자는 문자, 밑줄(_) 혹은 달러 기호($)로 시작해야하며
-let 은 이미 JavaScript 문법에 존재하는 예약어라 사용이 불가능합니다.
+JavaScript 식별자는 `문자, 밑줄(_) 혹은 달러 기호($)로 시작`해야하며
+`let` 은 이미 JavaScript 문법에 존재하는 예약어라 사용이 불가능합니다.
 
 </details>
 
@@ -257,43 +251,3 @@ console.log(result);
 </details>
 
 <br/>
-
-
-
-🛑🛑
-[문제10 : 별 찍기](https://www.notion.so/10-26e59abc17d6492eb8fe8f8c20c632ca)
-
-크리스마스 날, 은비는 친구들과 함께 파티를 하기로 했습니다. 그런데, 크리스마스 트리를 사는 것을 깜빡하고 말았습니다. 
-온 가게를 돌아다녀 봤지만 크리스마스 트리는 모두 품절이었습니다. 하는 수 없이 은비는 프로그래밍으로 트리를 만들기로 합니다. 
-
-**은비를 위해 프로그램을 작성해 주세요.**
-
-```jsx
-**입력**
-5
-
-**출력**
-    *
-   ***
-  *****
- *******
-*********
-```
-
-<details>
-
-<summary>code & explain</summary>
-
-```js
-function makeTree(num) {
-  let result = '';
-  for (i = 0; i < num; i++) {
-    result += ' '.repeat(num - i - 1) + '*'.repeat(2 * i + 1) + '\n'
-  }
-  return console.log(result);
-}
-
-makeTree(20);
-```
-
-</details>
