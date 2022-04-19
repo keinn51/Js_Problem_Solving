@@ -2,98 +2,6 @@
 // You can get the problem easily at https://www.notion.so/JS-100-94d97d294dd14c9b911a02c840fa9f2d
 
 /* 🛑
-[문제26 : 행성 문제2](https://www.notion.so/26-2-a9ae3f90c41c4aef96af9c10f13a1d5d)
-우리 태양계를 이루는 행성은 수성, 금성, 지구, 화성, 목성, 토성, 천왕성, 해왕성이 있습니다.
-이 행성들의 영어 이름은 Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune입니다.
-
-**행성의 한글 이름을 입력하면 영어 이름을 반환하는 프로그램**을 만들어 주세요.
-*/
-
-// A26.
-function GetPlanetEng(planet) {
-  let planetK = ["수성", "금성", "지구", "화성", "목성", "토성", "천왕성", "해왕성"]
-  let planetE = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
-
-  return planetE[planetK.indexOf(planet)];
-}
-
-// console.log(GetPlanetEng("금성"));
-
-/* 🛑🛑
-[문제27 : 객체 만들기](https://www.notion.so/27-1bdb95a6719049ceb820538eda42c3a8)
-첫번째 입력에서는 학생의 이름이 공백으로 구분되어 입력되고, 두번째에는 그 학생의 수학 점수가 공백으로 구분되어 주어집니다.
-
-두 개를 합쳐 **학생의 이름이 key**이고 **value가 수학 점수**인 객체를 출력해주세요.
-
-```jsx
-**입력**
-Yujin Hyewon
-70 100
-
-**출력**
-{'Yujin': 70, 'Hyewon': 100}
-```
-*/
-
-// A.27
-
-const getObject = function () {
-    let name = prompt("Enter the names: ").split(' ');
-    let scores = prompt('Enter the scores: ').split(' ');
-
-    return Object.fromEntries(name.map((elem, i) => [elem, Number(scores[i])]));
-}
-
-console.log(getObject());
-
-
-/* 🛑🛑
-[문제28 : 2-gram](https://www.notion.so/28-2-gram-fb3e43a5c88f4745932844d1ebac7725)
-**2-gram**이란 문자열에서 2개의 연속된 요소를 출력하는 방법입니다.
-
-예를 들어 'Javascript'를 2-gram으로 반복해 본다면 다음과 같은 결과가 나옵니다.
-
-```jsx
-**입력**
-Javascript
-
-**출력**
-J a
-a v
-v a
-a s
-s c
-c r
-r i
-i p
-p t
-```
-*/
-
-// A.28
-
-const	twoGram = function (str) {
-	str.split('').forEach((a, i, arr) => (i + 1 < arr.length) ? console.log(arr[i], arr[i + 1]) : 0);
-}
-
-twoGram('Javascript');
-
-
-/* 🛑
-[문제29 : 대문자만 지나가세요](https://www.notion.so/29-ef7e9672d0db44efa3e69c4799aea12e)
-진구는 영어 학원 아르바이트를 하고 있습니다. 반 아이들은 알파벳을 공부하는 학생들인데 오늘은 대문자 쓰기 시험을 봤습니다.
-
-**알파벳 하나만을 입력하고 그 알파벳이 대문자이면 YES를 아니면 NO를 출력하는 프로그램**을 만들어 주세요.
-*/
-
-// A.29
-
-let input = prompt("Enter")
-let IsUpperStirng = () => console.log((input == input.toUpperCase()) ? "Yes" : "No")
-
-IsUpperStirng()
-
-/* 🛑
 [문제30 : 문자열 속 문자 찾기](https://www.notion.so/30-c0ce1df21dbb431c8eb356d0c47491ed)
 문자 pineapple에는 apple이라는 문자가 숨어 있습니다. 원범이는 이렇듯 문자열 속에 숨어있는 문자를 찾아보려고 합니다.
 
@@ -110,11 +18,10 @@ apple
 
 // A.30
 
-let findstring = () => console.log(prompt("Enter letter").indexOf(prompt("Enter finding letter")));
+let findstring = () =>
+  console.log(prompt("Enter letter").indexOf(prompt("Enter finding letter")));
 
-findstring()
-
-
+findstring();
 
 /* 🛑
 [문제31 : 자바스크립트 자료형의 복잡도](https://www.notion.so/31-6772762cc7c7486a9643452a1baf5e1d)
@@ -136,8 +43,6 @@ slice랑 includes는 컴퓨터가 배열에 들어가서 값들을 하나하나 
 참고 : https://velog.io/@denmark-choco/javascript-Time-Complexity시간복잡도
       https://blog.chulgil.me/algorithm/*/
 
-
-
 /* 🛑
 [문제32 : 문자열 만들기](https://www.notion.so/32-bc824f2a919e4f948441286bb253cef0)
 취업 준비생인 혜림이는 자기소개서를 쓰고 있습니다. 열심히 자기소개서를 작성하던 도중 혜림이는 자기가 지금까지 단어를 얼마나 적었는지 궁금하게 됩니다. 
@@ -153,10 +58,7 @@ slice랑 includes는 컴퓨터가 배열에 들어가서 값들을 하나하나 
 */
 
 // A.32
-let checkWord = () => console.log(prompt("Enter").split(' ').length)
-
-
-
+let checkWord = () => console.log(prompt("Enter").split(" ").length);
 
 /* 🛑
 [문제33 : 거꾸로 출력하기](https://www.notion.so/33-e31451740a314d09ba074aac0a1002ed)
@@ -174,8 +76,13 @@ let checkWord = () => console.log(prompt("Enter").split(' ').length)
 
 //A.33
 
-let reverseWords = () => console.log(prompt("Enter").split(' ').reverse().join(' '))
-
+let reverseWords = () =>
+  console.log(
+    prompt("Enter")
+      .split(" ")
+      .reverse()
+      .join(" ")
+  );
 
 /* 🛑🛑
 [문제34 : sort 구현하기](https://www.notion.so/34-sort-35f9e8bed7f34f5a8722588b400d0d8c)
@@ -195,14 +102,15 @@ let reverseWords = () => console.log(prompt("Enter").split(' ').reverse().join('
 */
 
 // A.34
-const checkSort = function (str) {
-	let pastedArr = Array.from(str.split(' ')).sort((a, b) => a - b);
-	return console.log((str.split(' ').some((_, i, arr) => (arr[i] != pastedArr[i]))) ? "NO!" : "YES!");
+const checkSort = function(str) {
+  let pastedArr = Array.from(str.split(" ")).sort((a, b) => a - b);
+  return console.log(
+    str.split(" ").some((_, i, arr) => arr[i] != pastedArr[i]) ? "NO!" : "YES!"
+  );
 };
 
-checkSort('176 156 155 165 166 169');
-checkSort('155 156 165 166 169 176');
-
+checkSort("176 156 155 165 166 169");
+checkSort("155 156 165 166 169 176");
 
 /* 🛑🛑
 [문제35 : Factory 함수 사용하기](https://www.notion.so/35-Factory-6a3a32fd25344c7e9e7ae5eaa7a37dc2)
@@ -232,7 +140,7 @@ console.log(c(10));
 
 function one(n) {
   function two(num) {
-    return Math.pow(num, n)
+    return Math.pow(num, n);
   }
   return two;
 }
@@ -256,9 +164,7 @@ console.log(c(10));
 */
 
 // A.36
-let GUGUDAN = new Array(9).fill(+prompt("Enter")).map((a, i) => a * (i + 1))
-
-
+let GUGUDAN = new Array(9).fill(+prompt("Enter")).map((a, i) => a * (i + 1));
 
 /* 🛑🛑
 [문제37 : 반장 선거 ](https://www.notion.so/37-f56ab84018d44e7184c2307632a8c921)
@@ -277,51 +183,61 @@ let GUGUDAN = new Array(9).fill(+prompt("Enter")).map((a, i) => a * (i + 1))
 
 function getBanjang() {
   let A = {};
-  prompt("Enter").split(' ').forEach(a => A[a] ? (A[a] += 1) : A[a] = 1);
-  return console.log(Object.entries(A).sort((a, b) => b[1] - a[1])[0][0])
+  prompt("Enter")
+    .split(" ")
+    .forEach(a => (A[a] ? (A[a] += 1) : (A[a] = 1)));
+  return console.log(Object.entries(A).sort((a, b) => b[1] - a[1])[0][0]);
 }
 
-getBanjang()
-
+getBanjang();
 
 //--------------------------------------------------------------------
 
 /* Object.keys와 Array.reduce를 알아야 한다!
 Array.reduce는 배열 요소 각각의 전과 후를 비교해 비교-연산할 수 있다*/
 
-const array = prompt('이름을 입력해주세요.').split(' ');
+const array = prompt("이름을 입력해주세요.").split(" ");
 let result = {};
 let winner = "";
 
 for (let index in array) {
   let val = array[index];
-  result[val] = result[val] === undefined ? 1 : result[val] = result[val] + 1;
+  result[val] = result[val] === undefined ? 1 : (result[val] = result[val] + 1);
 }
 
-winner = Object.keys(result).reduce(function (a, b) {
-  return result[a] > result[b] ? a : b
+winner = Object.keys(result).reduce(function(a, b) {
+  return result[a] > result[b] ? a : b;
 });
 
 console.log(`${winner}(이)가 총 ${result[winner]}표로 반장이 되었습니다.`);
-
 
 //--------------------------------------------------------------------
 
 // include the re-vote! (but not nice code for big-O => iter for 4 times...)
 
-const votePresident = function (str) 
-{
-    const temp_obj = {};
-    str.split(' ').forEach((man) => temp_obj[man] ? temp_obj[man] += 1 : temp_obj[man] = 1);
-    const result = Object.entries(temp_obj).filter((e,i,arr) => (e[1] == Math.max(...arr.map(e=>e[1]))));
-    return (result.length == 1) ? console.log(`${result[0][0]}(이)가 총 ${result[0][1]}표로 반장이 되었습니다.`) 
-    : console.log(`${result.map(e=>e[0])}(이)가 총 ${result[0][1]}표로, 재투표가 필요합니다.`)
-}
+const votePresident = function(str) {
+  const temp_obj = {};
+  str
+    .split(" ")
+    .forEach(man =>
+      temp_obj[man] ? (temp_obj[man] += 1) : (temp_obj[man] = 1)
+    );
+  const result = Object.entries(temp_obj).filter(
+    (e, i, arr) => e[1] == Math.max(...arr.map(e => e[1]))
+  );
+  return result.length == 1
+    ? console.log(
+        `${result[0][0]}(이)가 총 ${result[0][1]}표로 반장이 되었습니다.`
+      )
+    : console.log(
+        `${result.map(e => e[0])}(이)가 총 ${
+          result[0][1]
+        }표로, 재투표가 필요합니다.`
+      );
+};
 
 votePresident("원범 원범 혜원 혜원 혜원 혜원 유진 유진");
 votePresident("원범 원범 혜원 혜원 혜원 혜원 유진 유진 유진 유진");
-
-
 
 /* 🛑🛑
 [문제38 : 호준이의 아르바이트](https://www.notion.so/38-371eb506b05f4b8db674569a08304799)
@@ -340,23 +256,25 @@ votePresident("원범 원범 혜원 혜원 혜원 혜원 유진 유진 유진 �
 
 // A.38
 
-
 // foreach, entries, sort
 function giveCandy() {
   let A = {};
-  prompt("Enter").split(' ').forEach(a => A[a] ? (A[a] += 1) : (A[a] = 1));
+  prompt("Enter")
+    .split(" ")
+    .forEach(a => (A[a] ? (A[a] += 1) : (A[a] = 1)));
   let B = Object.entries(A).sort((a, b) => b[1] - a[1]);
-  return console.log(B[0][1] + B[1][1] + B[2][1])
+  return console.log(B[0][1] + B[1][1] + B[2][1]);
 }
 
-giveCandy()
+giveCandy();
 // calculatingTime: 7.290771484375 ms (100try)
 
-
 // While과 Pop을 이용한 풀이
-const scores = prompt('점수입력').split(' ').map(function (n) {
-  return parseInt(n, 10);
-});
+const scores = prompt("점수입력")
+  .split(" ")
+  .map(function(n) {
+    return parseInt(n, 10);
+  });
 
 scores.sort((a, b) => {
   return a - b;
@@ -375,9 +293,6 @@ while (arr.length < 3) {
 
 console.log(count);
 // calculatingTime: 6.587890625 ms (100try)
-
-
-
 
 /* 🛑🛑 (regular expression!)
 [문제39 : 오타 수정하기](https://www.notion.so/39-e31823d5c6184efc95fdf78a86843414)
@@ -400,15 +315,14 @@ console.log(count);
 
 //1. 함수 사용
 
-let ChangeWord = () => console.log(prompt("Enter").replaceAll('q', 'e'));
+let ChangeWord = () => console.log(prompt("Enter").replaceAll("q", "e"));
 // calculatingTime: 4.27099609375 ms (100)
 
 //2. 정규식 사용
-const word = prompt('입력하세요.');
+const word = prompt("입력하세요.");
 
-console.log(word.replace(/q/gi, 'e'));
+console.log(word.replace(/q/gi, "e"));
 // calculatingTime: 5.274169921875 ms (100)
-
 
 /* 🛑
 [문제40 : 놀이동산에 가자](https://www.notion.so/40-592ce594719b4054a5bc4a38c5475ba5)
@@ -438,7 +352,8 @@ console.log(word.replace(/q/gi, 'e'));
 
 let NotOver = +prompt("Enter over weight");
 let NumFreind = +prompt("Enter number of freinds");
-let SumWeight = +prompt("Enter your freind weight"), count = 0;
+let SumWeight = +prompt("Enter your freind weight"),
+  count = 0;
 while (NotOver > SumWeight) {
   count += 1;
   if (NumFreind == count) {
@@ -446,9 +361,7 @@ while (NotOver > SumWeight) {
   }
   SumWeight += +prompt("Enter your freind weight");
 }
-console.log(count)
-
-
+console.log(count);
 
 /* 🛑
 [문제41 : 소수판별](https://www.notion.so/41-994743b827054aadadbe471001b6531c)
@@ -458,7 +371,8 @@ console.log(count)
 */
 
 // A.41
-let num = +prompt("Enter"), Answer = "YES";
+let num = +prompt("Enter"),
+  Answer = "YES";
 
 for (let i = 2; i < num; i++) {
   if (num % i == 0) {
@@ -466,9 +380,7 @@ for (let i = 2; i < num; i++) {
   }
 }
 
-console.log(Answer)
-
-
+console.log(Answer);
 
 /* 🛑🛑 (about date object!!)
 [문제42 : 2020년](https://www.notion.so/42-2020-ae1dd4dc05cd43dbb7475afb52bc00c4)
@@ -485,10 +397,8 @@ console.log(Answer)
 */
 
 // A.42
-let time = new Date(`${+prompt("Enter")} ${+prompt("Enter")},2020`)
-console.log(time.toString().slice(0, 3))
-
-
+let time = new Date(`${+prompt("Enter")} ${+prompt("Enter")},2020`);
+console.log(time.toString().slice(0, 3));
 
 /* 🛑🛑🛑 (what is toString??)
 [문제43 : 10진수를 2진수로](https://www.notion.so/43-10-2-ea6da83e61ba4b038841ec035a621fea)
@@ -500,32 +410,27 @@ console.log(time.toString().slice(0, 3))
 */
 
 // A.43
-const dec_to_bin = function (num) 
-{
-    let n = 0;
-    let result = [];
-    while (Math.pow(2, n) <= num)
-        n++;
-    if (n != 0)
-        n--;
-    while (n >= 0)
-    {
-        result.push(parseInt(num / Math.pow(2, n), 10));
-        num = num % Math.pow(2, n--);
-    }
-    return console.log(result.join(''));
-}
+const dec_to_bin = function(num) {
+  let n = 0;
+  let result = [];
+  while (Math.pow(2, n) <= num) n++;
+  if (n != 0) n--;
+  while (n >= 0) {
+    result.push(parseInt(num / Math.pow(2, n), 10));
+    num = num % Math.pow(2, n--);
+  }
+  return console.log(result.join(""));
+};
 
 dec_to_bin(10023);
 
-
 // using toSring (ho....)
 
-const dec_to_bin = function (num) {console.log(num.toString(2))};
+const dec_to_bin = function(num) {
+  console.log(num.toString(2));
+};
 
 dec_to_bin(23);
-
-
 
 /*  🛑🛑
 [문제44 : 각 자리수의 합](https://www.notion.so/44-a15b4323690f449ebb91275d7d38662f)
@@ -546,11 +451,14 @@ dec_to_bin(23);
 
 // A.44
 
-let SumLetters = () => console.log(+prompt("Enter").split('').reduce((pre, curr) => pre + parseInt(curr, 10), 0));
+let SumLetters = () =>
+  console.log(
+    +prompt("Enter")
+      .split("")
+      .reduce((pre, curr) => pre + parseInt(curr, 10), 0)
+  );
 
-SumLetters()
-
-
+SumLetters();
 
 /*  🛑
 [문제45 : getTime()함수 사용하기](https://www.notion.so/45-getTime-88b0941980cc47859649df7576966391)
@@ -568,8 +476,6 @@ let year = Math.floor(date.getTime() / (1000 * 3600 * 24 * 365) + 1970);
 
 console.log(year);
 
-
-
 /*  🛑
 [문제46 : 각 자리수의 합 2](https://www.notion.so/46-2-1349c673327740de973e50d1297354f5)
 1부터 20까지의(20을 포함) 모든 숫자를 일렬로 놓고 모든 자릿수의 총 합을 구하세요. 
@@ -579,14 +485,12 @@ console.log(year);
 */
 
 // A.46
-let num = '';
+let num = "";
 for (let i = 1; i <= 20; i++) {
   num += i;
 }
 
-console.log(num.split('').reduce((prev, curr) => prev + parseInt(curr, 10), 0));
-
-
+console.log(num.split("").reduce((prev, curr) => prev + parseInt(curr, 10), 0));
 
 /* 🛑 (about set!)
 [문제47 : set 자료형의 응용](https://www.notion.so/47-set-8b73fa6b52114d128bba7bc6c6da83c6)
@@ -624,7 +528,6 @@ let DeleteSame = () => console.log(Object.entries(people).length);
 
 DeleteSame(people);
 
-
 // Just use Set! (size is same with length)
 const people = {
   이호준: "01050442903",
@@ -642,7 +545,6 @@ for (let key in people) {
 }
 console.log(result.size); //size 는 set 객체 내 값의 개수를 반환합니다.
 
-
 /* 🛑
 [문제48 : 대소문자 바꿔서 출력하기](https://www.notion.so/48-ab0fe531a1ca4042b9436c1e3dc5a75d)
 문자열이 주어지면 대문자와 소문자를 바꿔서 출력하는 프로그램을 작성하세요.
@@ -654,9 +556,14 @@ console.log(result.size); //size 는 set 객체 내 값의 개수를 반환합�
 */
 
 // A.48
-let ChangeCase = prompt("Enter").split('').map((curr, i) => (curr == curr.toUpperCase()) ? curr.toLowerCase() : curr.toUpperCase()).join('');
+let ChangeCase = prompt("Enter")
+  .split("")
+  .map((curr, i) =>
+    curr == curr.toUpperCase() ? curr.toLowerCase() : curr.toUpperCase()
+  )
+  .join("");
 
-console.log(ChangeCase)
+console.log(ChangeCase);
 
 /* 🛑
 [문제49 : 최댓값 구하기](https://www.notion.so/49-2052f88fe90f4bde93cea5fb63627483)
@@ -669,9 +576,10 @@ console.log(ChangeCase)
 */
 
 // A.49
-let CheckMax = prompt("Enter").split(' ').sort((a, b) => b - a)[0];
-console.log(CheckMax)
-
+let CheckMax = prompt("Enter")
+  .split(" ")
+  .sort((a, b) => b - a)[0];
+console.log(CheckMax);
 
 /* 🛑🛑🛑
 [문제50 : 버블정렬 구현하기](https://www.notion.so/50-bb22106895db4766b2517b0f61a8cc2d)
@@ -716,10 +624,10 @@ function bubble(arr) {
   return result;
 }
 
-const items = prompt('입력해주세요.').split(' ').map((n) => {
-  return parseInt(n, 10);
-});
+const items = prompt("입력해주세요.")
+  .split(" ")
+  .map(n => {
+    return parseInt(n, 10);
+  });
 
 console.log(bubble(items));
-
-
