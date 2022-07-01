@@ -6,10 +6,10 @@
 출력 : 3
 
 ```js
-var fs = require("fs");
-var input = fs.readFileSync("/dev/stdin").toString().split(" ");
-var a = parseInt(input[0]);
-var b = parseInt(input[1]);
+let fs = require("fs");
+let input = fs.readFileSync("/dev/stdin").toString().split(" ");
+let a = parseInt(input[0]);
+let b = parseInt(input[1]);
 
 console.log(a + b);
 ```
@@ -18,8 +18,8 @@ console.log(a + b);
 
 ```js
 let input = require("fs").readFileSync("text.txt").toString().split("\n");
-var a = parseInt(input[0]);
-var b = parseInt(input[1]);
+let a = parseInt(input[0]);
+let b = parseInt(input[1]);
 
 console.log(a + b);
 ```
