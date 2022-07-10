@@ -14,6 +14,8 @@
 72 
 */
 
+// 유클리드 호제법!
+
 let [N, M] = require("fs")
   .readFileSync("/dev/stdin")
   .toString()
