@@ -45,3 +45,9 @@ for (let i = 0; i < 9; i++) {
   }
 }
 console.log(p);
+
+/*
+- `map(v=>v+)` 을 하면 모든 string 배열을 number로 바꿀 수 있습니다.
+- filter와 reduce를 같이 쓰면 아주 짧게 코딩이 끝난다.
+- 만든 사람은 천재인가?
+*/
