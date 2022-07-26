@@ -21,8 +21,6 @@ WWWWW
 130 65
 */
 
-// 11111111111111111111111
-
 const input = require("fs")
   .readFileSync("text.txt")
   .toString()
@@ -38,140 +36,73 @@ for (let i = 0; i < M; i++) {
   for (let j = 0; j < N; j++) graph[i][j] = input[i + 1][j];
 }
 
-// for (let i = 0; i < M; i++) {
-//   for (let j = 0; j < N; j++) {
-//     graph[i][j] = "V";
-//     if (i + 1 < M && graph[i + 1][j] !== "V" && graph[i + 1][j] === "W") {
-
-//       for (let l = i + 1; l < M; l++) {
-//         for (let k = 0; k < N; k++) {
-//           graph[l][k] = "V";
-//           if (l + 1 < M && graph[l + 1][j] !== "V" && graph[l + 1][j] === "W") {
-            
-//           }
-//           if (i - 1 >= 0 && graph[i - 1][j] !== "V" && graph[i - 1][j] === "W") {
-//           }
-//           if (j + 1 < N && graph[i][j + 1] !== "V" && graph[i][j + 1] === "W") {
-//           }
-//           if (j - 1 >= 0 && graph[i][j - 1] !== "V" && graph[i][j - 1] === "W") {
-//           }
-//         }
-//       }
-
-//     }
-//     if (i - 1 >= 0 && graph[i - 1][j] !== "V" && graph[i - 1][j] === "W") {
-//     }
-//     if (j + 1 < N && graph[i][j + 1] !== "V" && graph[i][j + 1] === "W") {
-//     }
-//     if (j - 1 >= 0 && graph[i][j - 1] !== "V" && graph[i][j - 1] === "W") {
-//     }
-//   }
-// }
-
-// 22222222222222222222222
-
-// function iter(a, b)
-// {
-//   graph[a][b] = "V";
-//   for (let i = a; i < M; i++) {
-//     for (let j = b; j < N; j++) {
-//       if (i + 1 < M && graph[i + 1][j] !== "V" && graph[i + 1][j] === "W") {
-//         iter(i + 1, j);
-//       }
-//       if (i - 1 >= 0 && graph[i - 1][j] !== "V" && graph[i - 1][j] === "W") {
-//         iter(i - 1, j);
-//       }
-//       if (j + 1 < N && graph[i][j + 1] !== "V" && graph[i][j + 1] === "W") {
-//         iter(i, j + 1);
-//       }
-//       if (j - 1 >= 0 && graph[i][j - 1] !== "V" && graph[i][j - 1] === "W") {
-//         iter(i, j - 1);
-//       }
-//     }
-//   }
-// }
-
-// iter(0, 0);
-
-// console.log(graph);
-
-
-// 3333333333333333333333333
-
-// let count = 0;
-
-// function iter(a, b, mode)
-// {
-//   graph[a][b] = "V";
-//   for (let i = a; i < M; i++) {
-//     for (let j = b; j < N; j++) {
-//       if (i + 1 < M && graph[i + 1][j] !== "V" && graph[i + 1][j] === mode) {
-//         count++
-//         iter(i + 1, j,mode);
-//       }
-//       if (i - 1 >= 0 && graph[i - 1][j] !== "V" && graph[i - 1][j] === mode) {
-//         count++
-//         iter(i + 1, j,mode);
-//       }
-//       if (j + 1 < N && graph[i][j + 1] !== "V" && graph[i][j + 1] === mode) {
-//         count++
-//         iter(i + 1, j,mode);
-//       }
-//       if (j - 1 >= 0 && graph[i][j - 1] !== "V" && graph[i][j - 1] === mode) {
-//         count++
-//         iter(i + 1, j,mode);
-//       }
-//     }
-//   }
-// }
-
-// iter(0, 0, 'W');
-
-// console.log(count); // 15
-// console.log(graph);
-
-// 4444444444444444444444444
-
-let count = 0;
+let whiteCount = 1;
+let BlueCount = 1;
+let whiteSum = 0;
+let blueSum = 0;
 let isStop = false;
 
 function iter(a, b, mode)
 {
   let isRtn = true;
   graph[a][b] = "V";
-  if (isStop)
-        return;
   for (let i = a; i < M; i++) {
     for (let j = b; j < N; j++) {
       if (i + 1 < M && graph[i + 1][j] !== "V" && graph[i + 1][j] === mode) {
         isRtn = false;
-        count++
+        if(mode === 'W')
+          whiteCount++;
+        if(mode === 'B')
+          BlueCount++;
         iter(i + 1, j,mode);
       }
       if (i - 1 >= 0 && graph[i - 1][j] !== "V" && graph[i - 1][j] === mode) {
         isRtn = false;
-        count++
-        iter(i - 1, j,mode);
+        if(mode === 'W')
+          whiteCount++;
+        if(mode === 'B')
+          BlueCount++;
+        iter(i - 1, j, mode);
       }
       if (j + 1 < N && graph[i][j + 1] !== "V" && graph[i][j + 1] === mode) {
         isRtn = false;
-        count++
-        iter(i, j + 1,mode);
+        if(mode === 'W')
+          whiteCount++;
+        if(mode === 'B')
+          BlueCount++;
+        iter(i, j + 1, mode);
       }
       if (j - 1 >= 0 && graph[i][j - 1] !== "V" && graph[i][j - 1] === mode) {
         isRtn = false;
-        count++
-        iter(i, j - 1,mode);
+        if(mode === 'W')
+          whiteCount++;
+        if(mode === 'B')
+          BlueCount++;
+        iter(i, j - 1, mode);
       }
-      if (isRtn)
-        isStop = true;
-      if (isStop)
-        return;
     }
   }
 }
 
-iter(0, 0, 'W');
+for (let i = 0; i < M; i++) {
+  for (let j = 0; j < N; j++) {
+    if (graph[i][j] !== 'V') {
+      if (graph[i][j] === 'W')
+      {
+        iter(i, j, 'W');
+        whiteSum += whiteCount ** 2;
+        whiteCount = 1;
+      }
+      else if (graph[i][j] === 'B') {
+        iter(i, j, 'B');
+        console.log(BlueCount)
+        blueSum += BlueCount ** 2;
+        BlueCount = 1;
+      }
+      isStop = false;
+    }
+  }
+}
 
-console.log(count); // 8
+console.log(whiteSum, blueSum);
 console.log(graph);
