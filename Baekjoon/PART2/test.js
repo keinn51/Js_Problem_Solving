@@ -36,52 +36,25 @@ for (let i = 0; i < M; i++) {
   for (let j = 0; j < N; j++) graph[i][j] = input[i + 1][j];
 }
 
-let whiteCount = 1;
-let BlueCount = 1;
 let whiteSum = 0;
 let blueSum = 0;
-let isStop = false;
 
-function iter(a, b, mode)
+function iter(a, b, mode, cnt)
 {
-  let isRtn = true;
   graph[a][b] = "V";
-  for (let i = a; i < M; i++) {
-    for (let j = b; j < N; j++) {
-      if (i + 1 < M && graph[i + 1][j] !== "V" && graph[i + 1][j] === mode) {
-        isRtn = false;
-        if(mode === 'W')
-          whiteCount++;
-        if(mode === 'B')
-          BlueCount++;
-        iter(i + 1, j,mode);
-      }
-      if (i - 1 >= 0 && graph[i - 1][j] !== "V" && graph[i - 1][j] === mode) {
-        isRtn = false;
-        if(mode === 'W')
-          whiteCount++;
-        if(mode === 'B')
-          BlueCount++;
-        iter(i - 1, j, mode);
-      }
-      if (j + 1 < N && graph[i][j + 1] !== "V" && graph[i][j + 1] === mode) {
-        isRtn = false;
-        if(mode === 'W')
-          whiteCount++;
-        if(mode === 'B')
-          BlueCount++;
-        iter(i, j + 1, mode);
-      }
-      if (j - 1 >= 0 && graph[i][j - 1] !== "V" && graph[i][j - 1] === mode) {
-        isRtn = false;
-        if(mode === 'W')
-          whiteCount++;
-        if(mode === 'B')
-          BlueCount++;
-        iter(i, j - 1, mode);
-      }
-    }
+  if (a + 1 < M && graph[a + 1][b] !== "V" && graph[a + 1][b] === mode) {
+    cnt = iter(a + 1, b, mode, cnt + 1);
   }
+  if (a - 1 >= 0 && graph[a - 1][b] !== "V" && graph[a - 1][b] === mode) {
+    cnt = iter(a - 1, b, mode, cnt + 1);
+  }
+  if (b + 1 < N && graph[a][b + 1] !== "V" && graph[a][b + 1] === mode) {
+    cnt = iter(a, b + 1, mode, cnt + 1);
+  }
+  if (b - 1 >= 0 && graph[a][b - 1] !== "V" && graph[a][b - 1] === mode) {
+    cnt = iter(a, b - 1, mode, cnt + 1);
+  }
+  return cnt;
 }
 
 for (let i = 0; i < M; i++) {
@@ -89,15 +62,10 @@ for (let i = 0; i < M; i++) {
     if (graph[i][j] !== 'V') {
       if (graph[i][j] === 'W')
       {
-        iter(i, j, 'W');
-        whiteSum += whiteCount ** 2;
-        whiteCount = 1;
+        whiteSum += iter(i, j, 'W', 1) ** 2;
       }
       else if (graph[i][j] === 'B') {
-        iter(i, j, 'B');
-        console.log(BlueCount)
-        blueSum += BlueCount ** 2;
-        BlueCount = 1;
+        blueSum += iter(i, j, 'B', 1) ** 2;
       }
       isStop = false;
     }
@@ -105,4 +73,3 @@ for (let i = 0; i < M; i++) {
 }
 
 console.log(whiteSum, blueSum);
-console.log(graph);
