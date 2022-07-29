@@ -36,31 +36,36 @@ for (let i = 0; i < M; i++) {
   for (let j = 0; j < N; j++) graph[i][j] = input[i + 1][j];
 }
 
+let whiteSum = 0;
+let blueSum = 0;
+
 let dx = [1, 0, -1, 0];
 let dy = [0, 1, 0, -1];
 
-function dfs(x, y, std, count) {
-  graph[x][y] = "visited";
+function iter(a, b, mode, cnt)
+{
+  graph[a][b] = "V";
   let nx, ny;
-  for (let i = 0; i < 4; i++) {
-    nx = x + dx[i];
-    ny = y + dy[i];
+  for(let i = 0; i < 4; i++)
+  {
+    nx = a + dx[i];
+    ny = b + dy[i];
     if (0 <= nx && nx < M && 0 <= ny && ny < N)
-      if (graph[nx][ny] != "visited" && graph[nx][ny] == std)
-        count = dfs(nx, ny, std, count + 1);
+      if (graph[nx][ny] !== 'V' && graph[nx][ny] === mode)
+        cnt = iter(nx, ny, mode, cnt + 1);
   }
-  return count;
+  return cnt;
 }
 
-let white = 0,
-  blue = 0;
-
-for (let i = 0; i < M; i++)
-  for (let j = 0; j < N; j++)
-    if (graph[i][j] != "visited") {
-      if (graph[i][j] == "W") {
-        white += dfs(i, j, "W", 1) ** 2;
-      } else blue += dfs(i, j, "B", 1) ** 2;
+for (let i = 0; i < M; i++) {
+  for (let j = 0; j < N; j++) {
+    if (graph[i][j] !== 'V') {
+      if (graph[i][j] === 'W')
+        whiteSum += iter(i, j, 'W', 1) ** 2;
+      else if (graph[i][j] === 'B')
+        blueSum += iter(i, j, 'B', 1) ** 2;
     }
+  }
+}
 
-console.log(white, blue);
+console.log(whiteSum, blueSum);
