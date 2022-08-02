@@ -4,25 +4,22 @@ const input = require("fs").readFileSync("text.txt").toString().split("\n");
 const size = parseInt(input[0]);
 
 function getPassword(line) {
-  let cursor = 0;
-  let result = [];
+  let leftStack = [];
+  let rightStack = [];
 
   for (let i = 0; i < line.length; i++) {
     if (line[i] === "<") {
-      if (cursor > 0) cursor--;
+      if (leftStack.length) rightStack.push(leftStack.pop());
     } else if (line[i] === ">") {
-      if (cursor < result.length) cursor++;
+      if (rightStack.length) leftStack.push(rightStack.pop());
     } else if (line[i] === "-") {
-      if (cursor !== 0) {
-        result.splice(cursor - 1, 1);
-        cursor--;
-      }
+      if (leftStack.length) leftStack.pop();
     } else {
-      result.splice(cursor, 0, line[i]);
-      cursor++;
+      leftStack.push(line[i]);
     }
   }
-  return result.join("");
+  rightStack.reverse();
+  return leftStack.concat(rightStack).join("");
 }
 
 for (let i = 1; i <= size; i++) {
