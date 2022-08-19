@@ -1,4 +1,5 @@
 // for을 두 번 쓴다고 해서 O(N2) 가 아니다.
+// 문제를 잘 읽어야겠군..
 
 function solution(A) {
   const circleArr = [];
