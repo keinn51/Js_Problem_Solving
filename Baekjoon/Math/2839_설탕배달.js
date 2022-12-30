@@ -14,24 +14,14 @@ const N = +require('fs').readFileSync('text.txt').toString().trim();
  * a가 0인데도 e를 3으로 나눈 나머지가 0이 아니라면 -1 반환
  */
 
-let fiveKg = Math.floor(N/5), threeKg = 0, after5 = 0, after3 = 0;
+let fiveKg = Math.floor(N/5), threeKg , after5, after3;
 
-while(fiveKg > 0) {
+while(fiveKg >= 0) {
     after5 = (N - (5*fiveKg));
     threeKg = Math.floor(after5/3);
     after3 = after5%3;
-    if (after3 === 0) {
-        break;
-    }
-    else {
-        fiveKg--
-    }
+    if (after3 === 0)  break;
+    else fiveKg--
 }
-
-if (fiveKg === 0) {
-    threeKg = Math.floor(N / 3);
-    after3 = N % 3;
-}
-
 if (after3 !== 0) console.log(-1);
 else console.log(fiveKg + threeKg);
