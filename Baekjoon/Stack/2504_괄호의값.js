@@ -1,6 +1,6 @@
-const input = require("fs").readFileSync("text.txt").toString();
+const input = require("fs").readFileSync("text.txt").toString().trim();
 
-console.log("input", input);
+// console.log("input", input);
 
 /**
  * stackA tempNumber
@@ -19,11 +19,11 @@ let tempNumber = null;
 
 const getResult = () => {
     for (let word of input) {
-        console.group("In word");
-        console.log("word:", word);
-        console.log("stackA:", stackA);
-        console.log("tempNumber:", tempNumber);
-        console.groupEnd();
+        // console.group("In word");
+        // console.log("word:", word);
+        // console.log("stackA:", stackA);
+        // console.log("tempNumber:", tempNumber);
+        // console.groupEnd();
         if (word === ")") {
             if (stackA[stackA.length - 1] === "(") {
                 stackA.pop();
@@ -71,8 +71,8 @@ const getResult = () => {
     return result;
 };
 
-console.log("output", getResult());
-// console.log(getResult());
+// console.log("output", getResult());
+console.log(getResult());
 
 /**
  *  [()()(())]([()][])()()
