@@ -19,20 +19,35 @@ function solution(users, emoticons) {
     // console.log(disArr);
     const allPriceArr = [];
     disArr.forEach((el) => {
-        // console.log(el);
-        // emoticons.forEach((price) => console.log(price));
         const priceArr = [];
         emoticons.forEach((price, idx) => {
-            // console.log(price * discount[el[idx]]);
             priceArr.push(price * discount[el[idx]]);
         });
-        // console.log(priceArr);
         allPriceArr.push(priceArr);
-        // users.forEach((man) => console.log(man));
     });
-    console.log(disArr, allPriceArr);
+    console.log("##", disArr, allPriceArr);
+    const result = [0, 0];
     allPriceArr.forEach((price, idx) => {
-        // if (disArr[idx])
+        users.forEach((user) => {
+            const purchaseIdxArr = [];
+            let money = 0;
+            console.log("price", price);
+            console.log("disArr", disArr);
+            console.log("user", user);
+
+            const disLimit = user[0];
+            const emotiLimit = user[1];
+            disArr.forEach((dis, idx2) => {
+                if (dis >= disLimit) purchaseIdxArr.push(idx2);
+            });
+            console.log("purchaseIdxArr", purchaseIdxArr);
+            purchaseIdxArr.forEach((purchaseIdx) => {
+                money += price[purchaseIdx] * discount[disArr[purchaseIdx]];
+            });
+            console.log("money", money);
+
+            console.log(purchaseIdxArr);
+        });
     });
 }
 
