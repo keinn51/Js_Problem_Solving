@@ -22,7 +22,7 @@ const checkAround = (i, j, map) => {
             checkAround(i + 1, j + 1, map);
     }
     if (map[i][j - 1] !== undefined && map[i][j - 1] === 1) checkAround(i, j - 1, map);
-    if (map[i][j + 1] === undefined && map[i][j + 1] === 1) checkAround(i, j + 1, map);
+    if (map[i][j + 1] !== undefined && map[i][j + 1] === 1) checkAround(i, j + 1, map);
 };
 
 const getNum = (widht, height, map) => {
