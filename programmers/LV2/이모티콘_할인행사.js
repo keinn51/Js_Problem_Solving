@@ -8,10 +8,17 @@ const tempEmo = [7000, 9000];
 const possibleDisCount = [10, 20, 30, 40];
 let index = 0;
 
-const iterForDisCountArr = (startDis, arrLen, result) => {
-    // ! DFS 를 해야 해서 잡시 쉬어갑니다
-    for (i = startDis; i <= 40; i += 10) {
-        result[index].push(i);
+const disCountCases = [];
+const innerArr = [];
+
+const iterForDisCountArr = (startIdx, depLen, depth) => {
+    if (depth === depLen) {
+        disCountCases.push([...innerArr]);
+        return;
+    }
+    for (let i = startIdx; i < 4; i++) {
+        innerArr[depth] = possibleDisCount[i];
+        iterForDisCountArr(startIdx, depLen, depth + 1);
     }
 };
 
@@ -23,7 +30,8 @@ const makeDisCountArrFromUser = (users) => {
         const newDisCount = Math.ceil(Number(userArr[0]) / 10) * 10;
         if (newDisCount < minDisCount) minDisCount = newDisCount;
     });
-    // console.log(minDisCount); //good
+    const startIdx = possibleDisCount.indexOf(minDisCount);
+    iterForDisCountArr(startIdx, userLen, 0);
 };
 
 function solution(users, emoticons) {
@@ -32,3 +40,4 @@ function solution(users, emoticons) {
 }
 
 makeDisCountArrFromUser(tempUser);
+console.log(disCountCases);
