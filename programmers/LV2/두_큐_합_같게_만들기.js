@@ -10,27 +10,28 @@ const getSumOfArr = (array) => {
 };
 
 function solution(queue1, queue2) {
-    let queue1Sum = getSumOfArr(queue1);
-    let queue2Sum = getSumOfArr(queue2);
+    const totalQueue = [...queue1, ...queue2];
+    let startIdx = 0;
+    let endIdx = queue1.length - 1;
+    const totalSum = getSumOfArr(totalQueue);
+    const goalSum = totalSum / 2;
+    let halfQueueSum = getSumOfArr(queue1);
     let result = 0;
-    const totalIdx = queue1.length + queue2.length;
 
-    if ((queue1Sum + queue2Sum) % 2 !== 0) return -1;
-    for (let i = 0; i <= totalIdx; i++) {
-        if (queue1Sum === queue2Sum) return result;
-        else if (queue1Sum < queue2Sum) {
-            const poppedNum = queue2.shift();
-            if (queue2.length === 0) return -1;
-            queue1.push(poppedNum);
-            queue1Sum += poppedNum;
-            queue2Sum -= poppedNum;
+    if (totalSum % 2 !== 0) return -1;
+    for (let i = 0; i <= queue1.length * 3; i++) {
+        if (halfQueueSum === goalSum) return result;
+        else if (halfQueueSum < goalSum) {
+            endIdx += 1;
+            if (endIdx > totalQueue.length) return -1;
+            const addedNum = totalQueue[endIdx];
+            halfQueueSum += addedNum;
             result += 1;
-        } else if (queue2Sum < queue1Sum) {
-            const poppedNum = queue1.shift();
-            if (queue1.length === 0) return -1;
-            queue2.push(poppedNum);
-            queue1Sum -= poppedNum;
-            queue2Sum += poppedNum;
+        } else if (halfQueueSum > goalSum) {
+            const poppedNum = totalQueue[startIdx];
+            startIdx += 1;
+            if (startIdx > endIdx) return -1;
+            halfQueueSum -= poppedNum;
             result += 1;
         }
     }
@@ -49,3 +50,4 @@ console.log(solution([1], [5]), "-1");
 console.log(solution([10, 3, 1], [3, 3]), "3");
 console.log(solution([1.5, 3, 2], [4, 1.5]), "3");
 console.log(solution([1, 1, 1, 1], [1, 1, 7, 10]), "-1");
+console.log(solution([1], [1]), "0");
