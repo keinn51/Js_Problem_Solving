@@ -1,6 +1,3 @@
-const tempQueue1 = [1, 2, 1, 2];
-const tempQueue2 = [1, 10, 1, 2];
-
 const getSumOfArr = (array) => {
     let result = 0;
     array.forEach((curr) => {
