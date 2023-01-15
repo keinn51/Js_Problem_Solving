@@ -1,6 +1,3 @@
-const tempN = 9;
-const tempInfo = [0, 0, 1, 2, 0, 1, 1, 1, 1, 1, 1];
-
 function solution(n, info) {
     const originScore = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
     const newScore = [20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0];
@@ -99,5 +96,5 @@ function solution(n, info) {
 
 console.log(solution(5, [2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]));
 console.log(solution(1, [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]));
-console.log(solution(tempN, tempInfo));
+console.log(solution(9, [0, 0, 1, 2, 0, 1, 1, 1, 1, 1, 1]));
 console.log(solution(10, [0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 3]));
