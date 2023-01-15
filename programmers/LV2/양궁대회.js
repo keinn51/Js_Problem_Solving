@@ -15,32 +15,52 @@ function solution(n, info) {
     console.log("profitArr", profitArr);
     const visitArr = [];
 
-    const getVisitedArr = (idx, currArrow) => {
-        /**
-         * arrow가 줄어드는 조건 추가해주고 도전해봄
-         */
+    const getVisitedArr = (idx, currArrow, visitArr) => {
         let sum = 0;
+        // console.log("currArrow", currArrow, neededArrowArr[idx]);
         while (profitArr[idx] >= profitArr[idx + 1] && currArrow >= neededArrowArr[idx]) {
+            console.log("idx", idx);
             visitArr.push(idx);
             sum += sumScore[idx];
             currArrow -= neededArrowArr[idx];
             idx++;
         }
-        const firstTryArr = [];
-        const secondTryArr = [];
-        let firstSum = 0,
-            secondSum = 0;
-        firstSum = getVisitedArr(idx, currArrow);
-        secondSum = getVisitedArr(idx + 1, currArrow);
-        if (firstSum >= secondSum) {
-            visitArr.push([...firstTryArr]);
-            sum += firstSum;
-        } else {
-            visitArr.push([...secondTryArr]);
-            sum += secondSum;
+        if (currArrow < neededArrowArr[idx]) {
+            while (currArrow < neededArrowArr[idx]) {
+                idx++;
+                if (idx >= neededArrowArr.length) break;
+            }
+        }
+        if (profitArr[idx] < profitArr[idx + 1]) {
+            const firstTryArr = [idx];
+            const secondTryArr = [];
+            let firstSum = sumScore[idx],
+                secondSum = 0;
+            // console.log("here");
+            firstSum += getVisitedArr(idx + 1, currArrow - neededArrowArr[idx], firstTryArr);
+            secondSum += getVisitedArr(idx + 1, currArrow, secondTryArr);
+            console.log("firstSum", firstSum, "secondSum", secondSum);
+            if (firstSum >= secondSum) {
+                visitArr.push(...firstTryArr);
+                sum += firstSum;
+            } else {
+                visitArr.push(...secondTryArr);
+                sum += secondSum;
+            }
         }
         return sum;
     };
+
+    getVisitedArr(0, n, visitArr);
+    console.log("visitArr", visitArr);
+    const resultArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    visitArr.forEach((idx) => {
+        resultArr[idx] = neededArrowArr[idx];
+    });
+    console.log("result", resultArr);
 }
 
-solution(tempN, tempInfo);
+solution(5, [2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]);
+// solution(tempN, tempInfo);
+// solution(tempN, tempInfo);
+// solution(tempN, tempInfo);
