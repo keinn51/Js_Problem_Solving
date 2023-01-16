@@ -1,11 +1,7 @@
 # Javascript 문제풀이 / 코딩테스트
 
-### 풀이 목록
+- 백준은 아래의 사이트를 위주로 풀었습니다.
+[백준 코테 대비 문제](https://covenant.tistory.com/224)
 
-[https://www.notion.so/Coding-Test-2e311653c08e4f62a9668075b6f77ca8](https://www.notion.so/Coding-Test-2e311653c08e4f62a9668075b6f77ca8)
-
-### 학습 알고리즘
-
-- [유클리드 호제법](https://www.acmicpc.net/problem/2609)
-
-정리 : [유클리드 호제법 (javascript)](https://basemenks.tistory.com/321)
+- 프로그래머스는 코딩테스트 연습 파트 LV1 ~ LV2 위주로 풀이중입니다.
+[프로그래머스 코테연습](https://school.programmers.co.kr/learn/challenges?order=recent&page=1&levels=2%2C1&languages=javascript&partIds=31236%2C25448%2C21366%2C20069%2C17214%2C12286%2C9317%2C22586%2C37527)
