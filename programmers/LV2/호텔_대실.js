@@ -16,22 +16,33 @@ function solution(book_time) {
      */
     const roomArr = [];
     let maxRoomCnt = 1;
+    let earliesEndTime = 0;
     book_time = book_time.sort((a, b) => transHourToMin(a[0]) - transHourToMin(b[0]));
     book_time.forEach((time) => {
         if (roomArr.length === 0) {
             roomArr.push(time);
+            earliesEndTime = transHourToMin(time[1]);
+            return;
+        }
+
+        if (transHourToMin(time[0]) < earliesEndTime) {
+            roomArr.push(time);
+            maxRoomCnt += 1;
+            earliesEndTime = Math.min(earliesEndTime, transHourToMin(time[1]));
             return;
         }
 
         let newIndex = roomArr.findIndex(
             (roomTime) => transHourToMin(roomTime[1]) + 10 <= transHourToMin(time[0])
         );
+
         if (newIndex === -1) {
             roomArr.push(time);
             maxRoomCnt += 1;
         } else {
             roomArr[newIndex] = time;
         }
+        earliesEndTime = Math.min(earliesEndTime, transHourToMin(time[1]));
     });
     return maxRoomCnt;
 }
