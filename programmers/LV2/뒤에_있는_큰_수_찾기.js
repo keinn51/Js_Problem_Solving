@@ -1,32 +1,24 @@
 function solution(numbers) {
-    /**
-     * 탑 위의 개구리 문제
-     * 가장 큰 탑의 index부터 좌-우로 간다
-     * 좌측으로 갈 때에 갈수록 큰 숫자들이 나온다면 그 숫자들은 가장 큰 탑의 값이 결과이다
-     * 우측으로 갈 때에 갈수록 작은 숫자들이 나온다면 그 숫자들은, 추후에 나올 큰 수
-     */
-    const result = [];
-    const sortedArr = [...numbers].sort((a, b) => a - b);
-    const arrSet = new Set(sortedArr);
-    const onlyArr = [];
-    for (let num of arrSet.values()) {
-        onlyArr.push(num);
-    }
-    console.log("onlyArr", onlyArr);
+    const result = new Array(numbers.length).fill(-1);
+    const indexStack = [];
 
     numbers.forEach((number, index) => {
-        if (number === onlyArr[onlyArr.length - 1]) {
-            onlyArr.pop();
-            result.push(-1);
+        if (index === 0) {
+            indexStack.push(index);
             return;
         }
-        for (let i = index + 1; i < numbers.length; i++) {
-            if (numbers[i] > number) {
-                result.push(numbers[i]);
-                return;
+        if (numbers[index - 1] < number) {
+            while (indexStack.length > 0) {
+                const lastIndex = indexStack[indexStack.length - 1];
+                if (numbers[lastIndex] < number) {
+                    result[lastIndex] = number;
+                    indexStack.pop();
+                    continue;
+                }
+                break;
             }
         }
-        return result.push(-1);
+        indexStack.push(index);
     });
     return result;
 }
