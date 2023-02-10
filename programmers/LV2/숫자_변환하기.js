@@ -1,22 +1,19 @@
 function solution(x, y, n) {
-    let needVisitArr = [x];
-    let depth = 0;
-    while (needVisitArr.length > 0) {
-        const newArr = [];
-        // console.log(needVisitArr);
-        for (let i = 0; i < needVisitArr.length; i++) {
-            const nowElem = needVisitArr[i];
-            if (nowElem === y) return depth;
-            if (nowElem > y) continue;
-            if (nowElem < y - n) newArr.push(nowElem + n);
-            if (nowElem === y - n) return depth + 1;
-            if (nowElem * 2 < y) newArr.push(nowElem * 2);
-            if (nowElem * 2 === y) return depth + 1;
-            if (nowElem * 3 < y) newArr.push(nowElem * 3);
-            if (nowElem * 3 === y) return depth + 1;
+    if (x === y) return 0;
+    const dp = {};
+    dp[x] = 0;
+    let data = [x];
+    while (data.length) {
+        const newData = [];
+        for (const d of data) {
+            for (const e of [d + n, d * 2, d * 3]) {
+                if (e > y || dp[e]) continue;
+                if (e === y) return dp[d] + 1;
+                dp[e] = dp[d] + 1;
+                newData.push(e);
+            }
         }
-        needVisitArr = [...newArr];
-        depth += 1;
+        data = newData;
     }
     return -1;
 }
