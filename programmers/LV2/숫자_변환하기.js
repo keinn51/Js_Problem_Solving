@@ -1,19 +1,18 @@
 function solution(x, y, n) {
-    if (x === y) return 0;
-    const dp = {};
-    dp[x] = 0;
-    let data = [x];
-    while (data.length) {
-        const newData = [];
-        for (const d of data) {
-            for (const e of [d + n, d * 2, d * 3]) {
-                if (e > y || dp[e]) continue;
-                if (e === y) return dp[d] + 1;
-                dp[e] = dp[d] + 1;
-                newData.push(e);
-            }
+    let needVisitSet = new Set([x]);
+    let depth = 0;
+    while (needVisitSet.size > 0) {
+        const newSet = new Set();
+        for (let item of needVisitSet) {
+            const nowElem = item;
+            if (nowElem === y) return depth;
+            if (nowElem > y) continue;
+            if (nowElem <= y - n) newSet.add(nowElem + n);
+            if (nowElem * 2 <= y) newSet.add(nowElem * 2);
+            if (nowElem * 3 <= y) newSet.add(nowElem * 3);
         }
-        data = newData;
+        needVisitSet = newSet;
+        depth += 1;
     }
     return -1;
 }
