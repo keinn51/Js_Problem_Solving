@@ -1,13 +1,16 @@
+// stack!!
 function solution(weights) {
     weights.sort((a, b) => a - b);
-    const combination = [1, 3 / 2, 4 / 3, 2];
+    const combination = [1, 4 / 3, 3 / 2, 2];
     let result = 0;
+    const matchStack = {};
     for (let i = 0; i < weights.length; i++) {
-        for (let j = i + 1; j < weights.length; j++) {
-            // console.log(weights[j], weights[i]);
-            if (weights[j] > weights[i] * 2) break;
-            if (combination.indexOf(weights[j] / weights[i]) !== -1) result += 1;
-        }
+        if (matchStack[weights[i]] !== undefined) result += matchStack[weights[i]];
+        combination.forEach((rate) => {
+            const suppliedNum = weights[i] * rate;
+            if (matchStack[suppliedNum] === undefined) matchStack[suppliedNum] = 1;
+            else matchStack[suppliedNum] += 1;
+        });
     }
     return result;
 }
