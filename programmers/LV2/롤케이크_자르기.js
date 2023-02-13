@@ -1,56 +1,26 @@
-const compareSet = (arr, idx) => {
-    const firstSet = new Set(arr.slice(0, idx));
-    const secondSet = new Set(arr.slice(idx, arr.length));
-    if (firstSet.size !== secondSet.size) return firstSet.size - secondSet.size;
-    return 0;
-};
-
-function solution(topping) {
-    let result = 0;
-    let idx = Math.round(topping.length / 2);
-    if (compareSet(topping, idx) > 0) {
-        while (compareSet(topping, idx) > 0 && idx >= 0) {
-            idx--;
-        }
-        if (idx < 0) return 0;
-        if (compareSet(topping, idx) < 0) return 0;
-        else {
-            while (compareSet(topping, idx) === 0 && idx >= 0) {
-                result += 1;
-                idx -= 1;
-            }
-            return result;
-        }
-    } else if (compareSet(topping, idx) < 0) {
-        while (compareSet(topping, idx) < 0 && idx <= arr.length - 1) {
-            idx++;
-        }
-        if (idx > arr.length - 1) return 0;
-        if (compareSet(topping, idx) > 0) return 0;
-        else {
-            while (compareSet(topping, idx) === 0 && idx <= arr.length - 1) {
-                result += 1;
-                idx += 1;
-            }
-            return result;
-        }
-    } else {
-        result += 1;
-        let forwardIdx = idx + 1;
-        let backwardIdx = idx - 1;
-        while (compareSet(topping, forwardIdx) === 0) {
-            forwardIdx += 1;
-            result += 1;
-        }
-        while (compareSet(topping, backwardIdx) === 0) {
-            backwardIdx -= 1;
-            result += 1;
-        }
-        return result;
+function initObj(arr) {
+    const midIdx = Math.round(arr.length / 2) - 1;
+    let innerIdx = 0;
+    const firstObj = {};
+    const secondObj = {};
+    while (innerIdx <= midIdx) {
+        if (firstObj[arr[innerIdx]] === undefined) firstObj[arr[innerIdx]] = 1;
+        else firstObj[arr[innerIdx]] += 1;
+        innerIdx += 1;
     }
-    return 0;
+    while (innerIdx <= arr.length - 1) {
+        if (secondObj[arr[innerIdx]] === undefined) secondObj[arr[innerIdx]] = 1;
+        else secondObj[arr[innerIdx]] += 1;
+        innerIdx += 1;
+    }
+    return [firstObj, secondObj];
 }
 
-compareSet([1, 2, 3, 3, 2, 1], 2);
+function solution(topping) {
+    const idx = Math.round(topping.length / 2) - 1;
+    const [firstObj, secondObj] = initObj(topping);
+    console.log(firstObj, secondObj);
+}
+
 console.log(solution([1, 2, 1, 3, 1, 4, 1, 2]));
 console.log(solution([1, 2, 3, 1, 4]));
