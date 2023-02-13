@@ -9,26 +9,27 @@ function solution(topping) {
     let idx = 0;
     let result = 0;
 
-    while (
-        Object.keys(firstStack).length - Object.keys(secondStack).length !== 0 &&
-        idx <= topping.length - 1
-    ) {
-        if (firstStack[topping[idx]] === undefined) firstStack[topping[idx]] = 1;
-        else firstStack[topping[idx]] -= 1;
+    let firstStackLen = Object.keys(firstStack).length;
+    let secondStackLen = Object.keys(secondStack).length;
+
+    while (firstStackLen - secondStackLen !== 0 && idx <= topping.length - 1) {
+        if (firstStack[topping[idx]] === undefined) {
+            firstStack[topping[idx]] = 1;
+            firstStackLen += 1;
+        }
         secondStack[topping[idx]] -= 1;
-        if (secondStack[topping[idx]] === 0) delete secondStack[topping[idx]];
+        if (secondStack[topping[idx]] === 0) secondStackLen -= 1;
         idx += 1;
     }
-    while (
-        Object.keys(firstStack).length - Object.keys(secondStack).length === 0 &&
-        idx <= topping.length - 1
-    ) {
-        if (firstStack[topping[idx]] === undefined) firstStack[topping[idx]] = 1;
-        else firstStack[topping[idx]] -= 1;
+    while (firstStackLen - secondStackLen === 0 && idx <= topping.length - 1) {
+        if (firstStack[topping[idx]] === undefined) {
+            firstStack[topping[idx]] = 1;
+            firstStackLen += 1;
+        }
         secondStack[topping[idx]] -= 1;
-        if (secondStack[topping[idx]] === 0) delete secondStack[topping[idx]];
-        result += 1;
+        if (secondStack[topping[idx]] === 0) secondStackLen -= 1;
         idx += 1;
+        result += 1;
     }
     return result;
 }
