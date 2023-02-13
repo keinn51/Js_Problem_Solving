@@ -1,25 +1,36 @@
-function initObj(arr) {
-    const midIdx = Math.round(arr.length / 2) - 1;
-    let innerIdx = 0;
-    const firstObj = {};
-    const secondObj = {};
-    while (innerIdx <= midIdx) {
-        if (firstObj[arr[innerIdx]] === undefined) firstObj[arr[innerIdx]] = 1;
-        else firstObj[arr[innerIdx]] += 1;
-        innerIdx += 1;
-    }
-    while (innerIdx <= arr.length - 1) {
-        if (secondObj[arr[innerIdx]] === undefined) secondObj[arr[innerIdx]] = 1;
-        else secondObj[arr[innerIdx]] += 1;
-        innerIdx += 1;
-    }
-    return [firstObj, secondObj];
-}
-
 function solution(topping) {
-    const idx = Math.round(topping.length / 2) - 1;
-    const [firstObj, secondObj] = initObj(topping);
-    console.log(firstObj, secondObj);
+    const firstStack = {};
+    const secondStack = topping.reduce((acc, curr) => {
+        if (acc[curr] === undefined) acc[curr] = 1;
+        else acc[curr] += 1;
+        return acc;
+    }, {});
+
+    let idx = 0;
+    let result = 0;
+
+    while (
+        Object.keys(firstStack).length - Object.keys(secondStack).length !== 0 &&
+        idx <= topping.length - 1
+    ) {
+        if (firstStack[topping[idx]] === undefined) firstStack[topping[idx]] = 1;
+        else firstStack[topping[idx]] -= 1;
+        secondStack[topping[idx]] -= 1;
+        if (secondStack[topping[idx]] === 0) delete secondStack[topping[idx]];
+        idx += 1;
+    }
+    while (
+        Object.keys(firstStack).length - Object.keys(secondStack).length === 0 &&
+        idx <= topping.length - 1
+    ) {
+        if (firstStack[topping[idx]] === undefined) firstStack[topping[idx]] = 1;
+        else firstStack[topping[idx]] -= 1;
+        secondStack[topping[idx]] -= 1;
+        if (secondStack[topping[idx]] === 0) delete secondStack[topping[idx]];
+        result += 1;
+        idx += 1;
+    }
+    return result;
 }
 
 console.log(solution([1, 2, 1, 3, 1, 4, 1, 2]));
