@@ -13,62 +13,62 @@
  * ! 왜인지 73점 밖에 나오지 않음
  */
 
-// function boardToString(arr) {
-//     let res = "";
-//     arr.forEach((line) => {
-//         res += line.join("");
-//         res += "\n";
-//     });
-//     return res;
-// }
+function boardToString(arr) {
+    let res = "";
+    arr.forEach((line) => {
+        res += line.join("");
+        res += "\n";
+    });
+    return res;
+}
 
-// function solution(board) {
-//     const visitBoard = new Array(board.length).fill([]).map((line, idx) => {
-//         return new Array(board[idx].length).fill("_");
-//     });
-//     let res = 100000000;
-//     const width = board[0].length,
-//         height = board.length;
+function solution(board) {
+    const visitBoard = new Array(board.length).fill([]).map((line, idx) => {
+        return new Array(board[idx].length).fill("_");
+    });
+    let res = 100000000;
+    const width = board[0].length,
+        height = board.length;
 
-//     let startX, startY;
+    let startX, startY;
 
-//     board.forEach((line, y) => {
-//         const x = line.indexOf("R");
-//         if (x !== -1) {
-//             startX = x;
-//             startY = y;
-//         }
-//     });
+    board.forEach((line, y) => {
+        const x = line.indexOf("R");
+        if (x !== -1) {
+            startX = x;
+            startY = y;
+        }
+    });
 
-//     function iter(x, y, count, dir) {
-//         if (board[y][x] === "G") {
-//             res = Math.min(res, count);
-//             return;
-//         }
-//         if (count >= res) return;
+    function iter(x, y, count, dir) {
+        if (board[y][x] === "G") {
+            res = Math.min(res, count);
+            return;
+        }
+        if (count >= res) return;
 
-//         visitBoard[y][x] = "V";
-//         let ex = x,
-//             wx = x,
-//             sy = y,
-//             ny = y;
+        visitBoard[y][x] = "V";
+        let ex = x,
+            wx = x,
+            sy = y,
+            ny = y;
 
-//         while (ex < width - 1 && board[y][ex + 1] !== "D" && dir !== "w") ex += 1;
-//         if (ex !== x && visitBoard[y][ex] === "_") iter(ex, y, count + 1, "e");
-//         while (wx > 0 && board[y][wx - 1] !== "D" && dir !== "e") wx -= 1;
-//         if (wx !== x && visitBoard[y][wx] === "_") iter(wx, y, count + 1, "w");
-//         while (sy < height - 1 && board[sy + 1][x] !== "D" && dir !== "n") sy += 1;
-//         if (sy !== y && visitBoard[sy][x] === "_") iter(x, sy, count + 1, "s");
-//         while (ny > 0 && board[ny - 1][x] !== "D" && dir !== "s") ny -= 1;
-//         if (ny !== y && visitBoard[ny][x] === "_") iter(x, ny, count + 1, "n");
-//         visitBoard[y][x] = "_";
-//     }
+        while (ex < width - 1 && board[y][ex + 1] !== "D" && dir !== "w") ex += 1;
+        if (ex !== x && visitBoard[y][ex] === "_") iter(ex, y, count + 1, "e");
+        while (wx > 0 && board[y][wx - 1] !== "D" && dir !== "e") wx -= 1;
+        if (wx !== x && visitBoard[y][wx] === "_") iter(wx, y, count + 1, "w");
+        while (sy < height - 1 && board[sy + 1][x] !== "D" && dir !== "n") sy += 1;
+        if (sy !== y && visitBoard[sy][x] === "_") iter(x, sy, count + 1, "s");
+        while (ny > 0 && board[ny - 1][x] !== "D" && dir !== "s") ny -= 1;
+        if (ny !== y && visitBoard[ny][x] === "_") iter(x, ny, count + 1, "n");
+        visitBoard[y][x] = "_";
+    }
 
-//     iter(startX, startY, 0, null);
+    iter(startX, startY, 0, null);
 
-//     if (res === 100000000) return -1;
-//     return res;
-// }
+    if (res === 100000000) return -1;
+    return res;
+}
 
 console.log(solution(["...D..R", ".D.G...", "....D.D", "D....D.", "..D...."]));
 console.log(solution([".D.R", "..G.", "..D.", "...D"]));
