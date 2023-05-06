@@ -68,103 +68,124 @@
 //     return result;
 // }
 
-function pasteDelChart(chart) {
-    const newChart = {};
-    Object.keys(chart).forEach((key) => {
-        newChart[key] = [];
-        chart[key].forEach((num) => {
-            if (newChart[key]) newChart[key].push(num);
-            else newChart[key] = [num];
-        });
-    });
-    return newChart;
-}
+// function pasteDelChart(chart) {
+//     const newChart = {};
+//     Object.keys(chart).forEach((key) => {
+//         newChart[key] = [];
+//         chart[key].forEach((num) => {
+//             if (newChart[key]) newChart[key].push(num);
+//             else newChart[key] = [num];
+//         });
+//     });
+//     return newChart;
+// }
 
-function checkEmpty(obj) {}
+// function checkEmpty(obj) {}
+
+// function solution(targets) {
+//     let deleteChart = {};
+//     targets.sort((a, b) => {
+//         const [startA, endA] = a;
+//         const [startB, endB] = b;
+//         if (startA !== startB) return startA - startB;
+//         if (endA !== endB) return endB - endA;
+//         return 0;
+//     });
+//     targets.forEach(([start, end]) => {
+//         if (deleteChart[start]) deleteChart[start].push(end);
+//         else deleteChart[start] = [end];
+//         // startLim = Math.min(startLim, start);
+//         // endLim = Math.max(endLim, end);
+//     });
+//     console.log("deleteChart", deleteChart);
+//     const lenChart = {};
+//     Object.keys(deleteChart).forEach((key) => {
+//         const arr = deleteChart[key];
+//         for (let i = arr.length - 1; i >= 0; i--) {
+//             const _len = arr[i] - Number(key);
+//             if (lenChart[_len]) lenChart[_len].push(Number(key));
+//             else lenChart[_len] = [Number(key)];
+//         }
+//     });
+//     console.log("lenChart", lenChart);
+//     console.log("pasteDelChart", pasteDelChart(deleteChart));
+//     let shotNum = 0,
+//         tempChart = {},
+//         result = 0;
+//     function iter(arr, key, num, deleteChart) {
+//         const _cpArr = [...arr]; // [11, 2]
+//         const startNum = _cpArr.pop(); //2
+//         if (deleteChart.length === 0) return true;
+//         else result += 1;
+//         console.log("_cpArr / delChart", _cpArr, deleteChart);
+//         // _cpArr = [11]
+//         // 2 ~ 4
+//         for (let i = startNum; i < startNum + Number(key); i++) {
+//             const _cpChart = pasteDelChart(deleteChart);
+//             // i ~ i+1 을 쏜 것
+//             // 쏴서 맞은 것들 딜리트 차트에서 없애기
+//             // 맞춘 것 num으로 추가하기
+//             // 바뀐 딜리트 차트 복사본도 재귀에 넘거야 함
+//             Object.keys(_cpChart).forEach((key) => {
+//                 const _innerArr = _cpChart[key];
+//                 _innerArr.forEach((_num) => {
+//                     const lastNum = _cpChart[key][_cpChart[key].length - 1];
+//                     // key : 1, lastNum : 4, i : 2
+//                     // _cpChart[1] : [4]
+//                     console.log("key / i / lastNum", key, i, lastNum, _cpChart);
+//                     if (Number(key) <= i && lastNum >= i + 1) {
+//                         _cpChart[key].pop();
+//                         num += 1;
+//                     }
+//                 });
+//                 // _cpChart[1] : []
+//             });
+//             console.log("num / chart", num, _cpChart);
+//             // num : 해당 i~i+1에서 맞은 값
+//             if (_cpArr.length) {
+//                 if (iter(_cpArr, key, num, _cpChart)) return true;
+//             } else {
+//                 if (num > shotNum) {
+//                     shotNum = num;
+//                     tempChart = _cpChart;
+//                 }
+//             }
+//         }
+//         return false;
+//     }
+//     Object.keys(lenChart).forEach((key) => {
+//         console.log("lenChart[key]", lenChart[key]);
+//         if (iter(lenChart[key], key, 0, deleteChart)) {
+//             return result;
+//         }
+//         shotNum = 0;
+//         deleteChart = tempChart;
+//         tempChart = {};
+//         // 해당 길이의 차트에서 모든 딜리트 차트를 맞추었다면 최솟값을 반환하고 종료
+//         // 왜냐하면 이전 것들은 무조건 요격해야 하는 것들이기 때문
+//     });
+//     return 0;
+// }
 
 function solution(targets) {
-    let deleteChart = {};
+    let answer = 0;
+
     targets.sort((a, b) => {
-        const [startA, endA] = a;
-        const [startB, endB] = b;
-        if (startA !== startB) return startA - startB;
-        if (endA !== endB) return endB - endA;
-        return 0;
+        if (a[1] == b[1]) return a[0] - b[0];
+        return a[1] - b[1];
     });
-    targets.forEach(([start, end]) => {
-        if (deleteChart[start]) deleteChart[start].push(end);
-        else deleteChart[start] = [end];
-        // startLim = Math.min(startLim, start);
-        // endLim = Math.max(endLim, end);
-    });
-    console.log("deleteChart", deleteChart);
-    const lenChart = {};
-    Object.keys(deleteChart).forEach((key) => {
-        const arr = deleteChart[key];
-        for (let i = arr.length - 1; i >= 0; i--) {
-            const _len = arr[i] - Number(key);
-            if (lenChart[_len]) lenChart[_len].push(Number(key));
-            else lenChart[_len] = [Number(key)];
+
+    let cut = -1;
+
+    for (let i = 0; i < targets.length; i++) {
+        let [left, right] = targets[i];
+        if (left >= cut) {
+            answer++;
+            cut = right;
         }
-    });
-    console.log("lenChart", lenChart);
-    console.log("pasteDelChart", pasteDelChart(deleteChart));
-    let shotNum = 0,
-        tempChart = {},
-        result = 0;
-    function iter(arr, key, num, deleteChart) {
-        const _cpArr = [...arr]; // [11, 2]
-        const startNum = _cpArr.pop(); //2
-        if (deleteChart.length === 0) return true;
-        else result += 1;
-        console.log("_cpArr / delChart", _cpArr, deleteChart);
-        // _cpArr = [11]
-        // 2 ~ 4
-        for (let i = startNum; i < startNum + Number(key); i++) {
-            const _cpChart = pasteDelChart(deleteChart);
-            // i ~ i+1 을 쏜 것
-            // 쏴서 맞은 것들 딜리트 차트에서 없애기
-            // 맞춘 것 num으로 추가하기
-            // 바뀐 딜리트 차트 복사본도 재귀에 넘거야 함
-            Object.keys(_cpChart).forEach((key) => {
-                const _innerArr = _cpChart[key];
-                _innerArr.forEach((_num) => {
-                    const lastNum = _cpChart[key][_cpChart[key].length - 1];
-                    // key : 1, lastNum : 4, i : 2
-                    // _cpChart[1] : [4]
-                    console.log("key / i / lastNum", key, i, lastNum, _cpChart);
-                    if (Number(key) <= i && lastNum >= i + 1) {
-                        _cpChart[key].pop();
-                        num += 1;
-                    }
-                });
-                // _cpChart[1] : []
-            });
-            console.log("num / chart", num, _cpChart);
-            // num : 해당 i~i+1에서 맞은 값
-            if (_cpArr.length) {
-                if (iter(_cpArr, key, num, _cpChart)) return true;
-            } else {
-                if (num > shotNum) {
-                    shotNum = num;
-                    tempChart = _cpChart;
-                }
-            }
-        }
-        return false;
     }
-    Object.keys(lenChart).forEach((key) => {
-        console.log("lenChart[key]", lenChart[key]);
-        if (iter(lenChart[key], key, 0, deleteChart)) {
-            return result;
-        }
-        shotNum = 0;
-        deleteChart = tempChart;
-        tempChart = {};
-        // 해당 길이의 차트에서 모든 딜리트 차트를 맞추었다면 최솟값을 반환하고 종료
-        // 왜냐하면 이전 것들은 무조건 요격해야 하는 것들이기 때문
-    });
-    return 0;
+
+    return answer;
 }
 
 console.log(
