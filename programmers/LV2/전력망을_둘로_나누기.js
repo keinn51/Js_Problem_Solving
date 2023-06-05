@@ -25,32 +25,39 @@ class Node {
         this.children = [];
     }
 
-    getAllNodeCount(tree) {
+    getAllNodeCount(tree, start, visitNodes) {
         let count = 1;
+        // const visitNodes = [this.head];
         function iter(arr) {
-            arr.forEach((node) => {
+            for (let key in arr) {
+                const node = arr[key];
+                if (visitNodes.includes(node)) continue;
+                visitNodes.push(node);
                 count += 1;
-                console.log(node, tree[node]);
                 iter(tree[node].children);
-            });
+            }
         }
-        iter(tree[this.head].children);
+        iter(tree[start].children);
         return count;
     }
 
     getCutLocation(tree) {
-        const allNodeCount = this.getAllNodeCount(tree);
+        const allNodeCount = this.getAllNodeCount(tree, this.head, [this.head]);
+        const visitNodes = [this.head];
         let lowest = allNodeCount;
-        function iter(arr, count) {
-            const rest = allNodeCount - count;
-            arr.forEach((node) => {
-                console.log(arr, count, rest);
-                lowest = Math.min(lowest, Math.abs(rest - count));
-                iter(tree[node].children, count - arr.length);
-            });
-        }
-        iter(tree[this.head].children, allNodeCount - 1);
-        console.log("lowest::", lowest);
+        const iter = (arr) => {
+            for (let key in arr) {
+                const node = arr[key];
+                if (visitNodes.includes(node)) continue;
+                visitNodes.push(node);
+                const nowNodeCount = this.getAllNodeCount(tree, node, visitNodes);
+                console.log(arr, node, nowNodeCount);
+                lowest = Math.min(lowest, Math.abs(allNodeCount - 2 * nowNodeCount));
+                iter(tree[node].children);
+            }
+        };
+        iter(tree[this.head].children);
+        return lowest;
     }
 }
 
@@ -58,27 +65,11 @@ function solution(n, wires) {
     const tree = {},
         head = wires[0][0];
     wires.forEach(([start, end]) => {
-        if (tree[end]) {
-            tree[end].children.push(start);
-            if (!tree[start]) tree[start] = new Node(start, head);
-        } else {
-            tree[end] = new Node(end, head);
-            if (!tree[start]) tree[start] = new Node(start, head);
-            tree[start].children.push(end);
-        }
+        if (!tree[start]) tree[start] = new Node(tree[start], head);
+        if (!tree[end]) tree[end] = new Node(tree[end], head);
+        tree[start].children.push(end);
+        tree[end].children.push(start);
     });
-    console.log("getCutLocation::", tree[1].getCutLocation(tree));
+    console.log(tree);
+    return tree[Object.keys(tree)[0]].getCutLocation(tree);
 }
-
-console.log(
-    solution(9, [
-        [1, 3],
-        [2, 3],
-        [3, 4],
-        [4, 5],
-        [4, 6],
-        [4, 7],
-        [7, 8],
-        [7, 9],
-    ])
-);
