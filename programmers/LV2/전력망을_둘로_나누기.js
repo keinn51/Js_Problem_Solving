@@ -27,12 +27,12 @@ class Node {
 
     getAllNodeCount(tree, start, visitNodes) {
         let count = 1;
-        // const visitNodes = [this.head];
+        const _visitNodes = [this.head];
         function iter(arr) {
             for (let key in arr) {
                 const node = arr[key];
-                if (visitNodes.includes(node)) continue;
-                visitNodes.push(node);
+                if (visitNodes.includes(node) || _visitNodes.includes(node)) continue;
+                _visitNodes.push(node);
                 count += 1;
                 iter(tree[node].children);
             }
@@ -51,7 +51,6 @@ class Node {
                 if (visitNodes.includes(node)) continue;
                 visitNodes.push(node);
                 const nowNodeCount = this.getAllNodeCount(tree, node, visitNodes);
-                console.log(arr, node, nowNodeCount);
                 lowest = Math.min(lowest, Math.abs(allNodeCount - 2 * nowNodeCount));
                 iter(tree[node].children);
             }
@@ -70,6 +69,5 @@ function solution(n, wires) {
         tree[start].children.push(end);
         tree[end].children.push(start);
     });
-    console.log(tree);
     return tree[Object.keys(tree)[0]].getCutLocation(tree);
 }
