@@ -11,8 +11,8 @@
  * 여기서 궁금한 것은 노드 트리 구조로 어떻게 만드냐는 것이다!
  * 1. 배열에서 가장 먼저 나오는 친구를 그냥 head라고 한다.
  * 2. 객체를 만들고 각 요소의 key는 요소의 value로 한다.
- * 3. 각 요소의 value는 Node Class이다. 이 때 children은 해당 요소가 이미 객체 안에 있으면 안 넣고 없으면 넣는다.
- * 4. 1번 노드의 Class는 {value: 1, children:[3]} 이다
+ * 3. 각 요소의 value는 Node Class이다. 이 때 friends은 해당 요소가 이미 객체 안에 있으면 안 넣고 없으면 넣는다.
+ * 4. 1번 노드의 Class는 {value: 1, friends:[3]} 이다
  *
  * end가 이미 있으면? end 칠드런에 start를 붙이는 것
  * end가 없으면 start 칠드런에 end를 붙이는 것
@@ -22,40 +22,40 @@ class Node {
     constructor(value, head) {
         this.head = head;
         this.value = value;
-        this.children = [];
+        this.friends = [];
     }
 
-    getAllNodeCount(tree, start, visitNodes) {
+    getAdjacentCount(tree, start, visitNodes) {
         let count = 1;
-        const _visitNodes = [this.head];
+        const _visitNodes = new Set(visitNodes);
         function iter(arr) {
             for (let key in arr) {
                 const node = arr[key];
-                if (visitNodes.includes(node) || _visitNodes.includes(node)) continue;
-                _visitNodes.push(node);
+                if (_visitNodes.has(node)) continue;
+                _visitNodes.add(node);
                 count += 1;
-                iter(tree[node].children);
+                iter(tree[node].friends);
             }
         }
-        iter(tree[start].children);
+        iter(tree[start].friends);
         return count;
     }
 
-    getCutLocation(tree) {
-        const allNodeCount = this.getAllNodeCount(tree, this.head, [this.head]);
-        const visitNodes = [this.head];
-        let lowest = allNodeCount;
+    getCutLocation(tree, n) {
+        const visitNodes = new Set();
+        visitNodes.add(this.head);
+        let lowest = n;
         const iter = (arr) => {
             for (let key in arr) {
                 const node = arr[key];
-                if (visitNodes.includes(node)) continue;
-                visitNodes.push(node);
-                const nowNodeCount = this.getAllNodeCount(tree, node, visitNodes);
-                lowest = Math.min(lowest, Math.abs(allNodeCount - 2 * nowNodeCount));
-                iter(tree[node].children);
+                if (visitNodes.has(node)) continue;
+                visitNodes.add(node);
+                const nowNodeCount = this.getAdjacentCount(tree, node, visitNodes);
+                lowest = Math.min(lowest, Math.abs(n - 2 * nowNodeCount));
+                iter(tree[node].friends);
             }
         };
-        iter(tree[this.head].children);
+        iter(tree[this.head].friends);
         return lowest;
     }
 }
@@ -66,8 +66,21 @@ function solution(n, wires) {
     wires.forEach(([start, end]) => {
         if (!tree[start]) tree[start] = new Node(tree[start], head);
         if (!tree[end]) tree[end] = new Node(tree[end], head);
-        tree[start].children.push(end);
-        tree[end].children.push(start);
+        tree[start].friends.push(end);
+        tree[end].friends.push(start);
     });
-    return tree[Object.keys(tree)[0]].getCutLocation(tree);
+    return tree[head].getCutLocation(tree, n);
 }
+
+console.log(
+    solution(9, [
+        [1, 3],
+        [2, 3],
+        [3, 4],
+        [4, 5],
+        [4, 6],
+        [4, 7],
+        [7, 8],
+        [7, 9],
+    ])
+);
