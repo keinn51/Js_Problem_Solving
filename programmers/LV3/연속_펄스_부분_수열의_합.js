@@ -1,22 +1,16 @@
 function solution(sequence) {
-    let pFrist = [];
-    let mFirst = [];
-    let result = 0;
-
-    sequence.forEach((el, i) => {
-        let sign = i % 2 === 0 ? 1 : -1;
-        const num = el * sign;
-        if (i === 0) {
-            pFrist.push(el);
-            mFirst.push(-el);
+    let sumArr = [0];
+    for (let i = 0; i < sequence.length; i++) {
+        if (i % 2) {
+            sumArr.push(sumArr[i] - sequence[i]);
         } else {
-            pFrist.push(Math.max(num, num + pFrist[i - 1]));
-            mFirst.push(Math.max(-num, -num + mFirst[i - 1]));
+            sumArr.push(sumArr[i] + sequence[i]);
         }
-        result = Math.max(result, pFrist[i], mFirst[i]);
-    });
-
-    return result;
+    }
+    let checkArr = [...sumArr].sort((a, b) => a - b);
+    let min = sumArr.indexOf(checkArr[0]);
+    let max = sumArr.indexOf(checkArr[checkArr.length - 1]);
+    return Math.abs(sumArr[max] - sumArr[min]);
 }
 
 console.log(solution([2, 3, -6, 1, 3, -1, 2, 4]));
