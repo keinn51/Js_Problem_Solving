@@ -16,47 +16,30 @@
  */
 
 function getPulses(num) {
-    /**
-     * 만약 8이 들어온다면, [1] [-1] [1,-1] [1,-1,1]
-     */
     const result = [];
     for (let i = 1; i <= num; i++) {
-        const plus = [];
-        const minus = [];
-        let booho = 1;
+        const plusFirst = [];
+        const minusFirst = [];
+        let sign = 1;
         for (let j = 1; j <= i; j++) {
-            plus.push(1 * booho);
-            minus.push(1 * -1 * booho);
-            booho *= -1;
+            plusFirst.push(1 * sign);
+            minusFirst.push(1 * -1 * sign);
+            sign *= -1;
         }
-        result.push(plus, minus);
+        result.push(plusFirst, minusFirst);
     }
     return result;
 }
 
 function solution(sequence) {
     const pulses = getPulses(sequence.length);
-    let result = 0;
+    let result = Number.MIN_SAFE_INTEGER;
     while (pulses.length) {
-        const pulse = pulses.shift();
-        let num = 0;
+        const pulse = pulses.pop();
         for (let i = 0; i <= sequence.length - pulse.length; i++) {
-            if (i === 0) {
-                for (let j = 0; j < pulse.length; j++) {
-                    num += sequence[j] * pulse[j];
-                }
-            } else {
-                num -= sequence[i - 1] * pulse[0];
-                console.log("1) num", num, sequence[i - 1] * pulse[0]);
-                num += sequence[i + pulse.length - 1] * pulse[pulse.length - 1];
-                console.log(
-                    "2) num",
-                    num,
-                    sequence[i + pulse.length - 1] * pulse[pulse.length - 1]
-                );
-            }
+            let num = 0;
+            for (let j = 0; j < pulse.length; j++) num += sequence[i + j] * pulse[j];
             result = Math.max(result, num);
-            console.log("i / result::", i, result, num, pulse);
         }
     }
     return result;
