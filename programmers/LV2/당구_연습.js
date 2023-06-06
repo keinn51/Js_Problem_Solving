@@ -1,70 +1,58 @@
-function getRes2(mode, ball1, ball2) {
-    let nball, fball;
-    let A1, A2, A3, A4;
-    if (mode === "left") {
-        if (ball1.x < ball2.x) {
-            nball = ball1;
-            fball = ball2;
-        } else {
-            nball = ball2;
-            fball = ball1;
-        }
-        A1 = nball.x;
-        A2 = fball.x;
-        A3 = Math.abs(nball.y - fball.y);
-        A4 = Math.abs(nball.x - fball.x);
-    }
-    if (mode === "right") {
-        if (ball1.x < ball2.x) {
-            nball = ball2;
-            fball = ball1;
-        } else {
-            nball = ball1;
-            fball = ball2;
-        }
-        A1 = 10 - nball.x;
-        A2 = 10 - fball.x;
-        A3 = Math.abs(nball.y - fball.y);
-        A4 = Math.abs(nball.x - fball.x);
-    }
-    if (mode === "top") {
-        if (ball1.y < ball2.y) {
-            nball = ball2;
-            fball = ball1;
-        } else {
-            nball = ball1;
-            fball = ball2;
-        }
-        A1 = 10 - nball.y;
-        A2 = 10 - fball.y;
-        A3 = Math.abs(nball.x - fball.x);
-        A4 = Math.abs(nball.y - fball.y);
-    }
-    if (mode === "bottom") {
-        if (ball1.y < ball2.y) {
-            nball = ball1;
-            fball = ball2;
-        } else {
-            nball = ball2;
-            fball = ball1;
-        }
-        A1 = nball.y;
-        A2 = fball.y;
-        A3 = Math.abs(nball.x - fball.x);
-        A4 = Math.abs(nball.y - fball.y);
-    }
+function solution(m, n, startX, startY, balls) {
+    const calculate = (direction, [x1, y1], [x2, y2]) => {
+        const minX = Math.min(x1, x2);
+        const minY = Math.min(y1, y2);
+        const maxX = Math.max(x1, x2);
+        const maxY = Math.max(y1, y2);
+        const BIGGEST_NUM = Number.MAX_SAFE_INTEGER;
 
-    console.log(nball, fball, A1, A2, A3, A4);
-    console.log(Math.pow(A2, 2) + Math.pow((A3 * A4) / A2, 2));
-    console.log(Math.pow(A1, 2) + Math.pow(A3 - (A3 * A4) / A2, 2));
-    return (
-        Math.pow(A2, 2) +
-        Math.pow((A3 * A4) / A2, 2) +
-        Math.pow(A1, 2) +
-        Math.pow(A3 - (A3 * A4) / A2, 2)
+        let result;
+
+        switch (direction) {
+            case "u":
+                if (x1 === x2 && y1 <= y2) return BIGGEST_NUM;
+                result = Math.pow(maxX - minX, 2) + Math.pow(n - maxY + n - minY, 2);
+                break;
+            case "d":
+                if (x1 === x2 && y1 >= y2) return BIGGEST_NUM;
+                result = Math.pow(maxX - minX, 2) + Math.pow(minY + maxY, 2);
+                break;
+            case "l":
+                if (y1 === y2 && x1 >= x2) return BIGGEST_NUM;
+                result = Math.pow(maxY - minY, 2) + Math.pow(minX + maxX, 2);
+                break;
+            case "r":
+                if (y1 === y2 && x1 <= x2) return BIGGEST_NUM;
+                result = Math.pow(maxY - minY, 2) + Math.pow(m - minX + m - maxX, 2);
+                break;
+        }
+
+        return result;
+    };
+
+    const start = [startX, startY];
+
+    return balls.map((ball) =>
+        Math.min(
+            calculate("u", start, ball),
+            calculate("d", start, ball),
+            calculate("r", start, ball),
+            calculate("l", start, ball)
+        )
     );
 }
 
-function solution(m, n, startX, startY, balls) {}
-
-console.log(getRes2("top", { x: 3, y: 7 }, { x: 7, y: 7 }));
+console.log(
+    solution(
+        10,
+        10,
+        3,
+        7,
+        [
+            [7, 7],
+            [2, 7],
+            [7, 3],
+        ],
+        [52, 37, 116]
+    )
+);
