@@ -40,34 +40,41 @@
  * 4. left와 right가 없을 때까지 내려본다
  */
 
-function getResult(number) {
-    let result = 1;
-    function iter(str) {
-        if (str.length === 1) return;
-        if (str.length % 2 === 0) str = "0" + str;
-        const len = str.length;
-        const centerIdx = Math.floor(len / 2);
-        const leftIdx = Math.floor(centerIdx / 2);
-        const rightIdx = Math.floor((centerIdx + len) / 2);
-        const left = str.slice(0, centerIdx);
-        const center = str[centerIdx];
-        const right = str.slice(centerIdx + 1, len);
-        if ((left[leftIdx] === "1" || right[rightIdx] === "1") && center === "0") {
-            result = 0;
-            return;
-        }
-        iter(left);
-        iter(right);
+function checkBTree(b_str, start, end) {
+    //부모 노드 idx
+    const mid = Math.floor((start + end) / 2);
+    //자식 노드 idx
+    const left_c = Math.floor((start + mid - 1) / 2);
+    const right_c = Math.floor((mid + 1 + end) / 2);
+
+    //리프노드 도달
+    if (start == end) return true;
+
+    //부모가 0 인데 자식에 1이 있으면 안됨 -> 이 경우 false 를 반환
+    if (b_str[mid] === "0" && (b_str[left_c] === "1" || b_str[right_c] === "1")) {
+        return false;
     }
-    iter(number.toString(2));
-    return result;
+
+    if (!checkBTree(b_str, start, mid - 1)) return false;
+    if (!checkBTree(b_str, mid + 1, end)) return false;
+    return true;
 }
 
 function solution(numbers) {
-    return numbers.map((number) => getResult(number));
+    const answer = [];
+    for (let number of numbers) {
+        let binarystr = number.toString(2);
+        let nowTreeCount = binarystr.length;
+        /**
+         * 현재 트리 총 개수 nowTreeCount <== 2 ** height -1
+         * 포화 트리 총 개수 perfectTreeCount === 2 ** height -1
+         */
+        let height = Math.ceil(Math.log2(nowTreeCount + 1));
+        const perfectTreeCount = 2 ** height - 1;
+        let treeStr = "0".repeat(perfectTreeCount - nowTreeCount);
+        treeStr = treeStr + "" + binarystr;
+        if (checkBTree(treeStr, 0, treeStr.length - 1)) answer.push(1);
+        else answer.push(0);
+    }
+    return answer;
 }
-
-// console.log(getResult(42));
-
-console.log(solution([7, 42, 5]));
-console.log(solution([63, 111, 95]));
