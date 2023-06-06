@@ -15,31 +15,17 @@
  *      지나간 값을 빼주면 된다는 것을 명심! (속도개선)
  */
 
-function getPulses(num) {
-    const result = [];
-    for (let i = 1; i <= num; i++) {
-        const plusFirst = [];
-        const minusFirst = [];
-        let sign = 1;
-        for (let j = 1; j <= i; j++) {
-            plusFirst.push(1 * sign);
-            minusFirst.push(1 * -1 * sign);
-            sign *= -1;
-        }
-        result.push(plusFirst, minusFirst);
-    }
-    return result;
-}
-
 function solution(sequence) {
-    const pulses = getPulses(sequence.length);
     let result = Number.MIN_SAFE_INTEGER;
-    while (pulses.length) {
-        const pulse = pulses.pop();
-        for (let i = 0; i <= sequence.length - pulse.length; i++) {
-            let num = 0;
-            for (let j = 0; j < pulse.length; j++) num += sequence[i + j] * pulse[j];
-            result = Math.max(result, num);
+    for (let i = 0; i < sequence.length; i++) {
+        let forward = 0;
+        let backward = 0;
+        let sign = 1;
+        for (let j = i; j < sequence.length; j++) {
+            forward += sequence[j] * sign;
+            backward += sequence[j] * sign * -1;
+            result = Math.max(result, forward, backward);
+            sign *= -1;
         }
     }
     return result;
