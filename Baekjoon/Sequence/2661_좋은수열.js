@@ -3,8 +3,6 @@ const input = require("fs").readFileSync(filename).toString().split("\n");
 
 const num = Number(input[0]);
 
-console.log(num);
-
 /**
  * - n자리의 좋은 수열들을 생산해내기, 123을 조합해서! 이 때 최소부터 하나씩 올라가면 될 듯.
  * 
@@ -16,6 +14,14 @@ console.log(num);
  * 3/ 13 / 213 / 1213
  
  * 32121323
+
+c === 3
+
+2 3
+13 23
+121 323
+3212 1323
+
  * 321 213 23
  * 3 212 132 3
  * 32 121 323
@@ -30,30 +36,40 @@ console.log(num);
  * 유효성 검증을 어떻게 해야할까?
  */
 
+function checkValid(str) {
+    const lim = Math.floor(str.length / 2);
+    for (let len = 1; len <= lim; len++) {
+        for (let j = 0; j < str.length; j++) {
+            if (j + 2 * len > str.length) break;
+            if (str.slice(j, j + len) === str.slice(j + len, j + 2 * len)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 function solution(num) {
     let result = Number.MIN_SAFE_INTEGER;
     let isFinish = false;
 
-    function checkValid(str, num) {
-        const lim = Math.floor(num / 2);
-        for (let len = 1; len <= lim; len++) {
-            // let temp
-            for (let j = 0; j <= lim; j++) {}
-        }
-    }
-
-    function iter(res, num, depth) {
+    function iter(res, num) {
         if (isFinish) return;
-        if (depth >= Math.floor(num / 2)) return;
         if (res.length === num) {
+            console.log("res", res, isFinish);
             if (checkValid(res)) {
+                console.log("result", res);
                 result = Number(res);
                 isFinish = true;
             }
+            return;
         }
-        for (let i = 0; i < 3; i++) {
-            iter(res + String(i), num, depth + 1);
+        for (let i = 1; i <= 3; i++) {
+            iter(res + String(i), num);
         }
     }
     iter("", num, 0);
+    console.log(result);
 }
+
+solution(num);
