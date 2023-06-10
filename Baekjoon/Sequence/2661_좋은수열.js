@@ -1,44 +1,40 @@
-const filename = process.platform === "linux" ? "/dev/stdin" : "text.txt";
-const input = require("fs").readFileSync(filename).toString().split("\n");
+const fs = require("fs");
+const N = fs
+    .readFileSync("./dev/stdin")
+    .toString()
+    .trim()
+    .split("\n")
+    .map((v) => +v)[0];
+let end = false;
 
-const num = Number(input[0]);
-
-function checkValid(str) {
-    const lim = Math.floor(str.length / 2);
-
-    for (let len = 1; len <= lim; len++) {
-        for (let j = str.length; j >= 0; j--) {
-            const a = j;
-            const b = j - len;
-            const c = j - 2 * len;
-            if (c < 0) break;
-            if (str.slice(b, a) === str.slice(c, b)) {
-                return false;
+function solve(str) {
+    if (end) return;
+    if (str.length == N) {
+        console.log(str);
+        end = true;
+        return;
+    } else {
+        for (let i = 1; i <= 3; i++) {
+            const temp = str + `${i}`;
+            if (temp.length <= N && isGood(temp)) {
+                solve(temp);
             }
+        }
+    }
+}
+
+function isGood(str) {
+    const L = str.length;
+    const C = Math.floor(L / 2);
+    for (let i = 1; i <= C; i++) {
+        const A = L;
+        const B = L - i;
+        const C = L - i * 2;
+        if (C >= 0 && str.substring(B, A) == str.substring(C, B)) {
+            return false;
         }
     }
     return true;
 }
 
-function solution(num) {
-    let result = Number.MIN_SAFE_INTEGER;
-    let isFinish = false;
-
-    function iter(res, num) {
-        if (isFinish) return;
-        if (res.length === num) {
-            if (checkValid(res)) {
-                result = Number(res);
-                isFinish = true;
-            }
-            return;
-        }
-        for (let i = 1; i <= 3; i++) {
-            iter(res + String(i), num);
-        }
-    }
-    iter("", num);
-    console.log(result);
-}
-
-solution(num);
+solve("1");
