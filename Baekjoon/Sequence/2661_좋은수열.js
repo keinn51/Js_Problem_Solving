@@ -1,3 +1,4 @@
+// https://lhoiktiv.tistory.com/398
 const fs = require("fs");
 const N = fs
     .readFileSync("./dev/stdin")
