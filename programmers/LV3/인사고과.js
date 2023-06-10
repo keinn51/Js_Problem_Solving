@@ -18,74 +18,62 @@
  *     각 요소를 도는데, 각 요소의 합보다 큰 것 중에서 저장할 것을 저장해두는게 좋음
  */
 function solution(scores) {
-    let order = 0;
-    const [w1, w2] = scores.shift();
-    let [l1, l2] = [Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER];
+    let answer = 1;
+    const [w1, w2] = scores[0];
 
-    scores.sort((a, b) => b[0] + b[1] - (a[0] + a[1]));
-
-    scores = scores.filter((score) => {
-        const [x1, x2] = score;
-        if (x1 + x2 <= w1 + w2) return false;
-        if (x1 > l1 && x2 > l2) {
-            l1 = x1;
-            l2 = x2;
-            return true;
-        } else if (x1 < l1 && x2 < l2) return false;
-        for (let key in scores) {
-            const [t1, t2] = scores[key];
-            if (x1 + x2 >= t1 + t2) return true;
-            if (x1 < t1 && x2 < t2) return false;
-        }
-        return true;
+    scores.sort((a, b) => {
+        if (a[0] !== b[0]) return b[0] - a[0];
+        return a[1] - b[1];
     });
 
-    if (w1 < l1 && w2 < l2) return -1;
-    for (let key in scores) {
-        const [t1, t2] = scores[key];
-        if (w1 < t1 && w2 < t2) return -1;
-        if (t1 + t2 > w1 + w2) order += 1;
-        else break;
-    }
+    let before = 0;
+    for (const score of scores) {
+        const [s1, s2] = score;
+        if (w1 < s1 && w2 < s2) return -1;
 
-    return order + 1;
+        if (before <= s2) {
+            if (w1 + w2 < s1 + s2) answer++;
+            before = s2;
+        }
+    }
+    return answer;
 }
 
-console.log(
-    solution([
-        [2, 2],
-        [1, 4],
-        [3, 2],
-        [3, 2],
-        [2, 1],
-    ])
-);
-console.log(
-    solution([
-        [2, 1],
-        [1, 4],
-        [3, 2],
-        [3, 2],
-        [2, 1],
-    ])
-);
-console.log(
-    solution([
-        [3, 2],
-        [1, 4],
-        [3, 2],
-        [3, 2],
-        [2, 1],
-    ])
-);
+// console.log(
+//     solution([
+//         [2, 2],
+//         [1, 4],
+//         [3, 2],
+//         [3, 2],
+//         [2, 1],
+//     ])
+// );
+// console.log(
+//     solution([
+//         [2, 1],
+//         [1, 4],
+//         [3, 2],
+//         [3, 2],
+//         [2, 1],
+//     ])
+// );
+// console.log(
+//     solution([
+//         [3, 2],
+//         [1, 4],
+//         [3, 2],
+//         [3, 2],
+//         [2, 1],
+//     ])
+// );
 
-console.log(
-    solution([
-        [2, 3],
-        [1, 4],
-        [3, 2],
-        [4, 3],
-        [3, 2],
-        [2, 1],
-    ])
-);
+// console.log(
+//     solution([
+//         [2, 3],
+//         [1, 4],
+//         [3, 2],
+//         [4, 3],
+//         [3, 2],
+//         [2, 1],
+//     ])
+// );
