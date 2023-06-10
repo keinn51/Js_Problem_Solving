@@ -1,17 +1,21 @@
-const filename = process.platform === "linux" ? "/dev/stdin" : "text3.txt";
+const filename = process.platform === "linux" ? "/dev/stdin" : "text5.txt";
 const input = require("fs").readFileSync(filename).toString().split("\n");
 
 const [N, P, Q] = input[0].split(" ").map((e) => +e);
 
 function solution(N, P, Q) {
-    let result = 0;
+    const point = new Map();
+    if (N === 0) {
+        console.log(1);
+        return;
+    }
     function iter(num) {
-        console.log(num);
-        if (num === 0) result += 1;
-        else iter(Math.floor(num / P)) + iter(Math.floor(num / Q));
+        if (num === 0) return 1;
+        if (point.get(num)) return Number(point.get(num));
+        return (point[num] = iter(Math.floor(num / P)) + iter(Math.floor(num / Q)));
     }
     iter(N);
-    console.log(result);
+    console.log(point[N]);
 }
 
 solution(N, P, Q);
