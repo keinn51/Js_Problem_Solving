@@ -1,21 +1,13 @@
-function getAppearance(num) {
-    let res = 0;
-    for (let i = 1; i * i <= num; i++) {
-        if (num % i === 0) res += 1;
-    }
-    res *= 2;
-    if (Number.isInteger(Math.sqrt(num))) res -= 1;
-    return res;
-}
-
 function solution(e, starts) {
-    const appearArr = [];
+    const appearArr = new Array(e).fill(0);
     const maxArr = new Array(e).fill(e);
     let max = e - 1;
     for (let i = 1; i <= e; i++) {
-        const count = getAppearance(i);
-        appearArr.push(count);
+        for (let j = i; j <= e; j += i) {
+            appearArr[j - 1] += 1;
+        }
     }
+    console.log(appearArr);
 
     for (let i = e - 1; i >= 0; i--) {
         if (appearArr[i] >= appearArr[max]) max = i;
