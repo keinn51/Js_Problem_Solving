@@ -9,20 +9,22 @@ function getAppearance(num) {
 }
 
 function solution(e, starts) {
-    const appearObj = {};
+    const appearArr = [];
+    const maxArr = new Array(e).fill(e);
+    let max = e - 1;
     for (let i = 1; i <= e; i++) {
         const count = getAppearance(i);
-        if (appearObj[count] === undefined) appearObj[count] = [i];
-        else appearObj[count].push(i);
+        appearArr.push(count);
     }
-    const descendArr = Object.values(appearObj).reverse();
-    const flatArr = descendArr.flat();
 
-    return starts.map((start) => {
-        for (let i = 0; i < flatArr.length; i++) {
-            if (flatArr[i] >= start && flatArr[i] <= e) return flatArr[i];
-        }
-    });
+    for (let i = e - 1; i >= 0; i--) {
+        if (appearArr[i] >= appearArr[max]) max = i;
+        maxArr[i] = max + 1;
+    }
+
+    return starts.map((start) => maxArr[start - 1]);
 }
 
 console.log(solution(8, [1, 3, 7]));
+console.log(solution(10, [1, 3, 10]));
+console.log(solution(12, [1, 3, 7]));
