@@ -5,26 +5,19 @@ const input = require("fs")
     .split("\n")
     .map((e) => +e);
 
-input.shift();
+const count = input.shift();
 
-function solution(arr) {
-    let result = Number.MIN_SAFE_INTEGER;
-    const len = arr.length;
-    function iter(idx, acc, pers) {
-        const now = acc + arr[idx];
-        if (idx === len - 1) {
-            result = Math.max(result, now);
-            return;
-        }
-        if (idx + 1 < len && pers < 2) {
-            iter(idx + 1, now, pers + 1);
-        }
-        if (idx + 2 < len) {
-            iter(idx + 2, now, 1);
-        }
+function solution(input, count) {
+    const dp = Array(input.length).fill(0);
+    dp[0] = input[0];
+    dp[1] = input[0] + input[1];
+    dp[2] = Math.max(input[0], input[1]) + input[2];
+
+    for (let i = 3; i < input.length; i++) {
+        dp[i] = Math.max(dp[i - 2] + input[i], dp[i - 3] + input[i - 1] + input[i]);
     }
-    iter(0, 0, 1);
-    console.log(result);
+
+    return dp[count - 1];
 }
 
-solution(input);
+console.log(solution(input, count));
