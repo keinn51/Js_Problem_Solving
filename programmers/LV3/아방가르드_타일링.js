@@ -1,94 +1,33 @@
-function checkFull(map, n) {
-    for (let y = 0; y < 3; y++) {
-        for (let x = 0; x < n; x++) {
-            if (map[y][x] === false) return false;
-        }
-    }
-    return true;
-}
-
+// 누군가의 풀이를 들고 왔지만 이해할 수 없어서 포기..
 function solution(n) {
-    const gmap = new Array(3).fill(null).map((_) => new Array(n).fill(false));
-    let result = 0;
-    function iter(map, gx, gy) {
-        let isStart = false;
-        for (let y = gy; y < 3; y++) {
-            for (let x = 0; x < n; x++) {
-                if (y >= gy && x >= gx) isStart = true;
-                if (isStart === false) continue;
-                if (map[y][x] === true) continue;
-                if (x < n - 1 && map[y][x + 1] === false && y < 2 && map[y + 1][x] === false) {
-                    map[y][x] = true;
-                    map[y][x + 1] = true;
-                    map[y + 1][x] = true;
-                    if (x + 1 >= n) iter(map, 0, y + 1);
-                    else iter(map, x + 1, y);
-                    map[y][x] = false;
-                    map[y][x + 1] = false;
-                    map[y + 1][x] = false;
-                }
-                // left bottom
-                if (x > 0 && map[y][x - 1] === false && y < 2 && map[y + 1][x] === false) {
-                    map[y][x] = true;
-                    map[y][x - 1] = true;
-                    map[y + 1][x] = true;
-                    if (x + 1 >= n) iter(map, 0, y + 1);
-                    else iter(map, x + 1, y);
-                    map[y][x] = false;
-                    map[y][x - 1] = false;
-                    map[y + 1][x] = false;
-                }
-                // top right
-                if (x < n - 1 && map[y][x + 1] === false && y > 0 && map[y - 1][x] === false) {
-                    map[y][x] = true;
-                    map[y][x + 1] = true;
-                    map[y - 1][x] = true;
-                    if (x + 1 >= n) iter(map, 0, y + 1);
-                    else iter(map, x + 1, y);
-                    map[y][x] = false;
-                    map[y][x + 1] = false;
-                    map[y - 1][x] = false;
-                }
-                // top left
-                if (x > 0 && map[y][x - 1] === false && y > 0 && map[y - 1][x] === false) {
-                    map[y][x] = true;
-                    map[y][x - 1] = true;
-                    map[y - 1][x] = true;
-                    if (x + 1 >= n) iter(map, 0, y + 1);
-                    else iter(map, x + 1, y);
-                    map[y][x] = false;
-                    map[y][x - 1] = false;
-                    map[y - 1][x] = false;
-                }
-                // top bottom
-                if (y > 0 && map[y - 1][x] === false && y < 2 && map[y + 1][x] === false) {
-                    map[y][x] = true;
-                    map[y - 1][x] = true;
-                    map[y + 1][x] = true;
-                    if (x + 1 >= n) iter(map, 0, y + 1);
-                    else iter(map, x + 1, y);
-                    map[y][x] = false;
-                    map[y - 1][x] = false;
-                    map[y + 1][x] = false;
-                }
-                // left right
-                if (x > 0 && map[y][x - 1] === false && x < n - 1 && map[y][x + 1] === false) {
-                    map[y][x] = true;
-                    map[y][x - 1] = true;
-                    map[y][x + 1] = true;
-                    if (x + 1 >= n) iter(map, 0, y + 1);
-                    else iter(map, x + 1, y);
-                    map[y][x] = false;
-                    map[y][x - 1] = false;
-                    map[y][x + 1] = false;
-                }
-            }
-        }
+    const DIVIDENUM = 1000000007;
+    const dp = new Array(n + 1).fill(null);
 
-        if (checkFull(map, n)) result += 1;
+    const cache = [8, 0, 2];
+
+    dp[0] = 0;
+    dp[1] = 1;
+    dp[2] = 3;
+    dp[3] = 10;
+
+    for (let i = 4; i <= n; i += 1) {
+        const remainder = i % 3;
+        let sum = cache[remainder];
+        const plus = i % 3 === 0 ? 4 : 2;
+
+        sum += dp[i - 1] * 1;
+        sum += dp[i - 2] * 2;
+        sum += dp[i - 3] * 5;
+        sum += plus;
+        sum %= DIVIDENUM;
+
+        cache[remainder] += dp[i - 1] * 2;
+        cache[remainder] += dp[i - 2] * 2;
+        cache[remainder] += dp[i - 3] * 4;
+        cache[remainder] %= DIVIDENUM;
+
+        dp[i] = sum;
     }
-    iter(gmap, 0, 0);
-    return Math.floor(result % 1000000007);
-}
 
-console.log(solution(3));
+    return dp[n];
+}
