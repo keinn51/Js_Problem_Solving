@@ -1,14 +1,20 @@
 const filename = process.platform === "linux" ? "/dev/stdin" : "text.txt";
-const input = require("fs").readFileSync(filename).toString().split("\n");
+const input = require("fs").readFileSync(filename).toString();
 
-const target = Number(input[0]);
+const num = Number(input);
 
-function solution(num) {
-    if (num === 1 || num === 2) return 1;
-    let share = Math.floor(num / 3);
-    let remain = num % 3; //0, 1, 2
-    if (remain === 1 || remain === 0) return share + remain;
-    else return share + 2;
+const DP = new Array(num + 1).fill(0);
+
+for (let i = 2; i <= num; i++) {
+    DP[i] = DP[i - 1] + 1;
+
+    if (i % 2 === 0) {
+        DP[i] = Math.min(DP[i], DP[i / 2] + 1);
+    }
+
+    if (i % 3 === 0) {
+        DP[i] = Math.min(DP[i], DP[i / 3] + 1);
+    }
 }
 
-console.log(solution(target));
+console.log(DP[num]);
