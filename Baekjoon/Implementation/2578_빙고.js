@@ -78,7 +78,7 @@ function solution(board, calls) {
                 if (bingoStatus.rd === false) count += 1;
                 bingoStatus.rd = true;
             }
-            if (count === 3) {
+            if (count >= 3) {
                 return 5 * i + (j + 1);
             }
         }
