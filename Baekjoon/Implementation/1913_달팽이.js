@@ -15,62 +15,34 @@ function solution(N, target) {
         num = Math.pow(N, 2);
 
     for (now = N; now >= 3; now -= 2) {
-        let pos = [idx, idx];
-        let [x, y] = pos;
+        let [x, y] = [idx, idx];
 
-        // bottom
-        for (let line = 1; line <= now - 1; line++) {
-            map[x][y] = Number(num);
-            if (Number(num) === Number(target)) {
-                tx = x;
-                ty = y;
+        for (let dir = 1; dir <= 4; dir++) {
+            for (let line = 1; line <= now - 1; line++) {
+                map[x][y] = Number(num);
+                if (Number(num) === Number(target)) {
+                    tx = x;
+                    ty = y;
+                }
+                if (dir === 1) x++;
+                if (dir === 2) y++;
+                if (dir === 3) x--;
+                if (dir === 4) y--;
+                num--;
             }
-            x++;
-            num--;
         }
-        //right
-        for (let line = 1; line <= now - 1; line++) {
-            map[x][y] = num;
-            if (Number(num) === Number(target)) {
-                tx = x;
-                ty = y;
-            }
-            y++;
-            num--;
-        }
-        //top
-        for (let line = 1; line <= now - 1; line++) {
-            map[x][y] = num;
-            if (Number(num) === Number(target)) {
-                tx = x;
-                ty = y;
-            }
-            x--;
-            num--;
-        }
-        //left
-        for (let line = 1; line <= now - 1; line++) {
-            map[x][y] = num;
-            if (Number(num) === Number(target)) {
-                tx = x;
-                ty = y;
-            }
-            y--;
-            num--;
-        }
+
         idx++;
     }
     map[idx][idx] = 1;
+    if (num === target) {
+        tx = idx;
+        ty = idx;
+    }
     map.forEach((line) => {
         console.log(line.join(" "));
     });
     console.log(tx + 1, ty + 1);
 }
 
-const start = new Date().getTime();
-
 solution(...input);
-
-const end = new Date().getTime();
-
-console.log((end - start) / 1000);
