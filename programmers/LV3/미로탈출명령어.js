@@ -1,88 +1,59 @@
 /**
  * d l r u
- *
- * 1. 일단 최단 경로를 가져와야 함. 왜? 그 최단 경로는 무조건 포함되는 값이기 때문에.
- *      이건 쉬움 start가 (2,3) end가 (3,1) 이니까 x는 +1 y는 -2 가 무조건.
- *      문자열로 해석하면 dll. 이 때에도 작은 문자가 먼저 나와야 함.
- * 2. 문제에서는 dll이 나올 것이다. 이제 여기서 나올 수 있는 것들은 짝지어서 나온다.
- *      d가 나오면 u가 나오고, l이 나오면 r이 나온다.
- *      u보다는 d가, r보다는 l이 우선으로 나오는 것이 좋다.
- *          그런데 d가 나올 수 없는 경우(이미 x축의 끝이라면) l이 먼저 나온다
- *          l도 나올 수 없는 경우?(y축의 왼쪽 끝이어서?) r이 나오겠지
- *          r도 아니면.. 일리 없기 때문에 (m의 크기가 2보다는 커서) r이 되겠지
- *      이 것을 반복하면 된다. 언제까지? 문자열의 len가 k일 때까지!
- * 3.impossible
- *      최소 경로를 뺀 길이가 짝수가 아니라면
- *      최소 경로의 길이보다 k가 작다면
+ * 1. 위 네개 문자를 조합해서 나올 수 있는 크기가 k인 문자열의 배열을 구한다.
+ * 2. 수식에서 나온 것만 추가한다
+ * 3. 문자열이 완성되었을 때 맵을 넘는지 아닌지 구하기
+ * 4. 가능성 있는 것들 중에서 sort해서 맨 앞거를 보내기
  */
 function solution(n, m, x, y, r, c, k) {
-    let result = "";
-    let tempx = r - x,
-        tempy = c - y;
-    let templen = Math.abs(tempx) + Math.abs(tempy); //3 k:5
+    const ulc = (k + (x + y) - (r + c)) / 2;
 
-    if ((k - templen) % 2 !== 0) return "impossible";
-    if (k < templen) return "impossible";
+    if (Number.isInteger(ulc) === false) return "impossible";
+    if (Math.abs(r - x) + Math.abs(c - y) > k) return "impossible";
 
-    // 최단 경로 구하기
-    for (let i = 0; i < templen; i++) {
-        if (tempx > 0) {
-            result += "d";
-        } else if (tempy < 0) {
-            result += "l";
-        } else if (tempy > 0) {
-            result += "r";
-        } else if (tempx < 0) {
-            result += "u";
+    const passArr = [];
+
+    function iter(str, px, py) {
+        if (str.length === k) {
+            let dc = 0,
+                lc = 0,
+                rc = 0,
+                uc = 0;
+
+            for (let idx in str) {
+                const word = str[idx];
+                if (word === "d") dc += 1;
+                if (word === "l") lc += 1;
+                if (word === "r") rc += 1;
+                if (word === "u") uc += 1;
+            }
+
+            if (uc + lc === ulc && dc + rc + ulc === k && dc - uc === r - x && rc - lc === c - y)
+                passArr.push(str);
+
+            return;
         }
+        if (px < n) iter(str + "d", px + 1, py);
+        if (py > 1) iter(str + "l", px, py - 1);
+        if (py < m) iter(str + "r", px, py + 1);
+        if (px > 1) iter(str + "u", px - 1, py);
     }
 
-    let goup = false,
-        godown = false,
-        goleft = false,
-        goright = false;
+    iter("", x, y);
 
-    for (let i = templen; i < k; i++) {
-        if (goup || godown || goleft || goright) {
-            if (goup) {
-                x -= 1;
-                result += "u";
-                goup = false;
-            } else if (godown) {
-                x += 1;
-                result += "d";
-                godown = false;
-            } else if (goleft) {
-                y -= 1;
-                result += "l";
-                goleft = false;
-            } else if (goright) {
-                y += 1;
-                result += "r";
-                goright = false;
-            }
-        } else {
-            if (x < n || y > 1) {
-                if (x < n) {
-                    x += 1;
-                    result += "d";
-                    goup = true;
-                } else if (y > 1) {
-                    y -= 1;
-                    result += "l";
-                    goright = true;
-                }
-            } else {
-                if (y < m) {
-                    y += 1;
-                    result += "r";
-                    goleft = true;
-                } else if (x > 1) {
-                    x -= 1;
-                    result += "u";
-                    godown = true;
-                }
-            }
+    passArr.sort((a, b) => {
+        for (let i = 0; i < k; i++) {
+            if (a[i] < b[i]) return -1;
+            else if (a[i] > b[i]) return 1;
         }
-    }
+        return 0;
+    });
+
+    console.log(passArr);
+
+    return passArr[0];
 }
+
+console.log(solution(3, 4, 2, 3, 3, 1, 5));
+console.log(solution(2, 2, 1, 1, 2, 2, 2));
+console.log(solution(3, 3, 1, 2, 3, 3, 4));
