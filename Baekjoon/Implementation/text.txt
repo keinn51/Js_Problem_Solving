@@ -1,9 +1,2 @@
-8
-sbrus.txt
-spc.spc
-acm.icpc
-korea.icpc
-sample.txt
-hello.sss
-sogang.spc
-example.txt
+z o
+zoac
