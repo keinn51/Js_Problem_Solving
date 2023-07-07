@@ -104,7 +104,7 @@ function solution(map) {
                 console.log(`${map[y][x]}\n${y} ${x}`);
                 return;
             }
-            if (counter(map, x, y, 3) === 0 && counter(map, x, y, 7) === 4) {
+            if (counter(map, x, y, 7) === 0 && counter(map, x, y, 3) === 4) {
                 console.log(`${map[y][x]}\n${y} ${x}`);
                 return;
             }
