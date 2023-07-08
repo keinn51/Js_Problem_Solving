@@ -8,7 +8,7 @@ let [N, M, R] = input
 
 const map = input.map((line) => line.split(" ").map((e) => +e));
 
-// console.log(`kyungsle`, map);
+console.log(`kyungsle`, map);
 
 /**
 4 4 2
@@ -19,47 +19,33 @@ const map = input.map((line) => line.split(" ").map((e) => +e));
  */
 
 function solution() {
-    let dy = 0,
-        rx = 0,
-        uy = N - 1,
-        lx = M - 1;
+    // TOOD use stack !!!
+    // not have to assign lt... the first line, it can be in for
+    let lt = [0, 0],
+        rt = [M - 1, 0],
+        lb = [0, N - 1],
+        rb = [M - 1, N - 1];
+    let width = rt[0] - lt[0] + 1;
+    let height = lb[1] - lt[1] + 1;
+    let ltv = map[lt[1]][lt[0]],
+        lbv = map[lb[1]][lb[0]],
+        rbv = map[rb[1]][rb[0]],
+        rtv = map[rt[1]][rt[0]];
     let temp = null;
-    let count = R;
-    let iter = 0;
-    while (count > 0) {
-        console.log(`dy rx uy lx`, dy, rx, uy, lx);
-        for (let d = 0; d + 1 < N - 2 * iter; d++) {
-            temp = map[dy + d][rx];
-            map[dy + d][rx] = map[dy + d + 1][rx];
-            map[dy + d + 1][rx] = temp;
-        }
-        console.log(`map`, map);
-        for (let r = 0; r + 1 < M - 2 * iter; r++) {
-            temp = map[uy][rx + r];
-            map[uy][rx + r] = map[uy][rx + r + 1];
-            map[uy][rx + r + 1] = temp;
-        }
-        console.log(`map`, map);
-        for (let u = 0; u + 1 < N - 2 * iter; u++) {
-            temp = map[uy - u][lx];
-            map[uy - u][lx] = map[uy - u - 1][lx];
-            map[uy - u - 1][lx] = temp;
-        }
-        console.log(`map`, map);
-        for (let l = 0; l + 1 < M - 2 * iter; l++) {
-            temp = map[dy][lx - l];
-            map[dy][lx - l] = map[dy][lx - l - 1];
-            map[dy][lx - l - 1] = temp;
-        }
-        console.log(`map`, map);
-        count--;
-        iter++;
-        dy = iter;
-        rx = iter;
-        uy = N - 1 - iter;
-        lx = M - 1 - iter;
+    for (let right = 0; right < width - 1; right++) {
+        temp = map[lt[1]][lt[0] + right];
+        map[lt[1]][lt[0] + right + 1] = map[rt[1]][lt[0] + right];
     }
-    console.log(`map`, map);
+    for (let down = 0; down < height - 1; down++) {
+        map[rt[1] + down + 1][rt[0]] = map[rt[1] + down][rt[0]];
+    }
+    for (let left = 0; left < width - 1; left++) {
+        map[rb[1]][rb[0] - left - 1] = map[rb[1]][rb[0] - left];
+    }
+    for (let up = 0; up < height - 1; up++) {
+        map[lb[1] - up - 1][lb[0]] = map[lb[1] - up][lb[0]];
+    }
+    console.log(`kyungsle`, map);
 }
 
 solution();
