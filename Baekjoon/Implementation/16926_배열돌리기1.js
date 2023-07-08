@@ -1,51 +1,41 @@
 const filename = process.platform === "linux" ? "/dev/stdin" : "text.txt";
 const input = require("fs").readFileSync(filename).toString().trim().split("\n");
 
-let [N, M, R] = input
-    .shift()
-    .split(" ")
-    .map((e) => +e);
+const [N, M, R] = input[0].split(" ").map(Number);
+let arr = input.slice(1).map((_) => _.trim().split(" ").map(Number));
 
-const map = input.map((line) => line.split(" ").map((e) => +e));
+function rotate(arr) {
+    let min = Math.min(N, M);
 
-console.log(`kyungsle`, map);
+    let tempMap = new Array(N).fill(null).map((_) => new Array(M).fill(0));
+    for (let limit = 0; limit < Math.floor(min / 2); limit++) {
+        // 윗줄.
+        for (let j = M - 2 - limit; j >= 0 + limit; j--)
+            tempMap[0 + limit][j] = arr[0 + limit][j + 1];
+        // 왼쪽.
+        for (let j = 1 + limit; j < N - limit; j++) tempMap[j][0 + limit] = arr[j - 1][0 + limit];
+        // 아래
+        for (let j = 1 + limit; j < M - limit; j++)
+            tempMap[N - 1 - limit][j] = arr[N - 1 - limit][j - 1];
+        // 오른쪽.
+        for (let j = N - 2 - limit; j >= 0 + limit; j--)
+            tempMap[j][M - 1 - limit] = arr[j + 1][M - 1 - limit];
+    }
 
-/**
-4 4 2
-1 2 3 4
-5 6 7 8
-9 10 11 12
-13 14 15 16
- */
+    return tempMap;
+}
 
 function solution() {
-    // TOOD use stack !!!
-    // not have to assign lt... the first line, it can be in for
-    let lt = [0, 0],
-        rt = [M - 1, 0],
-        lb = [0, N - 1],
-        rb = [M - 1, N - 1];
-    let width = rt[0] - lt[0] + 1;
-    let height = lb[1] - lt[1] + 1;
-    let ltv = map[lt[1]][lt[0]],
-        lbv = map[lb[1]][lb[0]],
-        rbv = map[rb[1]][rb[0]],
-        rtv = map[rt[1]][rt[0]];
-    let temp = null;
-    for (let right = 0; right < width - 1; right++) {
-        temp = map[lt[1]][lt[0] + right];
-        map[lt[1]][lt[0] + right + 1] = map[rt[1]][lt[0] + right];
+    let answer = "";
+
+    let modifiedArr = [...arr];
+    for (let i = 0; i < R; i++) {
+        modifiedArr = rotate(arr);
+        arr = [...modifiedArr];
     }
-    for (let down = 0; down < height - 1; down++) {
-        map[rt[1] + down + 1][rt[0]] = map[rt[1] + down][rt[0]];
-    }
-    for (let left = 0; left < width - 1; left++) {
-        map[rb[1]][rb[0] - left - 1] = map[rb[1]][rb[0] - left];
-    }
-    for (let up = 0; up < height - 1; up++) {
-        map[lb[1] - up - 1][lb[0]] = map[lb[1] - up][lb[0]];
-    }
-    console.log(`kyungsle`, map);
+    modifiedArr.forEach((e) => (answer += e.join(" ") + "\n"));
+
+    return console.log(answer.trim());
 }
 
 solution();
