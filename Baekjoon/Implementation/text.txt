@@ -1,6 +1,2 @@
-5
-ACACAC
-aaAAAAaaaaAAAA aac
-CAACAC ACACAA
-CAAAAAAa cacaccc
-caacac acaccac acacacaac ccc
+1
+0 01
