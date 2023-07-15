@@ -2,4 +2,4 @@
 damir
 marko
 darko
-360
+45

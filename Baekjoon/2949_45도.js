@@ -20,7 +20,6 @@ function printer(map, len) {
             printEndY = Math.max(printEndY, y);
         }
     }
-    console.log(`pppp`, printStartX, printEndX, printStartY, printEndY);
     for (let y = printStartY; y <= printEndY; y++) {
         let str = "";
         for (let x = printStartX; x <= printEndX; x++) {
@@ -40,49 +39,26 @@ function solution(input) {
     let startX = 0,
         startY = 0;
 
-    if (deg >= 0 && deg <= 90) {
-        startX = 0;
-        startY = 0;
-    }
-    if (deg >= 90 && deg <= 180) {
-        startX = w;
-        startY = 0;
-    }
-    if (deg >= 180 && deg <= 270) {
-        startX = w;
-        startY = w;
-    }
-    if (deg >= 270 && deg <= 360) {
-        startX = 0;
-        startY = w;
-    }
+    if (deg >= 90 && deg <= 270) startX = w;
+    if (deg >= 180 && deg <= 360) startY = w;
 
     const map = new Array(w + h).fill(0).map((_) => new Array(w + h).fill(0));
     const rmap = new Array(w + h).fill(0).map((_) => new Array(w + h).fill(0));
 
     for (let y = 0; y < 0 + h; y++) {
         const lines = input[y].split("");
-        for (let x = 0; x < 0 + w; x++) {
-            map[y + startY][x + startX] = lines[x];
-        }
+        for (let x = 0; x < 0 + w; x++) map[y + startY][x + startX] = lines[x];
     }
-
-    console.log(`beforemap`, map);
 
     for (let y = 0; y < h; y++) {
         for (let x = 0; x < w; x++) {
-            console.log(`kyungsle`, y, x, map[y][x]);
             if (map[y + startY][x + startX] === 0) continue;
             let dx = 0,
                 dy = 0;
 
             switch (deg) {
-                case 0:
-                    dx = 0;
-                    dy = 0;
-                    break;
                 case 45:
-                    dx = 0;
+                    dx = w - x;
                     dy = x;
                     break;
                 case 90:
@@ -108,8 +84,6 @@ function solution(input) {
                 case 315:
                     dx = 0;
                     dy = -x;
-                    break;
-                case 360:
                     break;
             }
 
