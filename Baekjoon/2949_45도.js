@@ -26,7 +26,7 @@ function printer(map, len) {
             if (map[y][x] === 0) str += " ";
             else str += map[y][x];
         }
-        console.log(str + ";");
+        console.log(str.trimEnd());
     }
 }
 
@@ -38,12 +38,13 @@ function solution(input) {
     const deg = +input.pop();
     let startX = 0,
         startY = 0;
+    const max = Math.max(w, h);
 
     if (deg >= 90 && deg <= 270) startX = w;
     if (deg >= 180 && deg <= 360) startY = w;
 
-    const map = new Array(w + h).fill(0).map((_) => new Array(w + h).fill(0));
-    const rmap = new Array(w + h).fill(0).map((_) => new Array(w + h).fill(0));
+    const map = new Array(max * 2).fill(0).map((_) => new Array(max * 2).fill(0));
+    const rmap = new Array(max * 2).fill(0).map((_) => new Array(max * 2).fill(0));
 
     for (let y = 0; y < 0 + h; y++) {
         const lines = input[y].split("");
@@ -58,7 +59,7 @@ function solution(input) {
 
             switch (deg) {
                 case 45:
-                    dx = w - x;
+                    dx = h - 1 - y;
                     dy = x;
                     break;
                 case 90:
@@ -67,14 +68,14 @@ function solution(input) {
                     break;
                 case 135:
                     dx = h - 1 - y - x - x;
-                    dy = h - 1 - y + x;
+                    dy = h - 1 - y + x - y;
                     break;
                 case 180:
                     dx = -(2 * x);
                     dy = 0;
                     break;
                 case 225:
-                    dx = -(2 * x);
+                    dx = -(2 * x) - (y - h + 1);
                     dy = -x;
                     break;
                 case 270:
@@ -82,7 +83,7 @@ function solution(input) {
                     dy = h - 1 - y - x;
                     break;
                 case 315:
-                    dx = 0;
+                    dx = +y;
                     dy = -x;
                     break;
             }
