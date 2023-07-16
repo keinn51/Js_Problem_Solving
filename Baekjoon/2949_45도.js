@@ -38,10 +38,10 @@ function solution(input) {
     const deg = +input.pop();
     let startX = 0,
         startY = 0;
-    const max = Math.max(w, h);
+    const max = 2 * Math.max(w, h);
 
-    if (deg >= 90 && deg <= 270) startX = w;
-    if (deg >= 180 && deg <= 360) startY = w;
+    startX = max;
+    startY = max;
 
     const map = new Array(max * 2).fill(0).map((_) => new Array(max * 2).fill(0));
     const rmap = new Array(max * 2).fill(0).map((_) => new Array(max * 2).fill(0));
@@ -67,23 +67,23 @@ function solution(input) {
                     dy = h - 1 - y + x;
                     break;
                 case 135:
-                    dx = h - 1 - y - x - x;
-                    dy = h - 1 - y + x - y;
+                    dx = h - 1 - y - 2 * x;
+                    dy = h - 1 + x - 2 * y;
                     break;
                 case 180:
                     dx = -(2 * x);
-                    dy = 0;
+                    dy = -(2 * y);
                     break;
                 case 225:
-                    dx = -(2 * x) - (y - h + 1);
-                    dy = -x;
+                    dx = -(2 * x) - (h - 1 - y);
+                    dy = -(2 * y) - x;
                     break;
                 case 270:
-                    dx = h - 1 - y - x;
+                    dx = -(h - 1 - y) - x;
                     dy = h - 1 - y - x;
                     break;
                 case 315:
-                    dx = +y;
+                    dx = -(h - 1 - y);
                     dy = -x;
                     break;
             }
@@ -92,7 +92,7 @@ function solution(input) {
         }
     }
 
-    printer(rmap, w + h);
+    printer(rmap, 2 * max);
 }
 
 solution(
