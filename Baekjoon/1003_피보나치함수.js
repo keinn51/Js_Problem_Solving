@@ -1,25 +1,17 @@
 function solution(input) {
     const _num = input.shift();
+    const map = [
+        [1, 0],
+        [0, 1],
+    ];
+
+    for (let i = 2; i <= 40; i++) {
+        map[i] = [map[i - 2][0] + map[i - 1][0], map[i - 2][1] + map[i - 1][1]];
+    }
 
     for (let idx in input) {
-        let zeroCnt = 0,
-            oneCnt = 0;
-
-        const _iter = (num) => {
-            if (num === 0) {
-                zeroCnt += 1;
-                return;
-            }
-            if (num === 1) {
-                oneCnt += 1;
-                return;
-            }
-            return _iter(num - 1) + _iter(num - 2);
-        };
-
-        _iter(Number(input[idx]));
-
-        console.log(`${zeroCnt} ${oneCnt}`);
+        const _num = Number(input[idx]);
+        console.log(`${map[_num][0]} ${map[_num][1]}`);
     }
 }
 
