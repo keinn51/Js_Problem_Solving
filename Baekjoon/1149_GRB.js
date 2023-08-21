@@ -1,20 +1,14 @@
 function solution(input) {
-    const limit = Number(input.shift());
-    const colors = ["r", "g", "b"];
-    const map = input.map((line) => line.split(" ").map((e) => +e));
-    let min = Number.MAX_SAFE_INTEGER;
-    const iter = (color, depth, sum) => {
-        if (sum >= min) return;
-        if (depth >= limit) {
-            min = Math.min(min, sum);
-            return;
-        }
-        for (let i = 0; i < 3; i++) {
-            if (color !== colors[i]) iter(colors[i], depth + 1, sum + map[depth][i]);
-        }
-    };
-    iter(null, 0, 0);
-    console.log(min);
+    const [n, ...arr] = input;
+    const map = arr.map((line) => line.split(" ").map((e) => +e));
+
+    for (let ii = 1; ii < map.length; ii++) {
+        map[ii][0] += Math.min(map[ii - 1][1], map[ii - 1][2]);
+        map[ii][1] += Math.min(map[ii - 1][0], map[ii - 1][2]);
+        map[ii][2] += Math.min(map[ii - 1][0], map[ii - 1][1]);
+    }
+
+    console.log(Math.min(...map[map.length - 1]));
 }
 
 solution(
