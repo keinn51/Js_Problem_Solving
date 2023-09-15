@@ -1,6 +1,3 @@
-/**
- *
- */
 function solution(input) {
     const depth = Number(input[0]);
     let max = Number.MIN_SAFE_INTEGER;
@@ -11,20 +8,13 @@ function solution(input) {
         tree[i] = input[i].split(" ").map((e) => +e);
     }
 
-    const iter = (now, count, index) => {
-        let sum1 = count,
-            sum2 = count;
-        if (now === depth) {
-            return count + tree[now][index];
+    for (let i = depth; i >= 1; i--) {
+        for (let j = 0; j < tree[i].length - 1; j++) {
+            tree[i - 1][j] += Math.max(tree[i][j], tree[i][j + 1]);
         }
+    }
 
-        sum1 = iter(now + 1, count + tree[now][index], Math.max(index, 0));
-        sum2 = iter(now + 1, count + tree[now][index], index + 1);
-
-        return Math.max(sum1, sum2);
-    };
-
-    console.log(iter(1, 0, 0));
+    console.log(tree[1][0]);
 }
 
 solution(
