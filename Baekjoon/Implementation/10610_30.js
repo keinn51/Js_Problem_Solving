@@ -21,29 +21,16 @@
  * 이걸 만족하는 최대한의 수를 찾아내면 되지 않을까?
  */
 function solution(input) {
-    const nums = input[0].split("");
-    nums.sort((a, b) => Number(b) - Number(a));
-    const originMirror = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    nums.forEach((n) => {
-        originMirror[n] += 1;
-    });
-    const originJoin = originMirror.join("");
-
-    let overNum = Math.floor(Number(nums.join("")) / 30) * 30;
-
-    while (overNum > 0) {
-        const mirror = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-        String(overNum)
-            .split("")
-            .forEach((n) => (mirror[n] += 1));
-        if (mirror.join("") === originJoin) {
-            console.log(overNum);
-            return;
-        }
-        overNum -= 30;
+    const nums = input[0].split("").map(Number);
+    nums.sort((a, b) => b - a);
+    if (nums.length <= 1 || nums[nums.length - 1] !== 0) {
+        console.log("-1");
+        return;
     }
-    console.log(-1);
+    nums.pop();
+    const sum = nums.reduce((prev, curr) => prev + curr, 0);
+    if (sum % 3 === 0) console.log([...nums, 0].join(""));
+    else console.log("-1");
 }
 
 solution(
