@@ -31,8 +31,8 @@
  */
 function solution(input) {
     const [str, N, ...arr] = input;
-    let left = str.trim();
-    let right = "";
+    let left = str.trim().split("");
+    let right = [];
 
     for (let i = 0; i < Number(N); i++) {
         const [_command, _variable] = arr[i].trim().split(" ");
@@ -40,28 +40,26 @@ function solution(input) {
         switch (_command) {
             case "L":
                 if (left.length > 0) {
-                    right = left[left.length - 1] + right;
-                    left = left.slice(0, -1);
+                    right.push(left.pop());
                 }
                 break;
             case "D":
                 if (right.length > 0) {
-                    left = left + right[0];
-                    right = right.slice(1, -1);
+                    left.push(right.pop());
                 }
                 break;
             case "B":
                 if (left.length > 0) {
-                    left = left.slice(0, -1);
+                    left.pop();
                 }
                 break;
             case "P":
-                left = left + _variable;
+                left.push(_variable);
                 break;
         }
     }
 
-    if (left.trim() + right.trim() !== "") console.log(left.trim() + right.trim());
+    console.log(left.join("").trim() + right.reverse().join("").trim());
 }
 
 solution(

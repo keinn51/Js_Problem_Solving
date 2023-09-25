@@ -1,17 +1,13 @@
-aaaaaa
-15
+dmih
+11
+B
+B
+P x
+L
+B
+B
+B
+P y
 D
-B
-B
-B
-B
-B
-B
-B
-B
-B
-B
-B
 D
-B
-B
+P z
