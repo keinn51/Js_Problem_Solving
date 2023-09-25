@@ -14,35 +14,32 @@
  * 2
  * 3 100
  * 1 1000
+ *
+ * [90,80,70,60,50,40,20,30,0,0]
  */
 function solution(input) {
     const [N, ...arr] = input;
+    const lim = Number(N);
     const _array = arr.map((v) => v.split(" "));
-    const dp = new Array(15).fill(null);
+    const dp = new Array(lim).fill(0);
 
-    console.log(_array);
+    for (let i = lim - 1; i >= 0; i--) {
+        const [_day, _profit] = _array[i].map(Number);
 
-    const getProfit = (index) => {
-        let _res = 0;
-        while (index + 1 <= _array.length) {
-            //_array length 2 , index 0, _pady 0
-            const [_day, _profit] = _array[index].map(Number);
-            console.log(index, _day, _profit);
-            if (index + _day <= _array.length) {
-                _res += _profit;
+        if (i + _day <= lim) {
+            let max = 0;
+
+            if (i + _day < lim) {
+                max += Math.max(...dp.slice(i + _day, lim));
             }
-            index += _day;
-        }
-        return _res;
-    };
 
-    for (let i = 0; i < _array.length; i++) {
-        if (dp[i] === null) {
-            dp[i] = getProfit(i);
+            dp[i] = max + _profit;
+        } else {
+            dp[i] = 0;
         }
     }
 
-    console.log(dp);
+    console.log(Math.max(...dp));
 }
 
 solution(
