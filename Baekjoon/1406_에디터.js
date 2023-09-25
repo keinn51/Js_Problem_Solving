@@ -25,41 +25,34 @@
  * abcdx
  * abcd x
  * abcdy x
+ *
+ * slice를 없애라!
+ *
  */
 function solution(input) {
     const [str, N, ...arr] = input;
     let left = str.trim();
     let right = "";
 
-    console.log(left, right);
-
     for (let i = 0; i < Number(N); i++) {
-        let _command, _variable;
-
-        _command = arr[i][0];
-
-        if (arr[i].length > 1) {
-            _variable = arr[i][2];
-        }
-
-        console.log(_command, left, right);
+        const [_command, _variable] = arr[i].trim().split(" ");
 
         switch (_command) {
             case "L":
                 if (left.length > 0) {
                     right = left[left.length - 1] + right;
-                    left = left.slice(0, left.length - 1);
+                    left = left.slice(0, -1);
                 }
                 break;
             case "D":
                 if (right.length > 0) {
                     left = left + right[0];
-                    right = right.slice(1, right.length - 1);
+                    right = right.slice(1, -1);
                 }
                 break;
             case "B":
                 if (left.length > 0) {
-                    left = left.slice(0, left.length - 1);
+                    left = left.slice(0, -1);
                 }
                 break;
             case "P":
@@ -68,7 +61,7 @@ function solution(input) {
         }
     }
 
-    console.log(left + right);
+    if (left.trim() + right.trim() !== "") console.log(left.trim() + right.trim());
 }
 
 solution(
