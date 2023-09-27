@@ -1,46 +1,24 @@
-const solution = require("./9935_문자열폭발.js");
+const solution = require("./DataStructure/Stack/9935_문자열폭발.js");
 
-test("first", () => {
-    const logSpy = jest.spyOn(console, "log");
+const inputs = [
+    `mirkovC4nizCC44
+C4`,
+    `12ab112ab2ab
+12ab`,
+    `mirkovC4nizCC4444CCCC4
+C4`,
+    `abcdcdcdcdcdcabcdcdedcbdcdc
+cd`,
+    `1111111111111111111111111111111111
+1`,
+];
+const outputs = [`mirkovniz`, "FRULA", "mirkovniz44CCC", "abcabedcbdc", "FRULA"];
 
-    const _inputWord = `mirkovC4nizCC44
-    C4`;
-
-    const _expectedResult = `mirkovniz`;
-
-    const _input = _inputWord.split(`\n`).map((s) => s.trim());
-
-    solution(_input);
-
-    expect(logSpy).toHaveBeenCalledWith(_expectedResult);
-});
-
-test("second", () => {
-    const logSpy = jest.spyOn(console, "log");
-
-    const _inputWord = `12ab112ab2ab
-    12ab`;
-
-    const _expectedResult = `FRULA`;
-
-    const _input = _inputWord.split(`\n`).map((s) => s.trim());
-
-    solution(_input);
-
-    expect(logSpy).toHaveBeenCalledWith(_expectedResult);
-});
-
-test("second", () => {
-    const logSpy = jest.spyOn(console, "log");
-
-    const _inputWord = `mirkovC4nizCCC4
-    C4`;
-
-    const _expectedResult = `mirkovnizCC`;
-
-    const _input = _inputWord.split(`\n`).map((s) => s.trim());
-
-    solution(_input);
-
-    expect(logSpy).toHaveBeenCalledWith(_expectedResult);
-});
+for (let i = 0; i < inputs.length; i++) {
+    test("go", () => {
+        const logSpy = jest.spyOn(console, "log");
+        const _input = inputs[i].split(`\n`).map((s) => s.trim());
+        solution(_input);
+        expect(logSpy).toHaveBeenCalledWith(outputs[i]);
+    });
+}
