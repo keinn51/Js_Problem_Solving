@@ -12,24 +12,58 @@
  * 다 읽거나 목표 문자열과 다른 문자가 나오면 읽은 길이를 반환한다
  *
  * 만약 문자를 읽다가 C가 나오면 함수를 실행한다.
- * 함수의 반환값 만큼 글자를 점프한다. 이 때 반환값이 목표 문자열 길이와 같다면
- * false가 나왔다면
- * 2. 근데..C가 또 나왔다면 스택에 C를 또
- * 약간 재귀로 가야하네
+ * 함수의 반환값 만큼 글자를 점프한다.
+ * 이 때 반환값이 목표 문자열 길이와 같다면 기존에 읽던게 있으면 읽던거를 빼줌
+ * 읽던거 없으면 시작과 끝을 어따가 저장
  */
 function solution(input) {
     let [target, bomb] = input;
     const _bomb = bomb.trim();
 
-    while (target.includes(_bomb)) {
-        let _newValue = target.replaceAll(_bomb, "").trim();
-        target = null;
-        target = _newValue;
-        _newValue = null;
+    const counter = (idx) => {
+        // idx 12
+        let _index = idx;
+
+        // _bomb.length 2
+        console.log("start", idx, _index);
+        for (let i = 0; i < _bomb.length; i++) {
+            console.log("i & index", i, _index);
+            // _index 13 & i 0
+            if (_bomb[i] === target[_index]) {
+                _index += 1;
+            } else if (target[_index] === bomb[0]) {
+                // temp 2
+                let temp = 0;
+                temp += counter(_index);
+                console.log("temp", temp);
+                i -= 1;
+                if (temp === _bomb.length) {
+                    _index += temp;
+                } else {
+                    return _index - idx;
+                }
+            } else {
+                break;
+            }
+        }
+        // 9 - 7
+        return _index - idx;
+    };
+
+    let res = "";
+
+    for (let idx = 0; idx < target.length; idx++) {
+        // idx 12 & _bomb C4
+        if (target[idx] === _bomb[0]) {
+            console.log("plus", counter(idx));
+            idx += counter(idx) - 1;
+        } else {
+            res += target[idx];
+        }
     }
 
-    if (target.trim() === "") console.log("FRULA");
-    else console.log(target.trim());
+    if (res.trim() === "") console.log("FRULA");
+    else console.log(res);
 }
 
 solution(
