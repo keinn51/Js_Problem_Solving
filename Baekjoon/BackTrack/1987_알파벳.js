@@ -18,22 +18,33 @@ function solution(input) {
     let count = 1;
     const dx = [-1, 0, 1, 0];
     const dy = [0, 1, 0, -1];
+    const mirror = new Array(26).fill(false);
 
-    const iter = (_x, _y, mirror, _count) => {
+    mirror[map[0][0].charCodeAt() - 65] = true;
+
+    const iter = (_x, _y, _count) => {
         count = Math.max(_count, count);
-        mirror[map[_y][_x]] = true;
 
         for (let j = 0; j < 4; j++) {
             const nx = _x + dx[j];
             const ny = _y + dy[j];
 
-            if (nx >= 0 && nx < C && ny >= 0 && ny < R && !mirror[map[ny][nx]]) {
-                iter(nx, ny, { ...mirror }, _count + 1);
+            if (
+                nx >= 0 &&
+                nx < C &&
+                ny >= 0 &&
+                ny < R &&
+                mirror[map[ny][nx].charCodeAt() - 65] === false
+            ) {
+                const m_idx = map[ny][nx].charCodeAt() - 65;
+                mirror[m_idx] = true;
+                iter(nx, ny, _count + 1);
+                mirror[m_idx] = false;
             }
         }
     };
 
-    iter(0, 0, {}, 1);
+    iter(0, 0, 1);
 
     return console.log(count);
 }
