@@ -1,7 +1,16 @@
 const solution = require("./.js");
 
-const inputs = [`7`, "4", "1"];
-const outputs = [`1 3 5 7 4 2 6`, "1 3 2 4", "1"];
+const inputs = [
+    "2 162",
+    "4 42",
+    "100 40021",
+    "100 100",
+    "100 101",
+    "100 1001",
+    "1000 2000",
+    "255 5101",
+];
+const outputs = [5, -1, 5, 1, -1, 2, 2, 3];
 
 for (let i = 0; i < inputs.length; i++) {
     test("go", () => {
