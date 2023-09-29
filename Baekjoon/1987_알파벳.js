@@ -15,12 +15,9 @@ function solution(input) {
     const [R, C] = input[0].split(" ").map(Number);
     const [_, ...arr] = input;
     const map = arr.map((l) => l.split(""));
-    const vmap = arr.map((_) => new Array(C).fill(0));
     let count = 1;
     const dx = [-1, 0, 1, 0];
     const dy = [0, 1, 0, -1];
-
-    vmap[0][0] = 1;
 
     const iter = (_x, _y, mirror, _count) => {
         count = Math.max(_count, count);
@@ -30,17 +27,8 @@ function solution(input) {
             const nx = _x + dx[j];
             const ny = _y + dy[j];
 
-            if (
-                nx >= 0 &&
-                nx < C &&
-                ny >= 0 &&
-                ny < R &&
-                !mirror[map[ny][nx]] &&
-                vmap[ny][nx] === 0
-            ) {
-                vmap[ny][nx] = 1;
+            if (nx >= 0 && nx < C && ny >= 0 && ny < R && !mirror[map[ny][nx]]) {
                 iter(nx, ny, { ...mirror }, _count + 1);
-                vmap[ny][nx] = 0;
             }
         }
     };
