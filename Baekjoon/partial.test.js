@@ -1,18 +1,7 @@
-const solution = require("./DataStructure/Stack/9935_문자열폭발.js");
+const solution = require("./.js");
 
-const inputs = [
-    `mirkovC4nizCC44
-C4`,
-    `12ab112ab2ab
-12ab`,
-    `mirkovC4nizCC4444CCCC4
-C4`,
-    `abcdcdcdcdcdcabcdcdedcbdcdc
-cd`,
-    `1111111111111111111111111111111111
-1`,
-];
-const outputs = [`mirkovniz`, "FRULA", "mirkovniz44CCC", "abcabedcbdc", "FRULA"];
+const inputs = [`7`, "4", "1"];
+const outputs = [`1 3 5 7 4 2 6`, "1 3 2 4", "1"];
 
 for (let i = 0; i < inputs.length; i++) {
     test("go", () => {
