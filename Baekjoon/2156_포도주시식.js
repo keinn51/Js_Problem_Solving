@@ -27,22 +27,16 @@
  * 8 1 : 9
  */
 function solution(input) {
-    const [a, ...b] = input;
-    const N = Number(a);
-    const arr = b.map(Number);
-    const stack = [0, 0, 0];
-
-    for (let i = 0; i < N; i += 2) {
-        const [pf, ps, pt] = stack;
-        const f = arr[i];
-        const s = i + 1 < N ? arr[i + 1] : 0;
-
-        stack[0] = Math.max(pf, ps) + f;
-        stack[1] = Math.max(pf, ps, pt) + s;
-        stack[2] = Math.max(pf) + f + s;
+    const [n, ...wine] = input;
+    if (n === 1) return wine[0];
+    else if (n === 2) return wine[0] + wine[1];
+    const dp = new Array(n).fill(0);
+    dp[1] = wine[0];
+    dp[2] = wine[0] + wine[1];
+    for (let i = 3; i <= n; i++) {
+        dp[i] = Math.max(dp[i - 3] + wine[i - 2] + wine[i - 1], dp[i - 2] + wine[i - 1], dp[i - 1]);
     }
-
-    console.log(Math.max(...stack));
+    console.log(dp[n]);
 }
 
 solution(
@@ -51,6 +45,7 @@ solution(
         .toString()
         .trim()
         .split("\n")
+        .map(Number)
 );
 
 module.exports = solution;
