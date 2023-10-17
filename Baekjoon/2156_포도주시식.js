@@ -32,16 +32,14 @@ function solution(input) {
     const arr = b.map(Number);
     const stack = [0, 0, 0];
 
-    for (let i = 0; i < N; i += 3) {
+    for (let i = 0; i < N; i += 2) {
         const [pf, ps, pt] = stack;
-        console.log("stack", stack);
         const f = arr[i];
         const s = i + 1 < N ? arr[i + 1] : 0;
-        const t = i + 2 < N ? arr[i + 2] : 0;
 
-        stack[0] = pf + f + s;
-        stack[1] = Math.max(pf, ps) + f + t;
-        stack[2] = Math.max(pf, ps, pt) + s + t;
+        stack[0] = Math.max(pf, ps) + f;
+        stack[1] = Math.max(pf, ps, pt) + s;
+        stack[2] = Math.max(pf) + f + s;
     }
 
     console.log(Math.max(...stack));
