@@ -6,33 +6,37 @@
             function initialize() {
                 const downButtons = document.getElementsByClassName("downButton");
                 const upButtons = document.getElementsByClassName("upButton");
+                const totalLens = document.getElementsByTagName("div").length;
 
-                const moveNodes = (element, direction) => {
+                const moveNodes = (parentElement, direction) => {
                     let index = 0;
-                    let allDivTags = document.getElementsByTagName("div");
-                    const divTagArray = [...allDivTags];
+                    const allSpanTags = document.getElementsByTagName("span");
+                    const targetSpan = parentElement.getElementsByTagName("span")[0];
+                    const spanTagArray = [...allSpanTags];
 
-                    for (let node of allDivTags) {
-                        if (node === element) break;
+                    for (let node of allSpanTags) {
+                        if (node === targetSpan) break;
                         index += 1;
                     }
 
                     if (direction === "up" && index > 0) {
-                        const tempNode = divTagArray[index];
-                        divTagArray[index] = divTagArray[index - 1];
-                        divTagArray[index - 1] = tempNode;
+                        const tempNode = spanTagArray[index];
+                        spanTagArray[index] = spanTagArray[index - 1];
+                        spanTagArray[index - 1] = tempNode;
                     }
-                    if (direction === "down" && index < 2) {
-                        const tempNode = divTagArray[index];
-                        divTagArray[index] = divTagArray[index + 1];
-                        divTagArray[index + 1] = tempNode;
+                    if (direction === "down" && index < totalLens - 1) {
+                        const tempNode = spanTagArray[index];
+                        spanTagArray[index] = spanTagArray[index + 1];
+                        spanTagArray[index + 1] = tempNode;
                     }
 
-                    divTagArray.forEach((elem) => {
-                        document.body.appendChild(elem);
-                    });
+                    const divTags = document.getElementsByTagName("div");
 
-                    allDivTags = document.getElementsByTagName("div");
+                    if (index >= 0 && index <= totalLens) {
+                        for (let i = 0; i < totalLens; i++) {
+                            divTags[i].insertBefore(spanTagArray[i], divTags[i].firstChild);
+                        }
+                    }
                 };
 
                 for (let node of downButtons) {
