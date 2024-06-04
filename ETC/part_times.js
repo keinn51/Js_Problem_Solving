@@ -19,42 +19,33 @@
 -C는 1 이상 1,000 이하인 자연수입니다.
  */
 
-const solution = (part_times) => {
-  let max = Number.MIN_SAFE_INTEGER;
+function solution(part_times) {
+  // 아르바이트 정보를 끝 날짜 기준으로 정렬
+  part_times.sort((a, b) => a[1] - b[1]);
 
-  part_times.sort((a, b) => {
-    const [sa, ea] = a,
-      [sb, eb] = b;
+  const n = part_times.length;
+  const dp = new Array(n).fill(0);
 
-    if (sa < sb) return -1;
-    if (sa > sb) return 1;
+  // 각 아르바이트의 급여로 초기화
+  for (let i = 0; i < n; i++) {
+    dp[i] = part_times[i][2];
+  }
 
-    if (ea < eb) return -1;
-    if (ea > eb) return 1;
-
-    return 0;
-  });
-
-  const iter = (end, cnt) => {
-    let j = 0;
-    let isFinal = true;
-
-    while (j < part_times.length) {
-      const [js, je, jc] = part_times[j];
-      if (js > end) {
-        isFinal = false;
-        iter(je, cnt + jc);
+  // DP 테이블 갱신
+  for (let i = 1; i < n; i++) {
+    const [is, _, ic] = part_times[i];
+    for (let j = 0; j < i; j++) {
+      const [__, je, ___] = part_times[j];
+      // 겹치지 않는 아르바이트 찾기
+      if (je < is) {
+        dp[i] = Math.max(dp[i], dp[j] + ic);
       }
-      j++;
     }
+  }
 
-    isFinal === true && (max = Math.max(max, cnt));
-  };
-
-  iter(0, 0, 0);
-
-  return max;
-};
+  // 최대로 벌 수 있는 돈 반환
+  return Math.max(...dp);
+}
 
 console.log(
   solution([
