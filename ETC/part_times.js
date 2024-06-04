@@ -20,7 +20,128 @@
  */
 
 const solution = (part_times) => {
-  let answer = 0;
+  let max = Number.MIN_SAFE_INTEGER;
 
-  return answer;
-}
+  part_times.sort((a, b) => {
+    const [sa, ea] = a,
+      [sb, eb] = b;
+
+    if (sa < sb) return -1;
+    if (sa > sb) return 1;
+
+    if (ea < eb) return -1;
+    if (ea > eb) return 1;
+
+    return 0;
+  });
+
+  const iter = (end, cnt) => {
+    let j = 0;
+    let isFinal = true;
+
+    while (j < part_times.length) {
+      const [js, je, jc] = part_times[j];
+      if (js > end) {
+        isFinal = false;
+        iter(je, cnt + jc);
+      }
+      j++;
+    }
+
+    isFinal === true && (max = Math.max(max, cnt));
+  };
+
+  iter(0, 0, 0);
+
+  return max;
+};
+
+console.log(
+  solution([
+    [1, 3, 100],
+    [2, 5, 200],
+    [6, 8, 150],
+  ])
+);
+console.log(
+  solution([
+    [1, 2, 50],
+    [2, 3, 100],
+    [3, 4, 150],
+    [4, 5, 200],
+  ])
+);
+console.log(
+  solution([
+    [1, 4, 300],
+    [5, 7, 300],
+    [8, 10, 300],
+    [2, 6, 500],
+  ]),
+  900
+);
+console.log(
+  solution([
+    [1, 2, 200],
+    [3, 4, 200],
+    [5, 6, 200],
+    [7, 8, 200],
+    [9, 10, 200],
+  ])
+);
+console.log(
+  solution([
+    [1, 10, 1000],
+    [2, 3, 200],
+    [4, 5, 300],
+    [6, 7, 400],
+    [8, 9, 500],
+  ])
+);
+console.log(
+  solution([
+    [1, 3, 500],
+    [3, 5, 600],
+    [5, 7, 700],
+    [7, 9, 800],
+    [9, 11, 900],
+  ])
+);
+console.log(
+  solution([
+    [1, 5, 100],
+    [6, 10, 200],
+    [11, 15, 300],
+    [16, 20, 400],
+    [21, 25, 500],
+  ])
+);
+console.log(
+  solution([
+    [1, 2, 100],
+    [2, 3, 200],
+    [3, 4, 300],
+    [4, 5, 400],
+    [5, 6, 500],
+    [6, 7, 600],
+    [7, 8, 700],
+  ])
+);
+console.log(
+  solution([
+    [1, 3, 100],
+    [4, 6, 200],
+    [7, 9, 300],
+    [10, 12, 400],
+    [13, 15, 500],
+  ])
+);
+console.log(
+  solution([
+    [1, 4, 500],
+    [2, 5, 400],
+    [3, 6, 300],
+    [4, 7, 200],
+    [5, 8, 100],
+  ])
+);
